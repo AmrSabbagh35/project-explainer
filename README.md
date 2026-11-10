@@ -2,7 +2,7 @@
 
 # /explain · شرح المشاريع بالعربية والإنجليزية
 
-**[جرّب العرض التجريبي](https://amrsabbagh35.github.io/project-explainer-ar/)** · **[English below ↓](#english)**
+**[جرّب العرض التجريبي](https://amrsabbagh35.github.io/project-explainer/)** · **[English below ↓](#english)**
 
 مهارة (Skill) لـ Claude تشرح أي مشروع برمجي شرحًا كاملًا بالعربية أو بالإنجليزية، في صفحة تفاعلية واحدة. الصفحة العربية من اليمين إلى اليسار، والإنجليزية من اليسار إلى اليمين. المطور المبتدئ يفهم منها المشروع، والمطور الخبير يستخدمها خريطةً بجانب الكود.
 
@@ -34,7 +34,7 @@
 </div>
 
 ```bash
-git clone https://github.com/AmrSabbagh35/project-explainer-ar.git ~/.claude/skills/explain
+git clone https://github.com/AmrSabbagh35/project-explainer.git ~/.claude/skills/explain
 ```
 
 <div dir="rtl">
@@ -44,7 +44,7 @@ git clone https://github.com/AmrSabbagh35/project-explainer-ar.git ~/.claude/ski
 </div>
 
 ```bash
-git clone https://github.com/AmrSabbagh35/project-explainer-ar.git .claude/skills/explain
+git clone https://github.com/AmrSabbagh35/project-explainer.git .claude/skills/explain
 ```
 
 <div dir="rtl">
@@ -135,7 +135,7 @@ git clone https://github.com/AmrSabbagh35/project-explainer-ar.git .claude/skill
 
 ## العرض التجريبي
 
-افتح صفحات المشروع الخيالي مباشرة في المتصفح، بدون تثبيت شيء: [صفحة سريعة](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html)، و[صفحة كاملة](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html)، و[صفحة عميقة](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). وبالإنجليزية: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick-en.html)، و[full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full-en.html)، و[deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep-en.html). جرّب الضغط على الأجزاء، وتشغيل الرحلة، ومفتاح مبتدئ / خبير.
+افتح صفحات المشروع الخيالي مباشرة في المتصفح، بدون تثبيت شيء: [صفحة سريعة](https://amrsabbagh35.github.io/project-explainer/demo/quick.html)، و[صفحة كاملة](https://amrsabbagh35.github.io/project-explainer/demo/full.html)، و[صفحة عميقة](https://amrsabbagh35.github.io/project-explainer/demo/deep.html). وبالإنجليزية: [quick](https://amrsabbagh35.github.io/project-explainer/demo/quick-en.html)، و[full](https://amrsabbagh35.github.io/project-explainer/demo/full-en.html)، و[deep](https://amrsabbagh35.github.io/project-explainer/demo/deep-en.html). جرّب الضغط على الأجزاء، وتشغيل الرحلة، ومفتاح مبتدئ / خبير.
 
 ## جرّبها بدون مشروع
 
@@ -202,7 +202,7 @@ MIT
 
 # /explain · Explain any codebase, in Arabic or English
 
-**[Open the live demo](https://amrsabbagh35.github.io/project-explainer-ar/)**
+**[Open the live demo](https://amrsabbagh35.github.io/project-explainer/)**
 
 **/explain** is a Claude skill that explains any software project in plain Arabic or plain English, as one interactive HTML page (right to left for Arabic, left to right for English). Beginners use it to understand a project they inherited or vibe-coded; experienced developers keep it open beside the code as a map.
 
@@ -232,13 +232,13 @@ Claude reads the real code, then writes a page that says what the project is, wh
 **1. Install the skill.** For all your projects:
 
 ```bash
-git clone https://github.com/AmrSabbagh35/project-explainer-ar.git ~/.claude/skills/explain
+git clone https://github.com/AmrSabbagh35/project-explainer.git ~/.claude/skills/explain
 ```
 
 Or for one project, so the whole team gets it:
 
 ```bash
-git clone https://github.com/AmrSabbagh35/project-explainer-ar.git .claude/skills/explain
+git clone https://github.com/AmrSabbagh35/project-explainer.git .claude/skills/explain
 ```
 
 **2. Restart Claude Code** and open the project you want explained.
@@ -326,7 +326,7 @@ What Claude noticed while reading: gaps, risks, security issues, tech debt and s
 
 ## Live demo
 
-Open the fictional project's pages in your browser, nothing to install. In English: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick-en.html), [full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full-en.html) and [deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep-en.html). In Arabic: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html), [full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html) and [deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). Click the parts, play the flow, and flip the beginner / expert switch.
+Open the fictional project's pages in your browser, nothing to install. In English: [quick](https://amrsabbagh35.github.io/project-explainer/demo/quick-en.html), [full](https://amrsabbagh35.github.io/project-explainer/demo/full-en.html) and [deep](https://amrsabbagh35.github.io/project-explainer/demo/deep-en.html). In Arabic: [quick](https://amrsabbagh35.github.io/project-explainer/demo/quick.html), [full](https://amrsabbagh35.github.io/project-explainer/demo/full.html) and [deep](https://amrsabbagh35.github.io/project-explainer/demo/deep.html). Click the parts, play the flow, and flip the beginner / expert switch.
 
 ## Try it without a project
 
