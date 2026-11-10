@@ -58,6 +58,8 @@ def check(d):
         for l in n.get("links", []):
             if l.get("to") not in ids:
                 fail("node %r links to unknown id %r" % (n["id"], l.get("to")))
+    if d["project"].get("lang", "ar") not in ("ar", "en"):
+        fail("project.lang must be ar or en")
     mode = d["project"].get("mode", "full")
     if mode not in MODES:
         fail("project.mode must be one of %s" % ", ".join(MODES))
@@ -253,18 +255,19 @@ def main():
     out, count = re.subn(r"// DATA:START.*?// DATA:END", lambda _m: block, tpl, flags=re.S)
     if count != 1:
         fail("template DATA markers not found")
-    title = data["project"].get("title") or ("شرح " + data["project"]["name"])
+    title = data["project"].get("title") or (("Explaining " if data["project"].get("lang") == "en" else "شرح ") + data["project"]["name"])
     out = out.replace("__TITLE__", title.replace("<", "").replace(">", ""), 1)
     if standalone:
         # a page opened as a file or hosted on its own needs a full document; artifacts add this themselves
-        out = '<!doctype html>\n<html lang="ar" dir="rtl">\n' + out + '\n</html>\n'
+        en = data["project"].get("lang") == "en"
+        out = '<!doctype html>\n<html lang="%s" dir="%s">\n' % (("en", "ltr") if en else ("ar", "rtl")) + out + '\n</html>\n'
     out_path.write_text(out, encoding="utf-8")
     for w in warnings:
         print("WARNING: " + w)
     nodes = sum(len(l["nodes"]) for l in data["layers"])
     flows = 1 + len(data.get("moreFlows") or [])
-    print("OK: wrote %s (%s mode, %d layers, %d nodes, %d flow%s)" % (
-        out_path, data["project"].get("mode", "full"), len(data["layers"]), nodes, flows, "" if flows == 1 else "s"))
+    print("OK: wrote %s (%s, %s mode, %d layers, %d nodes, %d flow%s)" % (
+        out_path, data["project"].get("lang", "ar"), data["project"].get("mode", "full"), len(data["layers"]), nodes, flows, "" if flows == 1 else "s"))
 
 
 if __name__ == "__main__":

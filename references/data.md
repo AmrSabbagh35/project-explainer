@@ -1,6 +1,6 @@
 # DATA file: shape and field rules
 
-Read this once before writing the DATA JSON. Every string is Arabic except code names, file paths and code snippets.
+Read this once before writing the DATA JSON. Every string is in the page's language (`project.lang`) except code names, file paths and code snippets. The examples below are Arabic; an English page uses the same fields with English text. The template translates its own labels (section titles, the Beginner / Expert switch, buttons), so you write only the content. Leave `tag` out to get the default label in the page's language.
 
 **Quick mode** uses only `project`, `layers`, `flow`, `change`, and optionally `analogy` (3 roles) and `glossary` (up to 5). Skip the other fields in the shape and their rules below. Where a rule below gives a count, the sizes table wins for your depth.
 
@@ -13,7 +13,8 @@ Read this once before writing the DATA JSON. Every string is Arabic except code 
     "path": "~/Projects/...",
     "oneLiner": "ما هو المشروع، لمن، وماذا يفعل، في جملتين.",
     "facts": ["Flutter 3.19", "flutter_bloc لإدارة الحالة", "بدون خادم"],
-    "mode": "full"
+    "mode": "full",
+    "lang": "ar"
   },
   "analogy": {
     "title": "تعرّف على الفريق",
@@ -78,17 +79,18 @@ In every mode, `what` is at most 2 sentences and every other prose string at mos
 
 - A cast role's `code` is the class, module or file that plays the role (in module-based code, a file name like `lib/matchmaking.ts` is fine).
 - `icon` is one of: person, screen, phone, brain, book, notebook, database, server, cloud, gear, key, mail, bell, shield, ball, box.
-- `layers`: top (what the user touches) to bottom (storage, network, device); layer count per the sizes table. Each layer gets 1–6 nodes. `between` is the short label on the arrow to the next layer; leave it out on the last layer. In full and deep, put startup and helper services in their own last layer ("البدء والأدوات المساعدة") rather than leaving them out; quick skips them.
+- `layers`: top (what the user touches) to bottom (storage, network, device); layer count per the sizes table. Each layer gets 1–6 nodes. `between` is the short label on the arrow to the next layer; leave it out on the last layer. In full and deep, put startup and helper services in their own last layer ("البدء والأدوات المساعدة", in English "Startup and helpers") rather than leaving them out; quick skips them.
 - `links` go from a node to what it uses. Every `to` must be an existing `id`; the build script rejects broken links. Aim for every node to have at least one connection.
 - `flow.steps`: the most common action (a tap, an HTTP request, a CLI command). Each step names who does it and cites the function.
 - `flow.steps[].at`: the node `id` where the request is during that step. The page shows a compact copy of the layer map and a ball that travels to that node, so the reader sees the request cross layers. Give every step an `at`; use `lit` for extra node ids to light up at the same time (for example the database and the service writing to it).
-- `database`: tables in order of importance (the main entity first), each with a one-sentence plain-Arabic `what` and 3–8 important columns (skip housekeeping like `created_at` unless it matters). Every relation needs a plain-Arabic `text` sentence a beginner can read ("كل حالة تخص مستخدمًا واحدًا"). `kind` is one of one-to-many, many-to-one, one-to-one, many-to-many. List only relations that exist in the schema; unrelated tables simply have none. Omit the whole field when there is no database.
+- `database`: tables in order of importance (the main entity first), each with a one-sentence plain-language `what` and 3–8 important columns (skip housekeeping like `created_at` unless it matters). Every relation needs a plain-language `text` sentence a beginner can read ("كل حالة تخص مستخدمًا واحدًا"). `kind` is one of one-to-many, many-to-one, one-to-one, many-to-many. List only relations that exist in the schema; unrelated tables simply have none. Omit the whole field when there is no database. For a schemaless store (Firestore, MongoDB, a key-value cache), list the collections and point `file` at the code that defines their shape (a types or model file).
 - `story`: 6–10 events, oldest first, grouped by `phase` (a release, a phase or a quarter). `kind` is one of start, feature, architecture, fix, release, docs. Say why each moment matters for someone reading the code today ("لهذا يوجد مجلدان للواجهة"), not just what the commit message says. Omit the field when there is no git history or fewer than about 15 commits.
 - `figures`: optional extra diagrams you draw yourself. Read `references/figures.md` only when you add one; most pages need 0–2.
 - `parts`: the screens for an app, the API routes for a backend, the commands for a CLI. Change `title` to match.
 - `glossary`: words the learner will meet in this codebase, framework terms first.
 - `change`: rows of "I want to…" → file.
-- `exercises`: easiest first. In full, two small safe edits with visible results (a text, a color, a constant) and one "read and explain" task with the answer in `answer`. Use real `before`/`after` lines copied from the file. `file` is written as `path · السطر N` (or `السطور A–B`). `before` is the cited line's text; leading spaces don't matter, and `verify.py` checks it. For the read-and-explain task, leave `before` empty and put the cited code in `after` (several lines joined with `\n`; the first one must sit at the cited line).
+- `glossary[].en`: on Arabic pages, the English term (`Widget`). On English pages leave it out.
+- `exercises`: easiest first. In full, two small safe edits with visible results (a text, a color, a constant) and one "read and explain" task with the answer in `answer`. Use real `before`/`after` lines copied from the file. `file` is written as `path · السطر N` (or `السطور A–B`) on Arabic pages and `path · line N` (or `lines A–B`) on English pages. `before` is the cited line's text; leading spaces don't matter, and `verify.py` checks it. For the read-and-explain task, leave `before` empty and put the cited code in `after` (several lines joined with `\n`; the first one must sit at the cited line).
 - `moreFlows` (deep): other common actions, each a complete flow like `flow` with its own `title`, a short `tab` label (2–3 words; give the main `flow` a `tab` too) and steps with `at`. Pick actions that cross different parts from the main flow (sign-in, a background job, an admin action), not variations of it.
 - `inside` (deep): the members of a part a maintainer would open first. `name` is the function, method or field as written in the code (`acceptOffer()`, `state.score`); `line` is where it is declared; `what` says what it does in one sentence. `verify.py` checks that each name sits in the part's `file` near that line, so you don't need to grep each one yourself: write your best line, run verify, and fix only what it reports.
 - `notes` (deep): what you noticed while reading that a maintainer must know. `kind` is one of gap (something missing or unfinished), risk (it breaks under a real case), security, debt (code that will slow the next change), perf. Every note cites `where` and says what happens and why it matters, in plain words. Report only what the code shows; no generic advice ("add more tests") and no guesses.

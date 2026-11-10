@@ -1,10 +1,10 @@
 <div dir="rtl">
 
-# /explain · شرح المشاريع بالعربية
+# /explain · شرح المشاريع بالعربية والإنجليزية
 
 **[جرّب العرض التجريبي](https://amrsabbagh35.github.io/project-explainer-ar/)** · **[English below ↓](#english)**
 
-مهارة (Skill) لـ Claude تشرح أي مشروع برمجي شرحًا كاملًا بالعربية، في صفحة تفاعلية واحدة من اليمين إلى اليسار. المطور المبتدئ يفهم منها المشروع، والمطور الخبير يستخدمها خريطةً بجانب الكود.
+مهارة (Skill) لـ Claude تشرح أي مشروع برمجي شرحًا كاملًا بالعربية أو بالإنجليزية، في صفحة تفاعلية واحدة. الصفحة العربية من اليمين إلى اليسار، والإنجليزية من اليسار إلى اليمين. المطور المبتدئ يفهم منها المشروع، والمطور الخبير يستخدمها خريطةً بجانب الكود.
 
 افتح أي مشروع في Claude Code واكتب:
 
@@ -18,6 +18,7 @@
 
 - [البدء السريع](#البدء-السريع)
 - [ثلاثة أعماق للشرح](#ثلاثة-أعماق-للشرح)
+- [بالعربية أو بالإنجليزية](#بالعربية-أو-بالإنجليزية)
 - [ماذا تجد في الصفحة](#ماذا-تجد-في-الصفحة)
 - [أمثلة على الطلبات](#أمثلة-على-الطلبات)
 - [العرض التجريبي](#العرض-التجريبي)
@@ -65,6 +66,19 @@ git clone https://github.com/AmrSabbagh35/project-explainer-ar.git .claude/skill
 | `/explain عميق` | ستعدّل الكود أو تراجعه | كل ما سبق، مع رحلتين أو ثلاث في تبويبات، وما بداخل كل جزء مهم (الدوال وأرقام أسطرها)، و«ملاحظات المراجعة»، و4–5 تمارين. |
 
 كلمات أخرى تعمل أيضًا: «مختصر» و«نظرة سريعة» للسريع، و«مفصل» و«تفصيلي» و«للمراجعة» للعميق. ويمكنك كتابتها بالإنجليزية: `quick` و `full` و `deep`. يظهر عمق الشرح في رأس الصفحة بثلاثة أعمدة صغيرة، وتنتهي الصفحة السريعة والكاملة بسطر يدلّك على العمق التالي.
+
+## بالعربية أو بالإنجليزية
+
+تُكتب الصفحة بلغة طلبك: «اشرح لي المشروع» تعطيك صفحة عربية، و "explain this repo" تعطيك صفحة إنجليزية. ويمكنك أن تختار اللغة صراحة:
+
+| الأمر | اللغة |
+| --- | --- |
+| `/explain بالعربية` أو `/explain ar` | العربية، من اليمين إلى اليسار، وحروف الأجزاء من أبجد. |
+| `/explain en` أو `/explain in English` | الإنجليزية، من اليسار إلى اليمين، وحروف الأجزاء من A إلى Z. |
+
+اللغة والعمق مستقلان، فيمكنك الجمع بينهما: `/explain en quick` أو `/explain عميق بالعربية`. القالب واحد في اللغتين، فتبقى كل الأقسام والتفاعل كما هي.
+
+<img src="docs/english.png" alt="الصفحة نفسها بالإنجليزية: خريطة الطبقات من اليسار إلى اليمين، وحروف الأجزاء من A إلى Z" width="100%">
 
 ## ماذا تجد في الصفحة
 
@@ -117,14 +131,15 @@ git clone https://github.com/AmrSabbagh35/project-explainer-ar.git .claude/skill
 | «استلمت هذا المشروع ولا أفهم كيف يعمل، ارسم لي مكوناته» | تعمل المهارة تلقائيًا، بدون `/explain`. |
 | «أريد شرحًا مختصرًا للمشروع للطلاب الجدد» | شرح سريع. |
 | «Explain this repo in Arabic for my team» | شرح كامل بالعربية. |
+| `/explain en` أو «Help me understand this repo» | شرح كامل بالإنجليزية. |
 
 ## العرض التجريبي
 
-افتح صفحات المشروع الخيالي مباشرة في المتصفح، بدون تثبيت شيء: [صفحة سريعة](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html)، و[صفحة كاملة](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html)، و[صفحة عميقة](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). جرّب الضغط على الأجزاء، وتشغيل الرحلة، ومفتاح مبتدئ / خبير.
+افتح صفحات المشروع الخيالي مباشرة في المتصفح، بدون تثبيت شيء: [صفحة سريعة](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html)، و[صفحة كاملة](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html)، و[صفحة عميقة](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). وبالإنجليزية: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick-en.html)، و[full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full-en.html)، و[deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep-en.html). جرّب الضغط على الأجزاء، وتشغيل الرحلة، ومفتاح مبتدئ / خبير.
 
 ## جرّبها بدون مشروع
 
-في مجلد `examples/` ثلاثة ملفات بيانات لنفس المشروع الخيالي، واحد لكل عمق. ابنِ أي منها وافتحه:
+في مجلد `examples/` ملفات بيانات لنفس المشروع الخيالي، لكل عمق وبكل لغة (الإنجليزية تنتهي بـ `-en`). ابنِ أي منها وافتحه:
 
 </div>
 
@@ -146,14 +161,14 @@ open /tmp/explain-deep.html   # على Linux: xdg-open
 
 | الملف | الوظيفة |
 | --- | --- |
-| `SKILL.md` | التعليمات لـ Claude: ماذا يقرأ، وكيف يختار العمق والتشبيه، وكيف يكتب العربية. |
+| `SKILL.md` | التعليمات لـ Claude: ماذا يقرأ، وكيف يختار اللغة والعمق والتشبيه، وكيف يكتب الشرح. |
 | `scripts/scan.py` | خريطة المشروع في أمر واحد: المجلدات، والمكتبات، ونقاط البداية، وأكبر الملفات وما تعرّفه، والمسارات، وقاعدة البيانات، وتاريخ git. |
 | `scripts/verify.py` | يتحقق في أمر واحد من كل مسار ورقم سطر ودالة و commit مذكور في الصفحة. |
 | `scripts/build.py` | يدمج البيانات في القالب، وينظّف الأشكال، ويرفض الأخطاء مثل الروابط المكسورة. |
 | `assets/template.html` | قالب الصفحة. |
 | `references/data.md` | شكل ملف البيانات وأحجام كل عمق. |
 | `references/figures.md` | قواعد رسم الأشكال التوضيحية. |
-| `examples/` | المشروع الخيالي بالأعماق الثلاثة. |
+| `examples/` | المشروع الخيالي بالأعماق الثلاثة وباللغتين، و `make-depths.py` الذي يشتق السريع والكامل من العميق. |
 
 ## التكلفة
 
@@ -185,11 +200,11 @@ MIT
 
 <a id="english"></a>
 
-# /explain · Explain any codebase in Arabic
+# /explain · Explain any codebase, in Arabic or English
 
 **[Open the live demo](https://amrsabbagh35.github.io/project-explainer-ar/)**
 
-**/explain** is a Claude skill that explains any software project in full, plain Arabic, as one interactive right-to-left HTML page. Beginners use it to understand a project they inherited or vibe-coded; experienced developers keep it open beside the code as a map.
+**/explain** is a Claude skill that explains any software project in plain Arabic or plain English, as one interactive HTML page (right to left for Arabic, left to right for English). Beginners use it to understand a project they inherited or vibe-coded; experienced developers keep it open beside the code as a map.
 
 Open a project in Claude Code and type:
 
@@ -203,6 +218,7 @@ Claude reads the real code, then writes a page that says what the project is, wh
 
 - [Quick start](#quick-start)
 - [Three depths](#three-depths)
+- [Arabic or English](#arabic-or-english)
 - [What's on the page](#whats-on-the-page)
 - [Example requests](#example-requests)
 - [Live demo](#live-demo)
@@ -242,6 +258,19 @@ It needs Python 3 and nothing else: no extra packages, no subscriptions and no p
 | `/explain deep` (or `عميق`) | you're about to change or review the code | all of the above, plus 2–3 flows as tabs, the key functions inside each central part with line numbers, review notes, and 4–5 exercises. |
 
 The page header shows its depth as a three-bar gauge, and quick and full pages end with a line pointing to the next depth.
+
+## Arabic or English
+
+The page is written in the language of your request: "explain this repo" gives an English page, «اشرح لي المشروع» an Arabic one. Or pick it yourself:
+
+| Command | Language |
+| --- | --- |
+| `/explain en` or `/explain in English` | English, left to right, parts keyed A to Z. |
+| `/explain ar` or `/explain بالعربية` | Arabic, right to left, parts keyed with the abjad letters. |
+
+Language and depth combine freely: `/explain en quick`, `/explain deep arabic`. Both languages share one template, so every section and interaction is the same.
+
+<img src="docs/english.png" alt="The same page in English: the layer map left to right, with parts keyed A to Z" width="100%">
 
 ## What's on the page
 
@@ -291,40 +320,43 @@ What Claude noticed while reading: gaps, risks, security issues, tech debt and s
 | `/explain ~/Projects/shop` | A full page for another project. |
 | `/explain deep ~/Projects/shop` | A deep page with review notes. |
 | `/explain the payment flow` | A full page whose flow follows payments. |
-| "Explain this repo in Arabic for my team" | The skill triggers on its own, no `/explain` needed. |
+| "Help me understand this repo" | The skill triggers on its own and writes an English page. |
+| "Explain this repo in Arabic for my team" | An Arabic page. |
+| `/explain en deep` | A deep page in English. |
 
 ## Live demo
 
-Open the fictional project's pages in your browser, nothing to install: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html), [full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html) and [deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). Click the parts, play the flow, and flip the beginner / expert switch.
+Open the fictional project's pages in your browser, nothing to install. In English: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick-en.html), [full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full-en.html) and [deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep-en.html). In Arabic: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html), [full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html) and [deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). Click the parts, play the flow, and flip the beginner / expert switch.
 
 ## Try it without a project
 
-`examples/` holds the same fictional project at all three depths. Build one and open it:
+`examples/` holds the same fictional project at all three depths in both languages (English files end in `-en`). Build one and open it:
 
 ```bash
 cd ~/.claude/skills/explain
 python3 -I scripts/build.py examples/sample-quick.json /tmp/explain-quick.html --standalone
 python3 -I scripts/build.py examples/sample.json /tmp/explain-full.html --standalone
 python3 -I scripts/build.py examples/sample-deep.json /tmp/explain-deep.html --standalone
-open /tmp/explain-deep.html   # on Linux: xdg-open
+python3 -I scripts/build.py examples/sample-deep-en.json /tmp/explain-deep-en.html --standalone
+open /tmp/explain-deep-en.html   # on Linux: xdg-open
 ```
 
 ## How it works
 
 <img src="docs/how-it-works.svg" alt="Five steps: scan.py maps the repo, Claude reads the key files, writes data.json, verify.py checks every fact, build.py writes the page" width="100%">
 
-Claude writes only the content; the layout is a fixed template. That keeps every page consistent and puts Claude's effort into understanding the code and writing clear Arabic.
+Claude writes only the content; the layout is a fixed template in both languages. That keeps every page consistent and puts Claude's effort into understanding the code and writing clearly.
 
 | File | Job |
 | --- | --- |
-| `SKILL.md` | Instructions for Claude: what to read, how to pick the depth and the analogy, how to write the Arabic. |
+| `SKILL.md` | Instructions for Claude: what to read, how to pick the language, depth and analogy, and how to write. |
 | `scripts/scan.py` | Maps the repo in one call: folders, dependencies, entry points, the biggest files and what they declare, routes, database schema and git history. |
 | `scripts/verify.py` | Checks every path, line number, function and commit the page cites, in one call. |
 | `scripts/build.py` | Merges the data into the template, sanitizes figures, and rejects mistakes like broken links. |
 | `assets/template.html` | The page template. |
 | `references/data.md` | The data file's shape and each depth's sizes. |
 | `references/figures.md` | Rules for drawing figures. |
-| `examples/` | The fictional project at all three depths. |
+| `examples/` | The fictional project at all three depths in both languages, and `make-depths.py`, which derives quick and full from deep. |
 
 ## Cost
 
@@ -344,7 +376,7 @@ The skill reads code on your machine only. The page it produces contains your fi
 
 ## Contributing
 
-Issues and pull requests are welcome, especially improvements to the Arabic wording and analogies for new kinds of projects.
+Issues and pull requests are welcome, especially improvements to the Arabic and English wording, analogies for new kinds of projects, and more page languages.
 
 ## License
 

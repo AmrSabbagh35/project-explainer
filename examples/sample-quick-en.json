@@ -1,0 +1,253 @@
+{
+  "project": {
+    "name": "How does «My Library» work?",
+    "title": "My Library, a quick look",
+    "tag": "Sample · fictional project",
+    "path": "~/Projects/my-library",
+    "oneLiner": "A web app for borrowing books from a neighborhood library. Readers search for a book and reserve it, get an email two days before it's due, and the librarian adds books from a private dashboard. This is a fictional sample that shows what the page looks like.",
+    "facts": [
+      "React 18",
+      "Node.js + Express",
+      "PostgreSQL via Prisma"
+    ],
+    "mode": "quick",
+    "lang": "en"
+  },
+  "analogy": {
+    "title": "Meet the library staff",
+    "intro": "A library has a reader, a librarian and a loan ledger. The app has the same jobs.",
+    "cast": [
+      {
+        "icon": "person",
+        "role": "You, the reader",
+        "job": "You search for a book and press «Reserve».",
+        "code": "",
+        "key": false,
+        "handoff": "“I'd like this book”"
+      },
+      {
+        "icon": "brain",
+        "role": "The librarian",
+        "job": "The only one allowed to lend books. Checks a copy is free, records the loan and sets the due date.",
+        "code": "loanService",
+        "key": true,
+        "handoff": "“Record this loan”"
+      },
+      {
+        "icon": "database",
+        "role": "The loan ledger",
+        "job": "Keeps every book, who borrowed it and when it's due back.",
+        "code": "PostgreSQL",
+        "key": false,
+        "handoff": ""
+      }
+    ]
+  },
+  "layers": [
+    {
+      "name": "Screens · what the reader sees",
+      "folder": "web/src/pages",
+      "between": "send requests to the server",
+      "nodes": [
+        {
+          "id": "list",
+          "name": "BookListPage",
+          "short": "search and reserve",
+          "file": "web/src/pages/BookListPage.tsx",
+          "what": "Shows the books and search results, with a «Reserve» button on each one.",
+          "links": [
+            {
+              "to": "loansR",
+              "verb": "sends the reservation"
+            }
+          ]
+        },
+        {
+          "id": "mine",
+          "name": "MyLoansPage",
+          "short": "my loans",
+          "file": "web/src/pages/MyLoansPage.tsx",
+          "what": "The books you've borrowed and when they're due, with a «Returned it» button.",
+          "links": [
+            {
+              "to": "loansR",
+              "verb": "loads my loans"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Server · routes",
+      "folder": "server/src/routes",
+      "between": "hand the request to the rules",
+      "nodes": [
+        {
+          "id": "loansR",
+          "name": "loans.routes.ts",
+          "short": "reserve and return",
+          "file": "server/src/routes/loans.routes.ts",
+          "what": "Handles `POST /loans` and `POST /loans/:id/return` once the front desk has checked the reader.",
+          "links": [
+            {
+              "to": "guard",
+              "verb": "goes through requireReader first"
+            },
+            {
+              "to": "loanSvc",
+              "verb": "calls createLoan()"
+            }
+          ]
+        },
+        {
+          "id": "guard",
+          "name": "requireReader",
+          "short": "the front desk",
+          "file": "server/src/middleware/requireReader.ts",
+          "what": "Reads the sign-in token from the request. Without a valid reader it answers 401.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "looks up the reader"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rules · what's allowed",
+      "folder": "server/src/services",
+      "between": "read and write",
+      "nodes": [
+        {
+          "id": "loanSvc",
+          "name": "loanService",
+          "short": "the librarian",
+          "file": "server/src/services/loanService.ts",
+          "what": "Checks the book has a free copy, records the loan, and sets the due date 14 days out.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "writes to the loans table"
+            }
+          ]
+        },
+        {
+          "id": "reminder",
+          "name": "reminderJob",
+          "short": "the postman",
+          "file": "server/src/jobs/reminders.ts",
+          "what": "Runs every morning at 8. Finds loans due in two days and sends a reminder.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "finds loans due soon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "folder": "server/prisma",
+      "nodes": [
+        {
+          "id": "db",
+          "name": "PostgreSQL",
+          "short": "books and loans",
+          "file": "server/prisma/schema.prisma",
+          "what": "Tables for books, readers, loans and sign-in tokens.",
+          "links": []
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "title": "What happens when you reserve a book?",
+    "intro": "Follow one press of «Reserve» until the loan is saved and the due date appears.",
+    "steps": [
+      {
+        "who": "You",
+        "title": "You press «Reserve»",
+        "text": "The screen sends `POST /loans` with the book's id.",
+        "file": "web/src/pages/BookListPage.tsx · onReserve()",
+        "at": "list",
+        "lit": []
+      },
+      {
+        "who": "requireReader",
+        "title": "The front desk checks you",
+        "text": "If the token is valid, the reader is known and the request goes through.",
+        "file": "server/src/middleware/requireReader.ts",
+        "at": "guard",
+        "lit": []
+      },
+      {
+        "who": "loanService",
+        "title": "The librarian decides",
+        "text": "Counts the copies on loan. If one is left, records the loan and sets the due date.",
+        "file": "server/src/services/loanService.ts · createLoan()",
+        "at": "loanSvc",
+        "lit": []
+      },
+      {
+        "who": "PostgreSQL",
+        "title": "Saved",
+        "text": "A new row with the due date lands in the `loans` table.",
+        "file": "server/prisma/schema.prisma · model Loan",
+        "at": "db",
+        "lit": []
+      }
+    ]
+  },
+  "glossary": [
+    {
+      "term": "Route",
+      "en": "",
+      "meaning": "An address the server answers on, like `POST /loans`."
+    },
+    {
+      "term": "Middleware",
+      "en": "",
+      "meaning": "A step every request passes through before its route, like `requireReader`."
+    },
+    {
+      "term": "Service",
+      "en": "",
+      "meaning": "Where the business rules live, like “no loan without a free copy”."
+    },
+    {
+      "term": "Schema",
+      "en": "",
+      "meaning": "The description of the tables and their columns in `schema.prisma`."
+    },
+    {
+      "term": "Transaction",
+      "en": "",
+      "meaning": "A group of writes that all succeed or all fail."
+    }
+  ],
+  "change": [
+    {
+      "want": "change how long a loan lasts",
+      "where": "server/src/services/loanService.ts · LOAN_DAYS"
+    },
+    {
+      "want": "change when the reminder goes out",
+      "where": "server/src/jobs/reminders.ts · dueInTwoDays()"
+    },
+    {
+      "want": "add a column to a table",
+      "where": "server/prisma/schema.prisma"
+    },
+    {
+      "want": "change an error message",
+      "where": "web/src/lib/api.ts · ERRORS"
+    },
+    {
+      "want": "change how a book card looks",
+      "where": "web/src/pages/BookListPage.tsx · BookCard"
+    }
+  ],
+  "footer": "A fictional sample that shows what an /explain quick page looks like."
+}

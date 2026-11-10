@@ -6,7 +6,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 /* World: a lettered mechanical plate. Lapis ground, vermilion keys, gilt hairlines.
    Layout: masthead band, then a right-hand index rail beside one main column. Dark-first. */
@@ -26,6 +26,7 @@
   --c1: #6F9BEA; --c2: #C29A4F; --c3: #A3AFC4; --c4: #8FB0EE; --c5: #9C8A62;
   --display: "Amiri", "Noto Naskh Arabic", "Times New Roman", serif;
   --body: "Noto Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --end: right;   /* where code lines align: the reading start of the page */
   --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --rail: 236px;
   --measure: 68ch;
@@ -85,7 +86,7 @@ body.beginner .x { display: none !important; }
 .intro { font-size: 17px; max-width: var(--measure); color: var(--ink); }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 0; margin: 0; padding: 0; list-style: none; font-size: 14.5px; color: var(--mast-ink-2); }
 .legend li:not(:last-child)::after { content: ""; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--mast-gilt); margin: 0 12px; vertical-align: middle; }
-.path { font-family: var(--mono); font-size: 13px; color: var(--mast-ink-2); direction: ltr; text-align: right; }
+.path { font-family: var(--mono); font-size: 13px; color: var(--mast-ink-2); direction: ltr; text-align: var(--end); }
 .lvl { display: inline-flex; border: 1px solid color-mix(in srgb, var(--mast-gilt) 45%, transparent); border-radius: 999px; padding: 3px; gap: 2px; }
 .lvl button { all: unset; cursor: pointer; padding: 3px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--mast-ink-2); }
 .lvl button[aria-pressed="true"] { background: var(--mast-ink); color: var(--mast); }
@@ -96,9 +97,9 @@ body.beginner .x { display: none !important; }
 .rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); align-self: start; max-height: calc(100vh - 40px); overflow: auto; display: flex; flex-direction: column; gap: 22px; padding-inline-end: 4px; font-size: 14.5px; scrollbar-width: thin; }
 .rail h2 { font-family: var(--display); font-size: 17px; font-weight: 700; margin: 0 0 6px; color: var(--gilt); }
 .toc { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-.toc a { display: block; padding: 4px 12px 4px 0; color: var(--ink-2); text-decoration: none; border-right: 1px solid var(--gilt-soft); }
+.toc a { display: block; padding-block: 4px; padding-inline: 12px 0; color: var(--ink-2); text-decoration: none; border-inline-start: 1px solid var(--gilt-soft); }
 .toc a:hover { color: var(--ink); }
-.toc a.here { color: var(--ink); border-right-color: var(--key); font-weight: 600; }
+.toc a.here { color: var(--ink); border-inline-start-color: var(--key); font-weight: 600; }
 .idx { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
 .idx button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: flex; align-items: center; gap: 10px; padding: 3px 4px; border-radius: 6px; }
 .idx button:hover { background: var(--plate); }
@@ -148,7 +149,7 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .nodes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 8px; }
 .node { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: center; padding: 9px 10px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--lc) 34%, transparent); background: color-mix(in srgb, var(--lc) 6%, transparent); transition: border-color .2s, background .2s, opacity .25s; }
 .node .k { grid-row: span 2; }
-.node .nm { font-family: var(--mono); font-size: 12.5px; font-weight: 600; direction: ltr; text-align: right; overflow-wrap: anywhere; line-height: 1.45; }
+.node .nm { font-family: var(--mono); font-size: 12.5px; font-weight: 600; direction: ltr; text-align: var(--end); overflow-wrap: anywhere; line-height: 1.45; }
 .node .sh { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
 .node:hover { border-color: var(--lc); }
 .node:focus-visible { outline: 2px solid var(--lapis); outline-offset: 2px; }
@@ -160,9 +161,9 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .down svg { width: 14px; height: 14px; color: var(--gilt); }
 .keybox { display: grid; grid-template-columns: auto minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px; align-items: start; border-top: 1px solid var(--gilt-soft); border-bottom: 1px solid var(--gilt-soft); padding: 20px 4px; }
 .keybox .big { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1; color: var(--key); min-width: 1.2em; text-align: center; padding-top: 6px; }
-.keybox .nm { font-family: var(--mono); font-weight: 600; font-size: 18px; direction: ltr; text-align: right; overflow-wrap: anywhere; }
+.keybox .nm { font-family: var(--mono); font-weight: 600; font-size: 18px; direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
 .keybox .lay { font-size: 13.5px; font-weight: 600; color: var(--gilt); margin-top: 2px; }
-.keybox .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: right; overflow-wrap: anywhere; }
+.keybox .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
 .keybox .what { margin-top: 10px; max-width: 60ch; }
 .links { display: flex; flex-direction: column; gap: 2px; }
 .links .lh { font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
@@ -178,7 +179,7 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .route-wrap { overflow-x: auto; padding: 4px 0 8px; }
 .route { position: relative; display: flex; justify-content: space-between; min-width: 600px; padding: 26px 18px 8px; list-style: none; margin: 0; }
 .route::before { content: ""; position: absolute; top: 44px; right: 34px; left: 34px; height: 2px; background: var(--gilt-soft); }
-.route .fill { position: absolute; top: 44px; right: 34px; height: 2px; background: var(--key); width: 0; transition: width .75s cubic-bezier(.16, 1, .3, 1); }
+.route .fill { position: absolute; top: 44px; height: 2px; background: var(--key); width: 0; transition: width .75s cubic-bezier(.16, 1, .3, 1); }
 .route li { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .route button { all: unset; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
 .route .k { width: 38px; height: 38px; font-size: 18px; background: var(--ground); }
@@ -201,7 +202,7 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .step-card { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); background: var(--plate); border: 1px solid var(--gilt-soft); border-radius: 6px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
 .step-card .who { font-size: 13.5px; color: var(--ink-2); }
 .step-card h3 { font-family: var(--display); font-size: 24px; font-weight: 700; line-height: 1.5; }
-.step-card .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: right; overflow-wrap: anywhere; padding-top: 10px; border-top: 1px solid var(--gilt-soft); }
+.step-card .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; padding-top: 10px; border-top: 1px solid var(--gilt-soft); }
 .ctrl { display: flex; gap: 8px; align-items: center; }
 .btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; background: transparent; color: var(--ink); border: 1px solid var(--gilt-soft); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
 .btn:hover { border-color: var(--gilt); }
@@ -214,16 +215,16 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .reg { display: flex; flex-direction: column; }
 .tbl { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 8px 24px; padding: 16px 6px; border-top: 1px solid var(--gilt-soft); transition: opacity .25s, background .2s; }
 .tbl:last-child { border-bottom: 1px solid var(--gilt-soft); }
-.tbl-h { all: unset; cursor: pointer; font-family: var(--mono); font-weight: 600; font-size: 14.5px; direction: ltr; text-align: right; align-self: start; overflow-wrap: anywhere; }
+.tbl-h { all: unset; cursor: pointer; font-family: var(--mono); font-weight: 600; font-size: 14.5px; direction: ltr; text-align: var(--end); align-self: start; overflow-wrap: anywhere; }
 .tbl-h:hover, .tbl-h:focus-visible { color: var(--key); }
 .tbl-h:focus-visible { outline: 2px solid var(--lapis); outline-offset: 3px; }
 .tbl .what { color: var(--ink); font-size: 15.5px; }
-.tbl .file { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: right; grid-column: 2; }
+.tbl .file { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); grid-column: 2; }
 .tbl details { grid-column: 2; }
 .tbl summary { cursor: pointer; font-size: 13.5px; color: var(--lapis); font-weight: 600; width: max-content; }
 .cols { display: grid; grid-template-columns: max-content max-content minmax(0, 1fr); gap: 4px 18px; margin-top: 8px; font-size: 13.5px; align-items: baseline; }
-.cols .cn { font-family: var(--mono); font-weight: 600; direction: ltr; text-align: right; }
-.cols .ct { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: right; }
+.cols .cn { font-family: var(--mono); font-weight: 600; direction: ltr; text-align: var(--end); }
+.cols .ct { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
 .cols .cd { color: var(--ink-2); }
 .tbl.sel { background: var(--plate); }
 .tbl.sel .tbl-h { color: var(--key); }
@@ -231,14 +232,14 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .rels { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .rels li { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 4px 18px; padding: 10px 6px; border-top: 1px solid var(--gilt-soft); transition: opacity .25s; }
 .rels .kind { font-size: 13px; font-weight: 600; color: var(--gilt); }
-.rels .pair { grid-column: 2; font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: right; }
+.rels .pair { grid-column: 2; font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
 .rels.focus li:not(.hit) span { color: var(--ink-2); }
 .rels li.hit { background: var(--plate); }
 
 /* parts */
 .parts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 28px; }
 .part { display: flex; flex-direction: column; gap: 4px; padding: 16px 0; border-top: 1px solid var(--gilt-soft); }
-.part .how { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: right; overflow-wrap: anywhere; }
+.part .how { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
 .part ul { margin: 4px 0 0; padding: 0 18px 0 0; font-size: 15px; color: var(--ink-2); }
 
 /* story */
@@ -247,10 +248,15 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .phase:first-child { padding-top: 0; }
 .ev { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 4px 22px; padding: 12px 0; border-top: 1px solid var(--gilt-soft); }
 .ev .meta { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
-.ev .date { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: right; }
+.ev .date { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
 .ev .kind { font-weight: 600; color: var(--kc); }
-.ev .hash { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: right; }
+.ev .hash { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
 .ev p { color: var(--ink-2); font-size: 15.5px; max-width: 64ch; margin-top: 2px; }
+
+/* English pages: left to right, Latin faces, the same plate */
+:root.ltr { --display: "Source Serif 4", Georgia, "Times New Roman", serif; --body: "Noto Sans", "Segoe UI", system-ui, sans-serif; --end: left; }
+:root.ltr .btn svg.mir { transform: scaleX(-1); }
+:root.ltr .whr { flex-direction: row-reverse; }
 
 /* depth gauge in the masthead */
 .depth { display: inline-flex; align-items: center; gap: 3px; font-size: 13px; font-weight: 600; color: var(--mast-ink-2); }
@@ -264,7 +270,7 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .inside ul { list-style: none; margin: 0; padding: 0; }
 .inside li { display: grid; grid-template-columns: minmax(0, 13em) minmax(0, 1fr); gap: 2px 14px; padding: 5px 0; font-size: 14.5px; }
 .inside .sig { display: flex; flex-direction: column; min-width: 0; }
-.inside .sig code { font-weight: 600; font-size: 12.5px; text-align: right; overflow-wrap: anywhere; }
+.inside .sig code { font-weight: 600; font-size: 12.5px; text-align: var(--end); overflow-wrap: anywhere; }
 .inside .ln { font-size: 12px; color: var(--ink-2); }
 .inside li > span:last-child { color: var(--ink-2); }
 
@@ -284,7 +290,7 @@ p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px
 .note .meta { font-size: 13px; font-weight: 600; color: var(--kc); }
 .note h3 { display: flex; align-items: center; gap: 8px; }
 .note p { color: var(--ink-2); font-size: 15.5px; max-width: 64ch; margin-top: 2px; }
-.note .where { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: right; overflow-wrap: anywhere; margin-top: 6px; }
+.note .where { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; margin-top: 6px; }
 .note[data-key] { cursor: pointer; }
 .next-depth { border-top: 1px solid var(--gilt-soft); padding-top: 18px; color: var(--ink-2); font-size: 15px; max-width: var(--measure); }
 
@@ -298,17 +304,17 @@ dl.words dd { color: var(--ink-2); font-size: 15.5px; }
 /* change table */
 .table-wrap { overflow-x: auto; }
 table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; }
-th, td { text-align: right; padding: 11px 6px; border-top: 1px solid var(--gilt-soft); vertical-align: top; }
+th, td { text-align: start; padding: 11px 6px; border-top: 1px solid var(--gilt-soft); vertical-align: top; }
 tr:last-child td { border-bottom: 1px solid var(--gilt-soft); }
 th { font-size: 13px; color: var(--gilt); font-weight: 700; border-top: 0; padding-top: 0; }
-td.where { font-family: var(--mono); font-size: 12.5px; direction: ltr; text-align: right; color: var(--ink-2); overflow-wrap: anywhere; width: 50%; }
+td.where { font-family: var(--mono); font-size: 12.5px; direction: ltr; text-align: var(--end); color: var(--ink-2); overflow-wrap: anywhere; width: 50%; }
 
 /* exercises */
 .tasks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 .task { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; padding: 22px 0; border-top: 1px solid var(--gilt-soft); }
 .task .num { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; color: var(--gilt); text-align: center; padding-top: 6px; }
 .task .body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.task .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: right; overflow-wrap: anywhere; }
+.task .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
 pre.snip, pre.tree { margin: 0; direction: ltr; text-align: left; font-family: "JetBrains Mono", "Noto Sans Arabic", ui-monospace, Menlo, monospace; font-size: 13px; line-height: 1.75; background: var(--code-bg); border: 1px solid var(--gilt-soft); border-radius: 6px; padding: 12px 14px; overflow-x: auto; white-space: pre; color: var(--ink); }
 pre.snip .old { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--key); }
 pre.snip .new { color: var(--c2); font-weight: 600; }
@@ -321,10 +327,11 @@ details.answer p { margin-top: 8px; color: var(--ink-2); max-width: 62ch; }
 .fig-body { min-width: 0; border: 1px solid var(--gilt-soft); border-radius: 2px; padding: 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .fig-t { font-family: var(--display); font-weight: 700; font-size: 20px; }
 .fig figcaption { font-size: 14.5px; color: var(--ink-2); max-width: var(--measure); }
-.fig figcaption b { color: var(--gilt); font-weight: 700; margin-left: 6px; }
+.fig figcaption b { color: var(--gilt); font-weight: 700; margin-inline-end: 6px; }
 .fig-body svg { display: block; width: 100%; height: auto; min-width: 560px; }
 .fig-body img { display: block; width: 100%; height: auto; }
 .fig-body svg text { font-family: var(--body); fill: var(--ink); font-size: 14px; direction: rtl; }
+:root.ltr .fig-body svg text { direction: ltr; }
 .fig-body svg .f-t { fill: var(--ink); font-size: 14px; font-weight: 700; }
 .fig-body svg .f-m { fill: var(--ink-2); font-size: 12px; font-weight: 400; }
 .fig-body svg .f-code { font-family: var(--mono); fill: var(--ink-2); font-size: 11px; direction: ltr; }
@@ -342,12 +349,13 @@ details.answer p { margin-top: 8px; color: var(--ink-2); max-width: 62ch; }
 
 summary { list-style: none; }
 summary::-webkit-details-marker { display: none; }
-summary::before { content: ""; display: inline-block; width: 0; height: 0; border-block: 4px solid transparent; border-right: 6px solid var(--gilt); margin-left: 8px; vertical-align: middle; transition: transform .2s; }
+summary::before { content: ""; display: inline-block; width: 0; height: 0; border-block: 4px solid transparent; border-inline-start: 6px solid var(--gilt); margin-inline-end: 8px; vertical-align: middle; transition: transform .2s; }
 details[open] > summary::before { transform: rotate(-90deg); }
+:root.ltr details[open] > summary::before { transform: rotate(90deg); }
 .ar { font-family: var(--body); direction: rtl; unicode-bidi: isolate; font-size: 1.05em; }
-.part .k { width: 1.5em; height: 1.5em; font-size: 12px; margin-left: 8px; vertical-align: middle; }
+.part .k { width: 1.5em; height: 1.5em; font-size: 12px; margin-inline-end: 8px; vertical-align: middle; }
 .whr { display: flex; justify-content: flex-end; align-items: center; gap: 8px; direction: ltr; }
-.whr .p { min-width: 0; text-align: right; }
+.whr .p { min-width: 0; text-align: var(--end); }
 .whr .k, .whr .k-slot { width: 1.5em; height: 1.5em; font-size: 12px; flex: none; }
 tr[data-key] { cursor: pointer; }
 tr.is-sel td { background: var(--plate); }
@@ -367,13 +375,13 @@ footer b { font-family: var(--mono); color: var(--gilt); font-weight: 600; direc
   .rail { position: sticky; top: 0; z-index: 5; max-height: none; overflow: visible; background: var(--ground); border-bottom: 1px solid var(--gilt-soft); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 8px max(16px, env(safe-area-inset-left, 0px)); gap: 0; }
   .rail .r-parts, .rail h2 { display: none; }
   .toc { flex-direction: row; overflow-x: auto; gap: 4px; scrollbar-width: none; }
-  .toc a { white-space: nowrap; border-right: 0; border-bottom: 2px solid transparent; padding: 4px 8px; }
-  .toc a.here { border-bottom-color: var(--key); border-right: 0; }
+  .toc a { white-space: nowrap; border-inline-start: 0; border-bottom: 2px solid transparent; padding: 4px 8px; }
+  .toc a.here { border-bottom-color: var(--key); border-inline-start: 0; }
   .main { padding-top: 32px; gap: 72px; }
   section, .plate, .route, .reg { scroll-margin-top: 64px; }
   html { scroll-padding-top: 64px; }
   .flow, .keybox { grid-template-columns: minmax(0, 1fr); }
-  .keybox .big { text-align: right; }
+  .keybox .big { text-align: var(--end); }
   .step-card { position: static; }
 }
 @media (max-width: 620px) {
@@ -1144,7 +1152,51 @@ var DATA = {
 
 (function () {
   var D = DATA;
-  var ABJAD = ["أ","ب","ج","د","ه","و","ز","ح","ط","ي","ك","ل","م","ن","س","ع","ف","ص","ق","ر","ش","ت","ث","خ","ذ","ض","ظ","غ"];
+  var EN = (D.project && D.project.lang) === "en";
+  /* Arabic pages key parts with the abjad order, English pages with A–Z */
+  var ABJAD = EN ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("") : ["أ","ب","ج","د","ه","و","ز","ح","ط","ي","ك","ل","م","ن","س","ع","ف","ص","ق","ر","ش","ت","ث","خ","ذ","ض","ظ","غ"];
+  var TX = EN ? {
+    fig: "Figure ", depthT: "Depth", depth: { quick: "Quick", full: "Full", deep: "Deep" }, tag: "Codebase explainer",
+    lvl: "Level", beginner: "Beginner", expert: "Expert", top: "First look",
+    mapS: "Layers", mapT: "The project's layers", mapI: "Every part has a letter. Click a part to see what it does and what it works with. The same letter follows the part across the page.",
+    castS: "The cast", routeH: "The route: each stop carries the letter of the part doing the work.", play: "Play the flow", pause: "Pause",
+    step: "Step ", prev: "Previous step", next: "Next step", flows: "Flows", flowS: "Step by step",
+    flowsT: "How do requests move through the project?", flowsI: "Pick a flow. Each one follows a single action from start to finish.",
+    relk: { "one-to-many": "one to many", "one-to-one": "one to one", "many-to-many": "many to many", "many-to-one": "many to one" }, rel: "relation", cols: "Columns",
+    dbS: "Database", dbT: "Where is the data kept?", dbI: "Click a table name to see the tables related to it.", rels: "How the tables relate",
+    parts: "Sections", kinds: { start: "Start", feature: "Feature", architecture: "Architecture", fix: "Fix", release: "Release", docs: "Docs" },
+    storyS: "Story", storyT: "How did the project get here?",
+    nk: { gap: "Gap", risk: "Risk", security: "Security", debt: "Tech debt", perf: "Performance" },
+    notesS: "Notes", notesT: "Review notes", notesI: "What we noticed while reading the code: gaps, risks and tech debt. Each note points to its file.",
+    wordsS: "Glossary", wordsT: "Words you'll meet in the code", changeS: "Where to change", changeT: "Where do I change what?", want: "I want to…", open: "Open",
+    tasksS: "Exercises", tasksT: "Small exercises", tasksI: "Open the project, change one thing, run it and watch what happens. You can always undo the change.", answer: "Show the answer",
+    treeS: "Files", treeT: "Where do the files live?", figsS: "Figures", figsT: "Figures",
+    nextQ: "This is a quick explainer. For the full page with the glossary and exercises, type `/explain full`; for an in-depth review, `/explain deep`.",
+    nextF: "Want more detail? `/explain deep` adds more flows, what's inside each part, and review notes.",
+    index: "Page index", contents: "Contents", partsIdx: "Parts", brand: "codebases, explained",
+    uses: "uses", usedBy: "used by", works: "Works with", alone: "Doesn't depend on other parts.", inside: "Inside", line: "line "
+  } : {
+    fig: "شكل ", depthT: "عمق الشرح", depth: { quick: "شرح سريع", full: "شرح كامل", deep: "شرح عميق" }, tag: "شرح مشروع",
+    lvl: "مستوى الشرح", beginner: "مبتدئ", expert: "خبير", top: "نظرة أولى",
+    mapS: "الطبقات", mapT: "طبقات المشروع", mapI: "كل جزء له حرف من حروف أبجد. اضغط على أي جزء لترى ماذا يفعل ومع من يتعامل. الحرف نفسه يتبع الجزء في كل الصفحة.",
+    castS: "الفريق", routeH: "رحلة الطلب: كل محطة حرفُ الجزء الذي يعمل في تلك الخطوة.", play: "شغّل الرحلة", pause: "إيقاف",
+    step: "الخطوة ", prev: "الخطوة السابقة", next: "الخطوة التالية", flows: "الرحلات", flowS: "خطوة بخطوة",
+    flowsT: "كيف تتحرك الطلبات داخل المشروع؟", flowsI: "اختر رحلة. كل رحلة تتبع عملًا واحدًا من بدايته إلى نهايته.",
+    relk: { "one-to-many": "واحد لكثير", "one-to-one": "واحد لواحد", "many-to-many": "كثير لكثير", "many-to-one": "كثير لواحد" }, rel: "علاقة", cols: "الأعمدة",
+    dbS: "قاعدة البيانات", dbT: "أين تُحفظ البيانات؟", dbI: "اضغط على اسم جدول لترى الجداول المرتبطة به.", rels: "العلاقات بين الجداول",
+    parts: "الأقسام", kinds: { start: "بداية", feature: "ميزة", architecture: "هيكلة", fix: "إصلاح", release: "إطلاق", docs: "توثيق" },
+    storyS: "قصة المشروع", storyT: "كيف وصل المشروع إلى شكله الحالي؟",
+    nk: { gap: "ناقص", risk: "خطر", security: "أمان", debt: "دين تقني", perf: "أداء" },
+    notesS: "ملاحظات", notesT: "ملاحظات المراجعة", notesI: "ما لاحظناه أثناء قراءة الكود: أشياء ناقصة، ومخاطر، وديون تقنية. كل ملاحظة تشير إلى ملفها.",
+    wordsS: "القاموس", wordsT: "كلمات ستراها في الكود", changeS: "أين أغيّر؟", changeT: "أين أغيّر ماذا؟", want: "أريد أن…", open: "افتح",
+    tasksS: "تمارين", tasksT: "تمارين صغيرة", tasksI: "افتح المشروع، غيّر شيئًا واحدًا، شغّله وشاهد النتيجة. يمكنك دائمًا التراجع عن التغيير.", answer: "اعرض الإجابة",
+    treeS: "الملفات", treeT: "أين تعيش الملفات؟", figsS: "أشكال", figsT: "أشكال توضيحية",
+    nextQ: "هذا شرح سريع. للشرح الكامل مع القاموس والتمارين اكتب `/explain كامل`، وللمراجعة المعمّقة `/explain عميق`.",
+    nextF: "تريد تفاصيل أكثر؟ `/explain عميق` يضيف رحلات أخرى، وما بداخل كل جزء، وملاحظات المراجعة.",
+    index: "فهرس الصفحة", contents: "المحتويات", partsIdx: "فهرس الأجزاء", brand: "شرح المشاريع بالعربية",
+    uses: "يستخدم", usedBy: "يستخدمه", works: "يتعامل مع", alone: "لا يعتمد على أجزاء أخرى.", inside: "من الداخل", line: "السطر "
+  };
+  if (EN) { document.documentElement.classList.add("ltr"); document.documentElement.lang = "en"; document.documentElement.dir = "ltr"; }
   var ICONS = {
     person: '<circle class="ink" cx="20" cy="13" r="7"/><path class="ink" d="M7 36 C7 26 33 26 33 36"/>',
     screen: '<rect class="ink" x="4" y="7" width="32" height="22" rx="3"/><path class="ink" d="M14 35 H26 M20 29 V35"/>',
@@ -1164,10 +1216,10 @@ var DATA = {
     box: '<path class="ink" d="M6 13 L20 6 L34 13 V28 L20 35 L6 28 Z M6 13 L20 20 L34 13 M20 20 V35"/>'
   };
   var UI = {
-    play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12 2.5 L3.5 8 L12 13.5 Z" fill="currentColor"/></svg>',
+    play: '<svg class="mir" viewBox="0 0 16 16" aria-hidden="true"><path d="M12 2.5 L3.5 8 L12 13.5 Z" fill="currentColor"/></svg>',
     pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/><rect x="9.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/></svg>',
-    prev: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13" class="ink" style="stroke-width:1.8"/></svg>',
-    next: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13" class="ink" style="stroke-width:1.8"/></svg>',
+    prev: '<svg class="mir" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13" class="ink" style="stroke-width:1.8"/></svg>',
+    next: '<svg class="mir" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13" class="ink" style="stroke-width:1.8"/></svg>',
     down: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2 V14 M3 9 L8 14 L13 9" class="ink" style="stroke-width:1.6"/></svg>',
     hand: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2 V14 M3.5 9.5 L8 14 L12.5 9.5" class="ink" style="stroke-width:1.6"/></svg>'
   };
@@ -1227,11 +1279,12 @@ var DATA = {
       figN++;
       var body = f.svg ? f.svg : '<img src="' + esc(f.src) + '" alt="' + esc(f.alt || f.title || "") + '" loading="lazy">';
       return '<figure class="fig' + (f.expertOnly ? ' x' : '') + '" id="fig-' + esc(f.id) + '">' + (f.title ? '<div class="fig-t">' + esc(f.title) + '</div>' : '') +
-        '<div class="fig-frame"><div class="fig-body">' + body + '</div></div>' + (f.caption ? '<figcaption><b>شكل ' + figN + '</b>' + rich(f.caption) + '</figcaption>' : '') + '</figure>';
+        '<div class="fig-frame"><div class="fig-body">' + body + '</div></div>' + (f.caption ? '<figcaption><b>' + TX.fig + figN + '</b>' + rich(f.caption) + '</figcaption>' : '') + '</figure>';
     }).join("");
   }
 
   var app = document.getElementById("app");
+  if (EN) { app.setAttribute("dir", "ltr"); app.setAttribute("lang", "en"); }
   var secs = [];   // [id, short title] for the rail
   function section(id, short, title, intro, body) {
     secs.push([id, short]);
@@ -1241,17 +1294,17 @@ var DATA = {
   /* masthead */
   var P = D.project;
   var MODE = { quick: 1, full: 2, deep: 3 }[P.mode] ? P.mode : "full", DEPTH = { quick: 1, full: 2, deep: 3 }[MODE];
-  var depth = '<span class="depth" title="عمق الشرح"><i class="on"></i><i' + (DEPTH > 1 ? ' class="on"' : '') + '></i><i' + (DEPTH > 2 ? ' class="on"' : '') + '></i><span>' + { quick: "شرح سريع", full: "شرح كامل", deep: "شرح عميق" }[MODE] + '</span></span>';
+  var depth = '<span class="depth" title="' + TX.depthT + '"><i class="on"></i><i' + (DEPTH > 1 ? ' class="on"' : '') + '></i><i' + (DEPTH > 2 ? ' class="on"' : '') + '></i><span>' + TX.depth[MODE] + '</span></span>';
   var LEDE = (function (t) { var m = String(t || "").match(/^.+?[.!؟?](\s|$)/); return m ? [m[0].trim(), String(t).slice(m[0].length).trim()] : [t, ""]; })(P.oneLiner);
   var head = '<header class="mast"><div class="mast-in gut">' +
-    '<div class="mast-top"><div class="mark"><b>/explain</b><span>' + esc(P.tag || "شرح مشروع") + '</span>' + depth + '</div>' +
-    '<div class="lvl" role="group" aria-label="مستوى الشرح"><button type="button" data-lvl="beginner" aria-pressed="false">مبتدئ</button><button type="button" data-lvl="expert" aria-pressed="true">خبير</button></div></div>' +
+    '<div class="mast-top"><div class="mark"><b>/explain</b><span>' + esc(P.tag || TX.tag) + '</span>' + depth + '</div>' +
+    '<div class="lvl" role="group" aria-label="' + TX.lvl + '"><button type="button" data-lvl="beginner" aria-pressed="false">' + TX.beginner + '</button><button type="button" data-lvl="expert" aria-pressed="true">' + TX.expert + '</button></div></div>' +
     '<h1>' + esc(P.name) + '</h1><p class="lede">' + rich(LEDE[0]) + '</p>' +
     '<ul class="legend">' + (P.facts || []).map(function (f) { return '<li>' + rich(f) + '</li>'; }).join("") + '</ul>' +
     (P.path ? '<div class="path x">' + esc(P.path) + '</div>' : '') + '</div></header>';
 
   var out = [];
-  var topF = figs("top"); if (topF) out.push(section("s-top", "نظرة أولى", "نظرة أولى", "", topF));
+  var topF = figs("top"); if (topF) out.push(section("s-top", TX.top, TX.top, "", topF));
 
   /* cast (placed after the plate) */
   var A = D.analogy, castSec = null;
@@ -1274,57 +1327,57 @@ var DATA = {
     return '<div class="band" style="--lc:' + lc(li) + '"><div class="band-h"><b>' + esc(L.name) + '</b>' + (L.folder ? '<span class="mono x">' + esc(L.folder) + '</span>' : '') + '</div><div class="nodes">' + nodes + '</div></div>' +
       (li < D.layers.length - 1 && L.between ? '<div class="down">' + UI.down + '<span>' + esc(L.between) + '</span></div>' : '');
   }).join("");
-  out.push(section("s-map", "الطبقات", "طبقات المشروع", "كل جزء له حرف من حروف أبجد. اضغط على أي جزء لترى ماذا يفعل ومع من يتعامل. الحرف نفسه يتبع الجزء في كل الصفحة.",
+  out.push(section("s-map", TX.mapS, TX.mapT, TX.mapI,
     figs("layers") + '<div class="plate" id="plate"><div class="plate-in">' + bands + '</div></div><div class="keybox" id="keybox" aria-live="polite"></div>'));
-  if (castSec) out.push(section("s-cast", "الفريق", castSec[0], castSec[1], castSec[2]));
+  if (castSec) out.push(section("s-cast", TX.castS, castSec[0], castSec[1], castSec[2]));
 
   /* route: one flow, or several as tabs */
   var FLOWS = [D.flow].concat(D.moreFlows || []), F = FLOWS[0], MANY = FLOWS.length > 1;
   function flowHtml(F) {
     var hasRoute = F.steps.some(function (s) { return s.at && byId[s.at]; });
-    var route = !hasRoute ? '' : '<div class="route-head"><span>رحلة الطلب: كل محطة حرفُ الجزء الذي يعمل في تلك الخطوة.</span><button class="btn" id="play" type="button">' + UI.play + '<span>شغّل الرحلة</span></button></div>' +
+    var route = !hasRoute ? '' : '<div class="route-head"><span>' + TX.routeH + '</span><button class="btn" id="play" type="button">' + UI.play + '<span>' + TX.play + '</span></button></div>' +
       '<div class="route-wrap"><ol class="route" id="route"><span class="fill" id="fill" aria-hidden="true"></span>' + F.steps.map(function (s, i) {
         var k = s.at && KEY[s.at] ? KEY[s.at] : String(i + 1);
-        return '<li data-i="' + i + '"' + (s.at ? ' data-key="' + esc(s.at) + '"' : '') + '><button type="button" data-i="' + i + '" aria-label="الخطوة ' + (i + 1) + ': ' + esc(s.title) + '"><span class="k" aria-hidden="true">' + esc(k) + '</span><span class="n">' + (i + 1) + '</span></button></li>';
+        return '<li data-i="' + i + '"' + (s.at ? ' data-key="' + esc(s.at) + '"' : '') + '><button type="button" data-i="' + i + '" aria-label="' + TX.step + (i + 1) + ': ' + esc(s.title) + '"><span class="k" aria-hidden="true">' + esc(k) + '</span><span class="n">' + (i + 1) + '</span></button></li>';
       }).join("") + '</ol></div>';
     var steps = '<div class="flow"><ol class="steps" id="steps">' + F.steps.map(function (s, i) {
       return '<li><button type="button" data-i="' + i + '"' + (s.at ? ' data-key="' + esc(s.at) + '"' : '') + '><span class="n">' + (i + 1) + '</span><span><span class="tt">' + esc(s.title) + '</span><span class="who">' + esc(s.who) + '</span></span>' + (s.at && KEY[s.at] ? key(s.at) : '<span></span>') + '</button></li>';
-    }).join("") + '</ol><div class="step-card" aria-live="polite"><div class="ctrl"><button class="btn icon" id="prev" type="button" aria-label="الخطوة السابقة">' + UI.prev + '</button><span class="count" id="count"></span><button class="btn icon primary" id="next" type="button" aria-label="الخطوة التالية">' + UI.next + '</button></div><div id="stepBody"></div></div></div>';
+    }).join("") + '</ol><div class="step-card" aria-live="polite"><div class="ctrl"><button class="btn icon" id="prev" type="button" aria-label="' + TX.prev + '">' + UI.prev + '</button><span class="count" id="count"></span><button class="btn icon primary" id="next" type="button" aria-label="' + TX.next + '">' + UI.next + '</button></div><div id="stepBody"></div></div></div>';
     return (MANY ? '<div class="flow-h"><h3>' + esc(F.title) + '</h3>' + (F.intro ? '<p>' + rich(F.intro) + '</p>' : '') + '</div>' : '') + route + steps;
   }
-  var tabs = MANY ? '<div class="flow-tabs" role="tablist" aria-label="الرحلات">' + FLOWS.map(function (f, i) {
+  var tabs = MANY ? '<div class="flow-tabs" role="tablist" aria-label="' + TX.flows + '">' + FLOWS.map(function (f, i) {
     return '<button type="button" role="tab" data-f="' + i + '" aria-selected="' + (i === 0) + '">' + esc(f.tab || f.title) + '</button>';
   }).join("") + '</div>' : '';
-  out.push(section("s-flow", "خطوة بخطوة", MANY ? (D.flowsTitle || "كيف تتحرك الطلبات داخل المشروع؟") : F.title, MANY ? "اختر رحلة. كل رحلة تتبع عملًا واحدًا من بدايته إلى نهايته." : F.intro,
+  out.push(section("s-flow", TX.flowS, MANY ? (D.flowsTitle || TX.flowsT) : F.title, MANY ? TX.flowsI : F.intro,
     figs("flow") + tabs + '<div id="flowBody">' + flowHtml(F) + '</div>'));
 
   /* database */
   var DB = D.database;
-  var RELK = { "one-to-many": "واحد لكثير", "one-to-one": "واحد لواحد", "many-to-many": "كثير لكثير", "many-to-one": "كثير لواحد" };
+  var RELK = TX.relk;
   if (DB && DB.tables && DB.tables.length) {
     var tbls = DB.tables.map(function (t) {
-      var cols = t.columns && t.columns.length ? '<details class="x"><summary>الأعمدة (' + t.columns.length + ')</summary><div class="cols">' + t.columns.map(function (c) {
+      var cols = t.columns && t.columns.length ? '<details class="x"><summary>' + TX.cols + ' (' + t.columns.length + ')</summary><div class="cols">' + t.columns.map(function (c) {
         return '<span class="cn">' + esc(c.name) + '</span><span class="ct">' + esc(c.type || "") + '</span><span class="cd">' + rich(c.note || "") + '</span>';
       }).join("") + '</div></details>' : '';
       return '<div class="tbl" data-t="' + esc(t.name) + '"><button type="button" class="tbl-h" data-t="' + esc(t.name) + '">' + esc(t.name) + '</button><p class="what">' + rich(t.what) + '</p>' + cols + (t.file ? '<div class="file x">' + fileLine(t.file) + '</div>' : '') + '</div>';
     }).join("");
     var rels = (DB.relations || []).map(function (r) {
-      return '<li data-a="' + esc(r.from) + '" data-b="' + esc(r.to) + '"><span class="kind">' + esc(RELK[r.kind] || r.kind || "علاقة") + '</span><span>' + rich(r.text) + '</span><span class="pair x">' + esc(r.from) + ' → ' + esc(r.to) + '</span></li>';
+      return '<li data-a="' + esc(r.from) + '" data-b="' + esc(r.to) + '"><span class="kind">' + esc(RELK[r.kind] || r.kind || TX.rel) + '</span><span>' + rich(r.text) + '</span><span class="pair x">' + esc(r.from) + ' → ' + esc(r.to) + '</span></li>';
     }).join("");
-    out.push(section("s-db", "قاعدة البيانات", DB.title || "أين تُحفظ البيانات؟", DB.intro || "اضغط على اسم جدول لترى الجداول المرتبطة به.",
-      figs("database") + '<div class="reg" id="reg">' + tbls + '</div>' + (rels ? '<h3>العلاقات بين الجداول</h3><ul class="rels" id="rels">' + rels + '</ul>' : '')));
+    out.push(section("s-db", TX.dbS, DB.title || TX.dbT, DB.intro || TX.dbI,
+      figs("database") + '<div class="reg" id="reg">' + tbls + '</div>' + (rels ? '<h3>' + TX.rels + '</h3><ul class="rels" id="rels">' + rels + '</ul>' : '')));
   }
 
   /* parts */
   if (D.parts && D.parts.items && D.parts.items.length) {
-    out.push(section("s-parts", D.parts.title || "الأقسام", D.parts.title || "الأقسام", D.parts.intro, figs("parts") + '<div class="parts">' + D.parts.items.map(function (p) {
+    out.push(section("s-parts", D.parts.title || TX.parts, D.parts.title || TX.parts, D.parts.intro, figs("parts") + '<div class="parts">' + D.parts.items.map(function (p) {
       var pid = partFor(p.how); return '<div class="part"' + (pid ? ' data-key="' + esc(pid) + '"' : '') + '><h3>' + (pid ? key(pid) : '') + esc(p.name) + '</h3>' + (p.how ? '<div class="how x">' + fileLine(p.how) + '</div>' : '') + '<ul>' + (p.points || []).map(function (x) { return '<li>' + rich(x) + '</li>'; }).join("") + '</ul></div>';
     }).join("") + '</div>'));
   }
 
   /* story */
   var ST = D.story;
-  var KINDS = { start: ["بداية", "--c5"], feature: ["ميزة", "--c1"], architecture: ["هيكلة", "--c2"], fix: ["إصلاح", "--c3"], release: ["إطلاق", "--c4"], docs: ["توثيق", "--c5"] };
+  var KINDS = { start: [TX.kinds.start, "--c5"], feature: [TX.kinds.feature, "--c1"], architecture: [TX.kinds.architecture, "--c2"], fix: [TX.kinds.fix, "--c3"], release: [TX.kinds.release, "--c4"], docs: [TX.kinds.docs, "--c5"] };
   if (ST && ST.events && ST.events.length) {
     var lastPhase = null;
     var evs = ST.events.map(function (e) {
@@ -1333,13 +1386,13 @@ var DATA = {
       var k = KINDS[e.kind] || KINDS.feature;
       return ph + '<li class="ev" style="--kc:var(' + k[1] + ')"><div class="meta"><span class="date">' + esc(e.date) + '</span><span class="kind">' + k[0] + '</span>' + (e.commit ? '<span class="hash x">' + esc(e.commit) + '</span>' : '') + '</div><div><h3>' + esc(e.title) + '</h3><p>' + rich(e.text) + '</p></div></li>';
     }).join("");
-    out.push(section("s-story", "قصة المشروع", ST.title || "كيف وصل المشروع إلى شكله الحالي؟", ST.intro, figs("story") + '<ol class="story">' + evs + '</ol>'));
+    out.push(section("s-story", TX.storyS, ST.title || TX.storyT, ST.intro, figs("story") + '<ol class="story">' + evs + '</ol>'));
   }
 
   /* review notes */
-  var NK = { gap: ["ناقص", "--c2"], risk: ["خطر", "--c1"], security: ["أمان", "--c4"], debt: ["دين تقني", "--c3"], perf: ["أداء", "--c5"] };
+  var NK = { gap: [TX.nk.gap, "--c2"], risk: [TX.nk.risk, "--c1"], security: [TX.nk.security, "--c4"], debt: [TX.nk.debt, "--c3"], perf: [TX.nk.perf, "--c5"] };
   if (D.notes && D.notes.items && D.notes.items.length) {
-    out.push(section("s-notes", "ملاحظات", D.notes.title || "ملاحظات المراجعة", D.notes.intro || "ما لاحظناه أثناء قراءة الكود: أشياء ناقصة، ومخاطر، وديون تقنية. كل ملاحظة تشير إلى ملفها.",
+    out.push(section("s-notes", TX.notesS, D.notes.title || TX.notesT, D.notes.intro || TX.notesI,
       '<ol class="notes">' + D.notes.items.map(function (n) {
         var k = NK[n.kind] || NK.gap, id = partFor(n.where);
         return '<li class="note"' + (id ? ' data-key="' + esc(id) + '"' : '') + ' style="--kc:var(' + k[1] + ')"><div class="meta">' + k[0] + '</div><div><h3>' + (id ? key(id) : '') + esc(n.title) + '</h3><p>' + rich(n.text) + '</p>' + (n.where ? '<div class="where x">' + fileLine(n.where) + '</div>' : '') + '</div></li>';
@@ -1347,34 +1400,33 @@ var DATA = {
   }
 
   if (D.glossary && D.glossary.length) {
-    out.push(section("s-words", "القاموس", "كلمات ستراها في الكود", "", '<dl class="words">' + D.glossary.map(function (g) {
+    out.push(section("s-words", TX.wordsS, TX.wordsT, "", '<dl class="words">' + D.glossary.map(function (g) {
       return '<dt>' + esc(g.term) + (g.en ? '<span class="mono">' + esc(g.en) + '</span>' : '') + '</dt><dd>' + rich(g.meaning) + '</dd>';
     }).join("") + '</dl>'));
   }
   var KEYED_ROWS = (D.change || []).some(function (c) { return !!partFor(c.where); });
   if (D.change && D.change.length) {
-    out.push(section("s-change", "أين أغيّر؟", "أين أغيّر ماذا؟", "", '<div class="table-wrap"><table><thead><tr><th scope="col">أريد أن…</th><th scope="col">افتح</th></tr></thead><tbody>' +
+    out.push(section("s-change", TX.changeS, TX.changeT, "", '<div class="table-wrap"><table><thead><tr><th scope="col">' + TX.want + '</th><th scope="col">' + TX.open + '</th></tr></thead><tbody>' +
       D.change.map(function (c) { var id = partFor(c.where); return '<tr' + (id ? ' data-key="' + esc(id) + '"' : '') + '><td>' + rich(c.want) + '</td><td class="where"><div class="whr"><span class="p">' + fileLine(c.where) + '</span>' + (id ? key(id) : (KEYED_ROWS ? '<span class="k-slot" aria-hidden="true"></span>' : '')) + '</div></td></tr>'; }).join("") + '</tbody></table></div>'));
   }
   if (D.exercises && D.exercises.length) {
-    out.push(section("s-tasks", "تمارين", "تمارين صغيرة", "افتح المشروع، غيّر شيئًا واحدًا، شغّله وشاهد النتيجة. يمكنك دائمًا التراجع عن التغيير.", '<ol class="tasks">' +
+    out.push(section("s-tasks", TX.tasksS, TX.tasksT, TX.tasksI, '<ol class="tasks">' +
       D.exercises.map(function (t, i) {
         var snip = t.before || t.after ? '<pre class="snip">' + (t.before ? '<span class="old">' + esc(t.before) + '</span>\n' : '') + (t.after ? '<span class="new">' + esc(t.after) + '</span>' : '') + '</pre>' : '';
         return '<li class="task"><span class="num" aria-hidden="true">' + (i + 1) + '</span><div class="body"><h3>' + esc(t.title) + '</h3><p>' + rich(t.text) + '</p>' + (t.file ? '<div class="file">' + fileLine(t.file) + '</div>' : '') + snip +
-          (t.answer ? '<details class="answer"><summary>اعرض الإجابة</summary><p>' + rich(t.answer) + '</p></details>' : '') + '</div></li>';
+          (t.answer ? '<details class="answer"><summary>' + TX.answer + '</summary><p>' + rich(t.answer) + '</p></details>' : '') + '</div></li>';
       }).join("") + '</ol>'));
   }
-  if (D.tree) out.push(section("s-tree", "الملفات", "أين تعيش الملفات؟", "", '<pre class="tree">' + esc(D.tree) + '</pre>'));
-  var endF = figs("end"); if (endF) out.push(section("s-figs", "أشكال", "أشكال توضيحية", "", endF));
-  var NEXT = { quick: "هذا شرح سريع. للشرح الكامل مع القاموس والتمارين اكتب `/explain كامل`، وللمراجعة المعمّقة `/explain عميق`.",
-               full: "تريد تفاصيل أكثر؟ `/explain عميق` يضيف رحلات أخرى، وما بداخل كل جزء، وملاحظات المراجعة." }[MODE];
+  if (D.tree) out.push(section("s-tree", TX.treeS, TX.treeT, "", '<pre class="tree">' + esc(D.tree) + '</pre>'));
+  var endF = figs("end"); if (endF) out.push(section("s-figs", TX.figsS, TX.figsT, "", endF));
+  var NEXT = { quick: TX.nextQ, full: TX.nextF }[MODE];
   if (NEXT) out.push('<p class="next-depth">' + rich(NEXT) + '</p>');
 
-  var rail = '<nav class="rail" aria-label="فهرس الصفحة"><div><h2>المحتويات</h2><ul class="toc">' + secs.map(function (s) { return '<li><a href="#' + s[0] + '">' + esc(s[1]) + '</a></li>'; }).join("") + '</ul></div>' +
-    '<div class="r-parts"><h2>فهرس الأجزاء</h2><ul class="idx">' + order.map(function (id) { return '<li><button type="button" data-key="' + esc(id) + '">' + key(id) + '<span class="nm">' + esc(byId[id].name) + '</span></button></li>'; }).join("") + '</ul></div></nav>';
+  var rail = '<nav class="rail" aria-label="' + TX.index + '"><div><h2>' + TX.contents + '</h2><ul class="toc">' + secs.map(function (s) { return '<li><a href="#' + s[0] + '">' + esc(s[1]) + '</a></li>'; }).join("") + '</ul></div>' +
+    '<div class="r-parts"><h2>' + TX.partsIdx + '</h2><ul class="idx">' + order.map(function (id) { return '<li><button type="button" data-key="' + esc(id) + '">' + key(id) + '<span class="nm">' + esc(byId[id].name) + '</span></button></li>'; }).join("") + '</ul></div></nav>';
 
   app.innerHTML = head + '<div class="shell gut">' + rail + '<main class="main">' + (LEDE[1] ? '<p class="intro">' + rich(LEDE[1]) + '</p>' : '') + out.join("") + '</main></div>' +
-    '<footer class="gut"><div class="in"><span>' + rich(D.footer || "") + '</span><span><b>/explain</b> · شرح المشاريع بالعربية</span></div></footer>';
+    '<footer class="gut"><div class="in"><span>' + rich(D.footer || "") + '</span><span><b>/explain</b> · ' + TX.brand + '</span></div></footer>';
 
   /* ---------- letters on the drawings ---------- */
   var SVGNS = "http://www.w3.org/2000/svg";
@@ -1396,8 +1448,8 @@ var DATA = {
     var rel = {}, links = [];
     order.forEach(function (k) {
       (byId[k].links || []).forEach(function (l) {
-        if (k === id && byId[l.to]) { rel[l.to] = true; links.push({ dir: "يستخدم", other: l.to, verb: l.verb }); }
-        else if (l.to === id) { rel[k] = true; links.push({ dir: "يستخدمه", other: k, verb: l.verb }); }
+        if (k === id && byId[l.to]) { rel[l.to] = true; links.push({ dir: TX.uses, other: l.to, verb: l.verb }); }
+        else if (l.to === id) { rel[k] = true; links.push({ dir: TX.usedBy, other: k, verb: l.verb }); }
       });
     });
     return { rel: rel, links: links };
@@ -1412,12 +1464,12 @@ var DATA = {
     var n = byId[id], L = D.layers[layerOf[id]];
     keybox.innerHTML = '<div class="big" aria-hidden="true">' + esc(KEY[id]) + '</div>' +
       '<div><div class="nm">' + esc(n.name) + '</div><div class="lay">' + esc(L.name) + '</div><div class="file x">' + fileLine(n.file) + '</div><p class="what">' + rich(n.what) + '</p>' +
-      (n.inside && n.inside.length ? '<div class="inside x"><div class="lh">من الداخل</div><ul>' + n.inside.map(function (m) {
-        return '<li><span class="sig"><code>' + esc(m.name) + '</code>' + (m.line ? '<span class="ln">السطر ' + esc(m.line) + '</span>' : '') + '</span><span>' + rich(m.what) + '</span></li>';
+      (n.inside && n.inside.length ? '<div class="inside x"><div class="lh">' + TX.inside + '</div><ul>' + n.inside.map(function (m) {
+        return '<li><span class="sig"><code>' + esc(m.name) + '</code>' + (m.line ? '<span class="ln">' + TX.line + esc(m.line) + '</span>' : '') + '</span><span>' + rich(m.what) + '</span></li>';
       }).join("") + '</ul></div>' : '') + '</div>' +
-      '<div class="links"><div class="lh">يتعامل مع</div>' + (r.links.length ? r.links.map(function (l) {
+      '<div class="links"><div class="lh">' + TX.works + '</div>' + (r.links.length ? r.links.map(function (l) {
         return '<button type="button" data-go="' + esc(l.other) + '"><span class="dir">' + l.dir + '</span>' + key(l.other) + '<span><span class="nm2">' + esc(byId[l.other].name) + '</span> <span class="vb">' + bidi(l.verb) + '</span></span></button>';
-      }).join("") : '<span class="lh">لا يعتمد على أجزاء أخرى.</span>') + '</div>';
+      }).join("") : '<span class="lh">' + TX.alone + '</span>') + '</div>';
     keybox.querySelectorAll("[data-go]").forEach(function (b) { b.addEventListener("click", function () { select(b.dataset.go); }); });
     store("explain-sel:" + D.project.name, id);
     if (opts && opts.reveal) document.getElementById("s-map").scrollIntoView({ block: "start" });
@@ -1445,19 +1497,19 @@ var DATA = {
       var first = stops[0], here = stops[ci];
       if (first && here) {
         var a = first.offsetLeft + first.offsetWidth / 2, b = here.offsetLeft + here.offsetWidth / 2;
-        fill.style.width = Math.max(0, a - b) + "px";
-        fill.style.right = (routeEl.offsetWidth - a) + "px";
+        fill.style.width = Math.abs(a - b) + "px";
+        if (EN) fill.style.left = a + "px"; else fill.style.right = (routeEl.offsetWidth - a) + "px";
       }
     }
   }
-  function stop() { if (timer) { clearInterval(timer); timer = null; } if (playBtn) playBtn.innerHTML = UI.play + '<span>شغّل الرحلة</span>'; }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } if (playBtn) playBtn.innerHTML = UI.play + '<span>' + TX.play + '</span>'; }
   function bindFlow() {
     sbtn = flowBody.querySelectorAll("#steps button"); stops = flowBody.querySelectorAll("#route li");
     fill = document.getElementById("fill"); routeEl = document.getElementById("route"); playBtn = document.getElementById("play");
     if (playBtn) playBtn.addEventListener("click", function () {
       if (timer) { stop(); return; }
       if (ci === F.steps.length - 1) show(0);
-      playBtn.innerHTML = UI.pause + '<span>إيقاف</span>';
+      playBtn.innerHTML = UI.pause + '<span>' + TX.pause + '</span>';
       timer = setInterval(function () { if (ci >= F.steps.length - 1) { stop(); return; } show(ci + 1); }, 2400);
     });
     flowBody.querySelectorAll("#steps button, #route button").forEach(function (b) { b.addEventListener("click", function () { stop(); show(+b.dataset.i); }); });

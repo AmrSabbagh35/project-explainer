@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>/explain · عرض تجريبي</title>
-<meta name="description" content="عرض تجريبي لمهارة /explain: شرح أي مشروع برمجي بالعربية في صفحة تفاعلية، بثلاثة أعماق. A live demo of the /explain Claude skill.">
+<title>/explain · عرض تجريبي · Live demo</title>
+<meta name="description" content="عرض تجريبي لمهارة /explain: شرح أي مشروع برمجي بالعربية أو الإنجليزية في صفحة تفاعلية، بثلاثة أعماق. A live demo of the /explain Claude skill, in Arabic and English.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
@@ -29,9 +29,8 @@ h1 { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 5.4vw
 .lede { font-size: 18px; max-width: 58ch; margin: 0; }
 .en { color: var(--ink-2); font-size: 15px; direction: ltr; text-align: right; margin: 6px 0 0; }
 .cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 44px 0; }
-.card { display: flex; flex-direction: column; gap: 10px; background: var(--plate); border: 1px solid var(--gilt-soft); border-radius: 10px; padding: 22px; text-decoration: none; transition: border-color .15s, transform .15s; }
-.card:hover { border-color: var(--gilt); transform: translateY(-2px); }
-.card:focus-visible { outline: 2px solid var(--key); outline-offset: 3px; }
+.card { position: relative; display: flex; flex-direction: column; gap: 10px; background: var(--plate); border: 1px solid var(--gilt-soft); border-radius: 10px; padding: 22px; transition: border-color .15s; }
+.card:hover { border-color: var(--gilt); }
 .card.deep { background: var(--plate-2); border-color: var(--gilt); }
 .top { display: flex; align-items: center; justify-content: space-between; }
 .gauge { display: inline-flex; gap: 3px; }
@@ -40,7 +39,10 @@ h1 { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 5.4vw
 .card h2 { font-family: var(--display); font-size: 30px; margin: 0; line-height: 1.2; }
 .cmd { font-family: var(--mono); font-size: 13.5px; color: var(--gilt); direction: ltr; text-align: right; }
 .card p { margin: 0; color: var(--ink-2); font-size: 15px; }
-.card .go { margin-top: auto; padding-top: 8px; font-weight: 600; color: var(--key); }
+.card .go { margin-top: auto; padding-top: 8px; display: flex; gap: 18px; flex-wrap: wrap; }
+.card .go a { font-weight: 600; color: var(--key); text-decoration: none; }
+.card .go a:hover { text-decoration: underline; }
+.card .go a:focus-visible { outline: 2px solid var(--key); outline-offset: 3px; border-radius: 2px; }
 .install { border-top: 1px solid var(--gilt-soft); padding-top: 28px; display: grid; gap: 10px; }
 .install h2 { font-family: var(--display); font-size: 26px; margin: 0; }
 pre { margin: 0; direction: ltr; text-align: left; font: 13.5px/1.7 var(--mono); background: var(--plate); border: 1px solid var(--gilt-soft); border-radius: 8px; padding: 12px 14px; overflow-x: auto; }
@@ -52,38 +54,38 @@ footer { margin-top: 40px; color: var(--ink-2); font-size: 14px; display: flex; 
 <body>
 <main class="wrap">
   <span class="mark">/explain</span>
-  <h1>اشرح أي مشروع برمجي بالعربية</h1>
-  <p class="lede">مهارة لـ Claude تقرأ الكود الحقيقي وتكتب صفحة تفاعلية تشرح المشروع: طبقاته، وكيف يتحرك الطلب داخله، وأين تغيّر ما تريد. هذه صفحات لمشروع خيالي، تطبيق «مكتبتي» لاستعارة الكتب، بالأعماق الثلاثة.</p>
-  <p class="en">A Claude skill that explains any codebase in plain Arabic. Below: the same fictional library app at all three depths.</p>
+  <h1>اشرح أي مشروع برمجي، بالعربية أو الإنجليزية</h1>
+  <p class="lede">مهارة لـ Claude تقرأ الكود الحقيقي وتكتب صفحة تفاعلية تشرح المشروع: طبقاته، وكيف يتحرك الطلب داخله، وأين تغيّر ما تريد. هذه صفحات لمشروع خيالي، تطبيق «مكتبتي» لاستعارة الكتب، بالأعماق الثلاثة وباللغتين.</p>
+  <p class="en">A Claude skill that explains any codebase in plain Arabic or English. Below: the same fictional library app at all three depths, in both languages.</p>
 
   <div class="cards">
-    <a class="card" href="demo/quick.html">
+    <div class="card">
       <div class="top"><h2>سريع</h2><span class="gauge" aria-hidden="true"><i class="on"></i><i></i><i></i></span></div>
       <div class="cmd">/explain سريع · quick</div>
       <p>فكرة المشروع، وأهم أجزائه، ورحلة واحدة قصيرة، و«أين أغيّر ماذا؟». تُقرأ في 5 دقائق.</p>
       <p class="en">A 5-minute overview.</p>
-      <span class="go">افتح الصفحة ←</span>
-    </a>
-    <a class="card" href="demo/full.html">
+      <span class="go"><a href="demo/quick.html" lang="ar">بالعربية ←</a><a href="demo/quick-en.html" lang="en" dir="ltr">In English →</a></span>
+    </div>
+    <div class="card">
       <div class="top"><h2>كامل</h2><span class="gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i></i></span></div>
       <div class="cmd">/explain · full</div>
       <p>مع التشبيه وفريقه، وقاعدة البيانات، وقصة المشروع، والقاموس، والتمارين.</p>
       <p class="en">The whole project, for learning and onboarding.</p>
-      <span class="go">افتح الصفحة ←</span>
-    </a>
-    <a class="card deep" href="demo/deep.html">
+      <span class="go"><a href="demo/full.html" lang="ar">بالعربية ←</a><a href="demo/full-en.html" lang="en" dir="ltr">In English →</a></span>
+    </div>
+    <div class="card deep">
       <div class="top"><h2>عميق</h2><span class="gauge" aria-hidden="true"><i class="on"></i><i class="on"></i><i class="on"></i></span></div>
       <div class="cmd">/explain عميق · deep</div>
       <p>مع ثلاث رحلات، والدوال داخل كل جزء بأرقام أسطرها، وملاحظات المراجعة.</p>
       <p class="en">Before you change or review the code.</p>
-      <span class="go">افتح الصفحة ←</span>
-    </a>
+      <span class="go"><a href="demo/deep.html" lang="ar">بالعربية ←</a><a href="demo/deep-en.html" lang="en" dir="ltr">In English →</a></span>
+    </div>
   </div>
 
   <section class="install">
     <h2>ثبّتها في Claude Code</h2>
     <pre>git clone https://github.com/AmrSabbagh35/project-explainer-ar.git ~/.claude/skills/explain</pre>
-    <p class="lede">ثم أعد تشغيل Claude Code، وافتح مشروعك، واكتب <span class="mark">/explain</span>. لا تحتاج إلا Python 3.</p>
+    <p class="lede">ثم أعد تشغيل Claude Code، وافتح مشروعك، واكتب <span class="mark">/explain</span>. تكتب الصفحة بلغة طلبك، أو اكتب <span class="mark">/explain en</span> للإنجليزية. لا تحتاج إلا Python 3.</p>
   </section>
 
   <footer>

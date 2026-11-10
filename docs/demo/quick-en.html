@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Library, a quick look</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Sans+Arabic:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Noto+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* World: a lettered mechanical plate. Lapis ground, vermilion keys, gilt hairlines.
+   Layout: masthead band, then a right-hand index rail beside one main column. Dark-first. */
+:root {
+  --ground: #0B1222;
+  --plate: #13224A;
+  --plate-2: #1A2D5C;
+  --mast: #13224A; --mast-ink: #EEF1F7; --mast-ink-2: #B4C0DA; --mast-gilt: #D2AC63;
+  --ink: #E8ECF4;
+  --ink-2: #A3AFC4;
+  --gilt: #C29A4F;
+  --gilt-soft: rgba(194, 154, 79, .32);
+  --key: #EE6A4C;
+  --on-key: #0B1222;
+  --lapis: #6F9BEA;
+  --code-bg: #0E182C;
+  --c1: #6F9BEA; --c2: #C29A4F; --c3: #A3AFC4; --c4: #8FB0EE; --c5: #9C8A62;
+  --display: "Amiri", "Noto Naskh Arabic", "Times New Roman", serif;
+  --body: "Noto Sans Arabic", "Segoe UI", Tahoma, system-ui, sans-serif;
+  --end: right;   /* where code lines align: the reading start of the page */
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --rail: 236px;
+  --measure: 68ch;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --ground: #F3F5F9; --plate: #FFFFFF; --plate-2: #E6EDF8; --ink: #111A2C; --ink-2: #4A576D;
+    --gilt: #8E6A28; --gilt-soft: rgba(142, 106, 40, .30); --key: #C2391F; --on-key: #FFFFFF; --lapis: #1E4FA8; --code-bg: #EDF1F8;
+    --mast: #1E3A78; --mast-ink: #F3F5F9; --mast-ink-2: #C6D1E8; --mast-gilt: #E0BE7A;
+    --c1: #1E4FA8; --c2: #8E6A28; --c3: #4A576D; --c4: #3A66B8; --c5: #6B5A33;
+    color-scheme: light;
+  }
+}
+:root[data-theme="light"] {
+  --ground: #F3F5F9; --plate: #FFFFFF; --plate-2: #E6EDF8; --ink: #111A2C; --ink-2: #4A576D;
+  --gilt: #8E6A28; --gilt-soft: rgba(142, 106, 40, .30); --key: #C2391F; --on-key: #FFFFFF; --lapis: #1E4FA8; --code-bg: #EDF1F8;
+  --mast: #1E3A78; --mast-ink: #F3F5F9; --mast-ink-2: #C6D1E8; --mast-gilt: #E0BE7A;
+  --c1: #1E4FA8; --c2: #8E6A28; --c3: #4A576D; --c4: #3A66B8; --c5: #6B5A33;
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --ground: #0B1222; --plate: #13224A; --plate-2: #1A2D5C; --ink: #E8ECF4; --ink-2: #A3AFC4;
+  --gilt: #C29A4F; --gilt-soft: rgba(194, 154, 79, .32); --key: #EE6A4C; --on-key: #0B1222; --lapis: #6F9BEA; --code-bg: #0E182C;
+  --mast: #13224A; --mast-ink: #EEF1F7; --mast-ink-2: #B4C0DA; --mast-gilt: #D2AC63;
+  --c1: #6F9BEA; --c2: #C29A4F; --c3: #A3AFC4; --c4: #8FB0EE; --c5: #9C8A62;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16.5px; line-height: 1.85; scrollbar-color: var(--gilt-soft) transparent; }
+::selection { background: color-mix(in srgb, var(--key) 32%, transparent); color: var(--ink); }
+a { color: var(--lapis); text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid var(--lapis); outline-offset: 2px; border-radius: 4px; }
+button { font: inherit; color: inherit; }
+code, .mono { font-family: var(--mono); font-size: .84em; direction: ltr; unicode-bidi: isolate; }
+p { margin: 0; }
+.x { }
+body.beginner .x { display: none !important; }
+.gut { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* letter key: the world's signature */
+.k { display: inline-grid; place-items: center; flex: none; width: 1.75em; height: 1.75em; border-radius: 50%; font-family: var(--display); font-weight: 700; font-size: 15px; line-height: 1; padding-top: .12em; color: var(--key); border: 1px solid color-mix(in srgb, var(--key) 55%, transparent); background: transparent; transition: background .2s, color .2s; }
+.is-sel .k, .k.on { background: var(--key); color: var(--on-key); border-color: var(--key); }
+
+/* masthead */
+.mast { background: var(--mast); color: var(--mast-ink); border-bottom: 1px solid var(--gilt); position: relative; }
+.mast::after { content: ""; position: absolute; inset: auto 0 -5px 0; height: 1px; background: var(--gilt-soft); }
+.mast :focus-visible { outline-color: var(--mast-gilt); }
+.mast-in { max-width: 1240px; margin: 0 auto; padding-block: 28px 40px; display: flex; flex-direction: column; gap: 16px; }
+.mast-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.mark { display: flex; align-items: baseline; gap: 10px; color: var(--mast-ink-2); font-size: 14px; }
+.mark b { font-family: var(--mono); font-weight: 600; color: var(--mast-gilt); font-size: 15px; direction: ltr; }
+.mast h1 { font-family: var(--display); font-weight: 700; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.25; margin: 4px 0 0; text-wrap: balance; max-width: 22ch; }
+.lede { font-size: 20px; line-height: 1.75; max-width: 64ch; color: var(--mast-ink); }
+.intro { font-size: 17px; max-width: var(--measure); color: var(--ink); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 0; margin: 0; padding: 0; list-style: none; font-size: 14.5px; color: var(--mast-ink-2); }
+.legend li:not(:last-child)::after { content: ""; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--mast-gilt); margin: 0 12px; vertical-align: middle; }
+.path { font-family: var(--mono); font-size: 13px; color: var(--mast-ink-2); direction: ltr; text-align: var(--end); }
+.lvl { display: inline-flex; border: 1px solid color-mix(in srgb, var(--mast-gilt) 45%, transparent); border-radius: 999px; padding: 3px; gap: 2px; }
+.lvl button { all: unset; cursor: pointer; padding: 3px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--mast-ink-2); }
+.lvl button[aria-pressed="true"] { background: var(--mast-ink); color: var(--mast); }
+.lvl button:focus-visible { outline: 2px solid var(--lapis); outline-offset: 2px; }
+
+/* shell: rail on the right (RTL start), main column beside it */
+.shell { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: var(--rail) minmax(0, 1fr); gap: 56px; padding-block: 40px 96px; }
+.rail { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); align-self: start; max-height: calc(100vh - 40px); overflow: auto; display: flex; flex-direction: column; gap: 22px; padding-inline-end: 4px; font-size: 14.5px; scrollbar-width: thin; }
+.rail h2 { font-family: var(--display); font-size: 17px; font-weight: 700; margin: 0 0 6px; color: var(--gilt); }
+.toc { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.toc a { display: block; padding-block: 4px; padding-inline: 12px 0; color: var(--ink-2); text-decoration: none; border-inline-start: 1px solid var(--gilt-soft); }
+.toc a:hover { color: var(--ink); }
+.toc a.here { color: var(--ink); border-inline-start-color: var(--key); font-weight: 600; }
+.idx { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+.idx button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: flex; align-items: center; gap: 10px; padding: 3px 4px; border-radius: 6px; }
+.idx button:hover { background: var(--plate); }
+.idx button:focus-visible { outline: 2px solid var(--lapis); outline-offset: 1px; }
+.idx .nm { font-family: var(--mono); font-size: 12.5px; direction: ltr; unicode-bidi: isolate; color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.idx .is-sel .nm, .idx button.is-sel .nm { color: var(--ink); }
+.main { min-width: 0; display: flex; flex-direction: column; gap: 88px; }
+section { min-width: 0; display: flex; flex-direction: column; gap: 20px; scroll-margin-top: 20px; }
+.sec-h { display: flex; flex-direction: column; gap: 10px; padding-top: 22px; border-top: 1px solid var(--gilt-soft); }
+.sec-h h2 { font-family: var(--display); font-weight: 700; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.35; margin: 0; text-wrap: balance; }
+.sec-h p { max-width: var(--measure); color: var(--ink-2); font-size: 16.5px; }
+h3 { margin: 0; font-size: 17px; font-weight: 700; line-height: 1.6; }
+
+/* inline reference to a lettered part */
+.ref { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; vertical-align: baseline; border-bottom: 1px dotted var(--gilt); line-height: 1.3; }
+.ref .k { width: 1.45em; height: 1.45em; font-size: 12px; }
+.ref code { font-size: .82em; }
+.ref:hover code, .ref:focus-visible code, .ref.is-sel code { color: var(--key); }
+.ref:focus-visible { outline: 2px solid var(--lapis); outline-offset: 2px; }
+p code, li code, dd code, td code { background: var(--code-bg); padding: 1px 5px; border-radius: 4px; }
+
+/* cast: the plate's legend of roles */
+.cast { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.role { display: grid; grid-template-columns: 52px minmax(0, 1fr) auto; gap: 18px; align-items: start; padding: 18px 16px; border-top: 1px solid var(--gilt-soft); }
+.role:last-child { border-bottom: 1px solid var(--gilt-soft); }
+.role.key { background: var(--plate); }
+.role .ic { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--gilt-soft); color: var(--gilt); }
+.role .ic svg { width: 28px; height: 28px; }
+.role h3 { font-size: 18px; }
+.role p { color: var(--ink-2); font-size: 15.5px; max-width: 60ch; }
+.role .hand { margin-top: 6px; font-size: 14px; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+.role .hand svg { width: 14px; height: 14px; color: var(--gilt); flex: none; }
+.role .code { align-self: center; }
+.ink { stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.big-idea { font-family: var(--display); font-size: 22px; line-height: 1.75; max-width: 46ch; color: var(--ink); padding: 4px 0; }
+.cast-art { margin: 0; border: 1px solid var(--gilt-soft); border-radius: 10px; overflow: hidden; background: var(--plate); }
+.cast-art img { display: block; width: 100%; height: auto; }
+.cast-art figcaption { padding: 8px 14px; font-size: 14px; color: var(--ink-2); }
+
+/* the mechanism plate */
+.plate { background: var(--plate); border: 1px solid var(--gilt); border-radius: 4px; padding: 6px; }
+.plate-in { border: 1px solid var(--gilt-soft); border-radius: 2px; padding: 18px; display: flex; flex-direction: column; gap: 4px; }
+.band { display: flex; flex-direction: column; gap: 10px; padding: 12px 0 14px; }
+.band-h { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; font-size: 14px; }
+.band-h b { color: var(--ink); font-weight: 700; }
+.band-h .mono { color: var(--ink-2); font-size: 12.5px; }
+.nodes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 8px; }
+.node { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 10px; align-items: center; padding: 9px 10px; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--lc) 34%, transparent); background: color-mix(in srgb, var(--lc) 6%, transparent); transition: border-color .2s, background .2s, opacity .25s; }
+.node .k { grid-row: span 2; }
+.node .nm { font-family: var(--mono); font-size: 12.5px; font-weight: 600; direction: ltr; text-align: var(--end); overflow-wrap: anywhere; line-height: 1.45; }
+.node .sh { font-size: 13px; color: var(--ink-2); line-height: 1.5; }
+.node:hover { border-color: var(--lc); }
+.node:focus-visible { outline: 2px solid var(--lapis); outline-offset: 2px; }
+.node.is-sel { border-color: var(--key); background: color-mix(in srgb, var(--key) 10%, transparent); }
+.node.rel { border-color: var(--lc); }
+.plate.focus .node:not(.is-sel):not(.rel) { border-color: var(--gilt-soft); background: transparent; }
+.plate.focus .node:not(.is-sel):not(.rel) .nm { color: var(--ink-2); font-weight: 400; }
+.down { display: flex; align-items: center; gap: 10px; color: var(--ink-2); font-size: 13px; padding-inline-start: 6px; }
+.down svg { width: 14px; height: 14px; color: var(--gilt); }
+.keybox { display: grid; grid-template-columns: auto minmax(0, 1.25fr) minmax(0, 1fr); gap: 22px; align-items: start; border-top: 1px solid var(--gilt-soft); border-bottom: 1px solid var(--gilt-soft); padding: 20px 4px; }
+.keybox .big { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1; color: var(--key); min-width: 1.2em; text-align: center; padding-top: 6px; }
+.keybox .nm { font-family: var(--mono); font-weight: 600; font-size: 18px; direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
+.keybox .lay { font-size: 13.5px; font-weight: 600; color: var(--gilt); margin-top: 2px; }
+.keybox .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
+.keybox .what { margin-top: 10px; max-width: 60ch; }
+.links { display: flex; flex-direction: column; gap: 2px; }
+.links .lh { font-size: 13px; color: var(--ink-2); margin-bottom: 6px; }
+.links button { all: unset; cursor: pointer; display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 8px; align-items: center; padding: 5px 6px; border-radius: 6px; font-size: 14px; }
+.links button:hover { background: var(--plate); }
+.links button:focus-visible { outline: 2px solid var(--lapis); }
+.links .dir { color: var(--gilt); font-size: 12px; font-weight: 600; min-width: 4.2em; }
+.links .vb { color: var(--ink-2); }
+.links .nm2 { font-family: var(--mono); font-size: 12.5px; direction: ltr; unicode-bidi: isolate; font-weight: 600; }
+
+/* route: one request as a line of lettered stations */
+.route-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--ink-2); font-size: 14px; }
+.route-wrap { overflow-x: auto; padding: 4px 0 8px; }
+.route { position: relative; display: flex; justify-content: space-between; min-width: 600px; padding: 26px 18px 8px; list-style: none; margin: 0; }
+.route::before { content: ""; position: absolute; top: 44px; right: 34px; left: 34px; height: 2px; background: var(--gilt-soft); }
+.route .fill { position: absolute; top: 44px; height: 2px; background: var(--key); width: 0; transition: width .75s cubic-bezier(.16, 1, .3, 1); }
+.route li { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.route button { all: unset; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.route .k { width: 38px; height: 38px; font-size: 18px; background: var(--ground); }
+.route .n { font-size: 12px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.route li.is-sel .k { border-color: var(--key); color: var(--key); background: var(--ground); border-width: 2px; }
+.route li.done .k { border-color: var(--key); color: var(--key); }
+.route li.now .k { background: var(--key); color: var(--on-key); border-color: var(--key); box-shadow: 0 0 0 6px color-mix(in srgb, var(--key) 22%, transparent); }
+.route button:focus-visible .k { outline: 2px solid var(--lapis); outline-offset: 3px; }
+.flow { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 28px; align-items: start; }
+.steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.steps button { all: unset; box-sizing: border-box; cursor: pointer; width: 100%; display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 10px 8px; border-top: 1px solid var(--gilt-soft); }
+.steps li:last-child button { border-bottom: 1px solid var(--gilt-soft); }
+.steps .n { font-variant-numeric: tabular-nums; color: var(--ink-2); font-size: 14px; text-align: center; }
+.steps .who { display: block; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; margin-top: 1px; }
+.steps .tt { display: block; font-size: 15.5px; font-weight: 600; line-height: 1.5; }
+.steps button:hover { background: var(--plate); }
+.steps button:focus-visible { outline: 2px solid var(--lapis); outline-offset: -2px; }
+.steps button.on { background: var(--plate); }
+.steps button.on .n { color: var(--key); font-weight: 700; }
+.step-card { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); background: var(--plate); border: 1px solid var(--gilt-soft); border-radius: 6px; padding: 20px 22px; display: flex; flex-direction: column; gap: 12px; }
+.step-card .who { font-size: 13.5px; color: var(--ink-2); }
+.step-card h3 { font-family: var(--display); font-size: 24px; font-weight: 700; line-height: 1.5; }
+.step-card .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; padding-top: 10px; border-top: 1px solid var(--gilt-soft); }
+.ctrl { display: flex; gap: 8px; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; background: transparent; color: var(--ink); border: 1px solid var(--gilt-soft); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.btn:hover { border-color: var(--gilt); }
+.btn svg { width: 14px; height: 14px; }
+.btn.primary { background: var(--key); color: var(--on-key); border-color: var(--key); }
+.btn.icon { padding: 6px 10px; }
+.count { font-size: 13px; color: var(--ink-2); min-width: 3.5ch; text-align: center; font-variant-numeric: tabular-nums; }
+
+/* database register */
+.reg { display: flex; flex-direction: column; }
+.tbl { display: grid; grid-template-columns: minmax(150px, 220px) minmax(0, 1fr); gap: 8px 24px; padding: 16px 6px; border-top: 1px solid var(--gilt-soft); transition: opacity .25s, background .2s; }
+.tbl:last-child { border-bottom: 1px solid var(--gilt-soft); }
+.tbl-h { all: unset; cursor: pointer; font-family: var(--mono); font-weight: 600; font-size: 14.5px; direction: ltr; text-align: var(--end); align-self: start; overflow-wrap: anywhere; }
+.tbl-h:hover, .tbl-h:focus-visible { color: var(--key); }
+.tbl-h:focus-visible { outline: 2px solid var(--lapis); outline-offset: 3px; }
+.tbl .what { color: var(--ink); font-size: 15.5px; }
+.tbl .file { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); grid-column: 2; }
+.tbl details { grid-column: 2; }
+.tbl summary { cursor: pointer; font-size: 13.5px; color: var(--lapis); font-weight: 600; width: max-content; }
+.cols { display: grid; grid-template-columns: max-content max-content minmax(0, 1fr); gap: 4px 18px; margin-top: 8px; font-size: 13.5px; align-items: baseline; }
+.cols .cn { font-family: var(--mono); font-weight: 600; direction: ltr; text-align: var(--end); }
+.cols .ct { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
+.cols .cd { color: var(--ink-2); }
+.tbl.sel { background: var(--plate); }
+.tbl.sel .tbl-h { color: var(--key); }
+.reg.focus .tbl:not(.sel):not(.rel) .tbl-h, .reg.focus .tbl:not(.sel):not(.rel) .what { color: var(--ink-2); }
+.rels { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.rels li { display: grid; grid-template-columns: 6.5em minmax(0, 1fr); gap: 4px 18px; padding: 10px 6px; border-top: 1px solid var(--gilt-soft); transition: opacity .25s; }
+.rels .kind { font-size: 13px; font-weight: 600; color: var(--gilt); }
+.rels .pair { grid-column: 2; font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
+.rels.focus li:not(.hit) span { color: var(--ink-2); }
+.rels li.hit { background: var(--plate); }
+
+/* parts */
+.parts { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0 28px; }
+.part { display: flex; flex-direction: column; gap: 4px; padding: 16px 0; border-top: 1px solid var(--gilt-soft); }
+.part .how { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
+.part ul { margin: 4px 0 0; padding: 0 18px 0 0; font-size: 15px; color: var(--ink-2); }
+
+/* story */
+.story { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.phase { font-family: var(--display); font-weight: 700; font-size: 21px; padding: 26px 0 8px; color: var(--gilt); }
+.phase:first-child { padding-top: 0; }
+.ev { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 4px 22px; padding: 12px 0; border-top: 1px solid var(--gilt-soft); }
+.ev .meta { display: flex; flex-direction: column; gap: 2px; font-size: 13px; }
+.ev .date { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
+.ev .kind { font-weight: 600; color: var(--kc); }
+.ev .hash { font-family: var(--mono); font-size: 12px; color: var(--ink-2); direction: ltr; text-align: var(--end); }
+.ev p { color: var(--ink-2); font-size: 15.5px; max-width: 64ch; margin-top: 2px; }
+
+/* English pages: left to right, Latin faces, the same plate */
+:root.ltr { --display: "Source Serif 4", Georgia, "Times New Roman", serif; --body: "Noto Sans", "Segoe UI", system-ui, sans-serif; --end: left; }
+:root.ltr .btn svg.mir { transform: scaleX(-1); }
+:root.ltr .whr { flex-direction: row-reverse; }
+
+/* depth gauge in the masthead */
+.depth { display: inline-flex; align-items: center; gap: 3px; font-size: 13px; font-weight: 600; color: var(--mast-ink-2); }
+.depth i { width: 5px; height: 13px; border-radius: 2px; background: color-mix(in srgb, var(--mast-gilt) 28%, transparent); }
+.depth i.on { background: var(--mast-gilt); }
+.depth span { margin-inline-start: 6px; }
+
+/* inside a part (deep mode) */
+.inside { margin-top: 14px; padding-top: 10px; border-top: 1px solid var(--gilt-soft); }
+.inside .lh { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+.inside ul { list-style: none; margin: 0; padding: 0; }
+.inside li { display: grid; grid-template-columns: minmax(0, 13em) minmax(0, 1fr); gap: 2px 14px; padding: 5px 0; font-size: 14.5px; }
+.inside .sig { display: flex; flex-direction: column; min-width: 0; }
+.inside .sig code { font-weight: 600; font-size: 12.5px; text-align: var(--end); overflow-wrap: anywhere; }
+.inside .ln { font-size: 12px; color: var(--ink-2); }
+.inside li > span:last-child { color: var(--ink-2); }
+
+/* several flows (deep mode) */
+.flow-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.flow-tabs button { all: unset; cursor: pointer; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--gilt-soft); font-size: 14px; font-weight: 600; color: var(--ink-2); }
+.flow-tabs button:hover { border-color: var(--gilt); color: var(--ink); }
+.flow-tabs button[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--ground); }
+.flow-tabs button:focus-visible { outline: 2px solid var(--lapis); outline-offset: 2px; }
+#flowBody { display: flex; flex-direction: column; gap: 20px; }
+.flow-h h3 { font-family: var(--display); font-weight: 700; font-size: 23px; margin: 0; }
+.flow-h p { color: var(--ink-2); max-width: var(--measure); margin-top: 4px; }
+
+/* review notes (deep mode) */
+.notes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.note { display: grid; grid-template-columns: 8.5em minmax(0, 1fr); gap: 4px 22px; padding: 14px 0; border-top: 1px solid var(--gilt-soft); }
+.note .meta { font-size: 13px; font-weight: 600; color: var(--kc); }
+.note h3 { display: flex; align-items: center; gap: 8px; }
+.note p { color: var(--ink-2); font-size: 15.5px; max-width: 64ch; margin-top: 2px; }
+.note .where { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; margin-top: 6px; }
+.note[data-key] { cursor: pointer; }
+.next-depth { border-top: 1px solid var(--gilt-soft); padding-top: 18px; color: var(--ink-2); font-size: 15px; max-width: var(--measure); }
+
+/* glossary */
+dl.words { margin: 0; display: grid; grid-template-columns: minmax(150px, 210px) minmax(0, 1fr); }
+dl.words dt, dl.words dd { margin: 0; padding: 12px 6px; border-top: 1px solid var(--gilt-soft); }
+dl.words dt { font-weight: 700; }
+dl.words dt .mono { display: block; color: var(--ink-2); font-weight: 400; font-size: 12px; }
+dl.words dd { color: var(--ink-2); font-size: 15.5px; }
+
+/* change table */
+.table-wrap { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 15px; }
+th, td { text-align: start; padding: 11px 6px; border-top: 1px solid var(--gilt-soft); vertical-align: top; }
+tr:last-child td { border-bottom: 1px solid var(--gilt-soft); }
+th { font-size: 13px; color: var(--gilt); font-weight: 700; border-top: 0; padding-top: 0; }
+td.where { font-family: var(--mono); font-size: 12.5px; direction: ltr; text-align: var(--end); color: var(--ink-2); overflow-wrap: anywhere; width: 50%; }
+
+/* exercises */
+.tasks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.task { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; padding: 22px 0; border-top: 1px solid var(--gilt-soft); }
+.task .num { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; color: var(--gilt); text-align: center; padding-top: 6px; }
+.task .body { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.task .file { font-family: var(--mono); font-size: 12.5px; color: var(--ink-2); direction: ltr; text-align: var(--end); overflow-wrap: anywhere; }
+pre.snip, pre.tree { margin: 0; direction: ltr; text-align: left; font-family: "JetBrains Mono", "Noto Sans Arabic", ui-monospace, Menlo, monospace; font-size: 13px; line-height: 1.75; background: var(--code-bg); border: 1px solid var(--gilt-soft); border-radius: 6px; padding: 12px 14px; overflow-x: auto; white-space: pre; color: var(--ink); }
+pre.snip .old { color: var(--ink-2); text-decoration: line-through; text-decoration-color: var(--key); }
+pre.snip .new { color: var(--c2); font-weight: 600; }
+details.answer summary { cursor: pointer; color: var(--lapis); font-weight: 600; font-size: 14.5px; width: max-content; }
+details.answer p { margin-top: 8px; color: var(--ink-2); max-width: 62ch; }
+
+/* figures, drawn by Claude as inline SVG that uses these classes */
+.fig { margin: 0; min-width: 0; max-width: 100%; display: flex; flex-direction: column; gap: 10px; }
+.fig-frame { background: var(--plate); border: 1px solid var(--gilt); border-radius: 4px; padding: 6px; }
+.fig-body { min-width: 0; border: 1px solid var(--gilt-soft); border-radius: 2px; padding: 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.fig-t { font-family: var(--display); font-weight: 700; font-size: 20px; }
+.fig figcaption { font-size: 14.5px; color: var(--ink-2); max-width: var(--measure); }
+.fig figcaption b { color: var(--gilt); font-weight: 700; margin-inline-end: 6px; }
+.fig-body svg { display: block; width: 100%; height: auto; min-width: 560px; }
+.fig-body img { display: block; width: 100%; height: auto; }
+.fig-body svg text { font-family: var(--body); fill: var(--ink); font-size: 14px; direction: rtl; }
+:root.ltr .fig-body svg text { direction: ltr; }
+.fig-body svg .f-t { fill: var(--ink); font-size: 14px; font-weight: 700; }
+.fig-body svg .f-m { fill: var(--ink-2); font-size: 12px; font-weight: 400; }
+.fig-body svg .f-code { font-family: var(--mono); fill: var(--ink-2); font-size: 11px; direction: ltr; }
+.fig-body svg .f-box { fill: var(--plate-2); stroke: var(--gilt-soft); stroke-width: 1.2; }
+.fig-body svg .f-band { fill: var(--ground); stroke: var(--gilt-soft); stroke-dasharray: 4 4; }
+.fig-body svg .f-line { stroke: var(--ink-2); stroke-width: 1.6; fill: none; }
+.fig-body svg .f-dash { stroke: var(--ink-2); stroke-width: 1.6; fill: none; stroke-dasharray: 5 4; }
+.fig-body svg .f-head { fill: var(--ink-2); }
+.fig-body svg .f-acc { fill: color-mix(in srgb, var(--gilt) 16%, var(--plate)); stroke: var(--gilt); stroke-width: 1.6; }
+.fig-body svg .f-c1 { fill: color-mix(in srgb, var(--c1) 14%, var(--plate)); stroke: var(--c1); stroke-width: 1.4; }
+.fig-body svg .f-c2 { fill: color-mix(in srgb, var(--c2) 14%, var(--plate)); stroke: var(--c2); stroke-width: 1.4; }
+.fig-body svg .f-c3 { fill: color-mix(in srgb, var(--c3) 14%, var(--plate)); stroke: var(--c3); stroke-width: 1.4; }
+.fig-body svg .f-c4 { fill: color-mix(in srgb, var(--c4) 14%, var(--plate)); stroke: var(--c4); stroke-width: 1.4; }
+.fig-body svg .f-c5 { fill: color-mix(in srgb, var(--c5) 14%, var(--plate)); stroke: var(--c5); stroke-width: 1.4; }
+
+summary { list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: ""; display: inline-block; width: 0; height: 0; border-block: 4px solid transparent; border-inline-start: 6px solid var(--gilt); margin-inline-end: 8px; vertical-align: middle; transition: transform .2s; }
+details[open] > summary::before { transform: rotate(-90deg); }
+:root.ltr details[open] > summary::before { transform: rotate(90deg); }
+.ar { font-family: var(--body); direction: rtl; unicode-bidi: isolate; font-size: 1.05em; }
+.part .k { width: 1.5em; height: 1.5em; font-size: 12px; margin-inline-end: 8px; vertical-align: middle; }
+.whr { display: flex; justify-content: flex-end; align-items: center; gap: 8px; direction: ltr; }
+.whr .p { min-width: 0; text-align: var(--end); }
+.whr .k, .whr .k-slot { width: 1.5em; height: 1.5em; font-size: 12px; flex: none; }
+tr[data-key] { cursor: pointer; }
+tr.is-sel td { background: var(--plate); }
+.part.is-sel h3 { color: var(--key); }
+.fig-body svg [data-key] { cursor: pointer; }
+.fig-body svg .f-key circle { fill: transparent; stroke: var(--key); stroke-width: 1.2; }
+.fig-body svg .f-key text { fill: var(--key); font-family: var(--display); font-weight: 700; font-size: 13px; }
+.fig-body svg .is-sel .f-key circle { fill: var(--key); }
+.fig-body svg .is-sel .f-key text { fill: var(--on-key); }
+.fig-body svg .is-sel > rect:first-of-type { stroke: var(--key); stroke-width: 2.4; }
+footer { max-width: 1240px; margin: 0 auto; padding-block: 0 48px; font-size: 14px; color: var(--ink-2); }
+footer .in { border-top: 1px solid var(--gilt); padding-top: 18px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+footer b { font-family: var(--mono); color: var(--gilt); font-weight: 600; direction: ltr; }
+
+@media (max-width: 960px) {
+  .shell { grid-template-columns: minmax(0, 1fr); gap: 0; padding-top: 0; }
+  .rail { position: sticky; top: 0; z-index: 5; max-height: none; overflow: visible; background: var(--ground); border-bottom: 1px solid var(--gilt-soft); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding: 8px max(16px, env(safe-area-inset-left, 0px)); gap: 0; }
+  .rail .r-parts, .rail h2 { display: none; }
+  .toc { flex-direction: row; overflow-x: auto; gap: 4px; scrollbar-width: none; }
+  .toc a { white-space: nowrap; border-inline-start: 0; border-bottom: 2px solid transparent; padding: 4px 8px; }
+  .toc a.here { border-bottom-color: var(--key); border-inline-start: 0; }
+  .main { padding-top: 32px; gap: 72px; }
+  section, .plate, .route, .reg { scroll-margin-top: 64px; }
+  html { scroll-padding-top: 64px; }
+  .flow, .keybox { grid-template-columns: minmax(0, 1fr); }
+  .keybox .big { text-align: var(--end); }
+  .step-card { position: static; }
+}
+@media (max-width: 620px) {
+  .role { grid-template-columns: 40px minmax(0, 1fr); }
+  .role .ic { width: 40px; height: 40px; }
+  .role .code { grid-column: 2; }
+  .tbl, .ev, .rels li, .note, .inside li { grid-template-columns: minmax(0, 1fr); }
+  .tbl .file, .tbl details, .rels .pair { grid-column: 1; }
+  dl.words { grid-template-columns: minmax(0, 1fr); }
+  dl.words dd { border-top: 0; padding-top: 0; }
+  .legend { flex-direction: column; }
+  .legend li::after { display: none !important; }
+  .big-idea { font-size: 19px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+
+<div id="app" dir="rtl" lang="ar"></div>
+
+<script>
+// DATA:START
+var DATA = {
+  "project": {
+    "name": "How does «My Library» work?",
+    "title": "My Library, a quick look",
+    "tag": "Sample · fictional project",
+    "path": "~/Projects/my-library",
+    "oneLiner": "A web app for borrowing books from a neighborhood library. Readers search for a book and reserve it, get an email two days before it's due, and the librarian adds books from a private dashboard. This is a fictional sample that shows what the page looks like.",
+    "facts": [
+      "React 18",
+      "Node.js + Express",
+      "PostgreSQL via Prisma"
+    ],
+    "mode": "quick",
+    "lang": "en"
+  },
+  "analogy": {
+    "title": "Meet the library staff",
+    "intro": "A library has a reader, a librarian and a loan ledger. The app has the same jobs.",
+    "cast": [
+      {
+        "icon": "person",
+        "role": "You, the reader",
+        "job": "You search for a book and press «Reserve».",
+        "code": "",
+        "key": false,
+        "handoff": "“I'd like this book”"
+      },
+      {
+        "icon": "brain",
+        "role": "The librarian",
+        "job": "The only one allowed to lend books. Checks a copy is free, records the loan and sets the due date.",
+        "code": "loanService",
+        "key": true,
+        "handoff": "“Record this loan”"
+      },
+      {
+        "icon": "database",
+        "role": "The loan ledger",
+        "job": "Keeps every book, who borrowed it and when it's due back.",
+        "code": "PostgreSQL",
+        "key": false,
+        "handoff": ""
+      }
+    ]
+  },
+  "layers": [
+    {
+      "name": "Screens · what the reader sees",
+      "folder": "web/src/pages",
+      "between": "send requests to the server",
+      "nodes": [
+        {
+          "id": "list",
+          "name": "BookListPage",
+          "short": "search and reserve",
+          "file": "web/src/pages/BookListPage.tsx",
+          "what": "Shows the books and search results, with a «Reserve» button on each one.",
+          "links": [
+            {
+              "to": "loansR",
+              "verb": "sends the reservation"
+            }
+          ]
+        },
+        {
+          "id": "mine",
+          "name": "MyLoansPage",
+          "short": "my loans",
+          "file": "web/src/pages/MyLoansPage.tsx",
+          "what": "The books you've borrowed and when they're due, with a «Returned it» button.",
+          "links": [
+            {
+              "to": "loansR",
+              "verb": "loads my loans"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Server · routes",
+      "folder": "server/src/routes",
+      "between": "hand the request to the rules",
+      "nodes": [
+        {
+          "id": "loansR",
+          "name": "loans.routes.ts",
+          "short": "reserve and return",
+          "file": "server/src/routes/loans.routes.ts",
+          "what": "Handles `POST /loans` and `POST /loans/:id/return` once the front desk has checked the reader.",
+          "links": [
+            {
+              "to": "guard",
+              "verb": "goes through requireReader first"
+            },
+            {
+              "to": "loanSvc",
+              "verb": "calls createLoan()"
+            }
+          ]
+        },
+        {
+          "id": "guard",
+          "name": "requireReader",
+          "short": "the front desk",
+          "file": "server/src/middleware/requireReader.ts",
+          "what": "Reads the sign-in token from the request. Without a valid reader it answers 401.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "looks up the reader"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rules · what's allowed",
+      "folder": "server/src/services",
+      "between": "read and write",
+      "nodes": [
+        {
+          "id": "loanSvc",
+          "name": "loanService",
+          "short": "the librarian",
+          "file": "server/src/services/loanService.ts",
+          "what": "Checks the book has a free copy, records the loan, and sets the due date 14 days out.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "writes to the loans table"
+            }
+          ]
+        },
+        {
+          "id": "reminder",
+          "name": "reminderJob",
+          "short": "the postman",
+          "file": "server/src/jobs/reminders.ts",
+          "what": "Runs every morning at 8. Finds loans due in two days and sends a reminder.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "finds loans due soon"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "folder": "server/prisma",
+      "nodes": [
+        {
+          "id": "db",
+          "name": "PostgreSQL",
+          "short": "books and loans",
+          "file": "server/prisma/schema.prisma",
+          "what": "Tables for books, readers, loans and sign-in tokens.",
+          "links": []
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "title": "What happens when you reserve a book?",
+    "intro": "Follow one press of «Reserve» until the loan is saved and the due date appears.",
+    "steps": [
+      {
+        "who": "You",
+        "title": "You press «Reserve»",
+        "text": "The screen sends `POST /loans` with the book's id.",
+        "file": "web/src/pages/BookListPage.tsx · onReserve()",
+        "at": "list",
+        "lit": []
+      },
+      {
+        "who": "requireReader",
+        "title": "The front desk checks you",
+        "text": "If the token is valid, the reader is known and the request goes through.",
+        "file": "server/src/middleware/requireReader.ts",
+        "at": "guard",
+        "lit": []
+      },
+      {
+        "who": "loanService",
+        "title": "The librarian decides",
+        "text": "Counts the copies on loan. If one is left, records the loan and sets the due date.",
+        "file": "server/src/services/loanService.ts · createLoan()",
+        "at": "loanSvc",
+        "lit": []
+      },
+      {
+        "who": "PostgreSQL",
+        "title": "Saved",
+        "text": "A new row with the due date lands in the `loans` table.",
+        "file": "server/prisma/schema.prisma · model Loan",
+        "at": "db",
+        "lit": []
+      }
+    ]
+  },
+  "glossary": [
+    {
+      "term": "Route",
+      "en": "",
+      "meaning": "An address the server answers on, like `POST /loans`."
+    },
+    {
+      "term": "Middleware",
+      "en": "",
+      "meaning": "A step every request passes through before its route, like `requireReader`."
+    },
+    {
+      "term": "Service",
+      "en": "",
+      "meaning": "Where the business rules live, like “no loan without a free copy”."
+    },
+    {
+      "term": "Schema",
+      "en": "",
+      "meaning": "The description of the tables and their columns in `schema.prisma`."
+    },
+    {
+      "term": "Transaction",
+      "en": "",
+      "meaning": "A group of writes that all succeed or all fail."
+    }
+  ],
+  "change": [
+    {
+      "want": "change how long a loan lasts",
+      "where": "server/src/services/loanService.ts · LOAN_DAYS"
+    },
+    {
+      "want": "change when the reminder goes out",
+      "where": "server/src/jobs/reminders.ts · dueInTwoDays()"
+    },
+    {
+      "want": "add a column to a table",
+      "where": "server/prisma/schema.prisma"
+    },
+    {
+      "want": "change an error message",
+      "where": "web/src/lib/api.ts · ERRORS"
+    },
+    {
+      "want": "change how a book card looks",
+      "where": "web/src/pages/BookListPage.tsx · BookCard"
+    }
+  ],
+  "footer": "A fictional sample that shows what an /explain quick page looks like."
+};
+// DATA:END
+
+(function () {
+  var D = DATA;
+  var EN = (D.project && D.project.lang) === "en";
+  /* Arabic pages key parts with the abjad order, English pages with A–Z */
+  var ABJAD = EN ? "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("") : ["أ","ب","ج","د","ه","و","ز","ح","ط","ي","ك","ل","م","ن","س","ع","ف","ص","ق","ر","ش","ت","ث","خ","ذ","ض","ظ","غ"];
+  var TX = EN ? {
+    fig: "Figure ", depthT: "Depth", depth: { quick: "Quick", full: "Full", deep: "Deep" }, tag: "Codebase explainer",
+    lvl: "Level", beginner: "Beginner", expert: "Expert", top: "First look",
+    mapS: "Layers", mapT: "The project's layers", mapI: "Every part has a letter. Click a part to see what it does and what it works with. The same letter follows the part across the page.",
+    castS: "The cast", routeH: "The route: each stop carries the letter of the part doing the work.", play: "Play the flow", pause: "Pause",
+    step: "Step ", prev: "Previous step", next: "Next step", flows: "Flows", flowS: "Step by step",
+    flowsT: "How do requests move through the project?", flowsI: "Pick a flow. Each one follows a single action from start to finish.",
+    relk: { "one-to-many": "one to many", "one-to-one": "one to one", "many-to-many": "many to many", "many-to-one": "many to one" }, rel: "relation", cols: "Columns",
+    dbS: "Database", dbT: "Where is the data kept?", dbI: "Click a table name to see the tables related to it.", rels: "How the tables relate",
+    parts: "Sections", kinds: { start: "Start", feature: "Feature", architecture: "Architecture", fix: "Fix", release: "Release", docs: "Docs" },
+    storyS: "Story", storyT: "How did the project get here?",
+    nk: { gap: "Gap", risk: "Risk", security: "Security", debt: "Tech debt", perf: "Performance" },
+    notesS: "Notes", notesT: "Review notes", notesI: "What we noticed while reading the code: gaps, risks and tech debt. Each note points to its file.",
+    wordsS: "Glossary", wordsT: "Words you'll meet in the code", changeS: "Where to change", changeT: "Where do I change what?", want: "I want to…", open: "Open",
+    tasksS: "Exercises", tasksT: "Small exercises", tasksI: "Open the project, change one thing, run it and watch what happens. You can always undo the change.", answer: "Show the answer",
+    treeS: "Files", treeT: "Where do the files live?", figsS: "Figures", figsT: "Figures",
+    nextQ: "This is a quick explainer. For the full page with the glossary and exercises, type `/explain full`; for an in-depth review, `/explain deep`.",
+    nextF: "Want more detail? `/explain deep` adds more flows, what's inside each part, and review notes.",
+    index: "Page index", contents: "Contents", partsIdx: "Parts", brand: "codebases, explained",
+    uses: "uses", usedBy: "used by", works: "Works with", alone: "Doesn't depend on other parts.", inside: "Inside", line: "line "
+  } : {
+    fig: "شكل ", depthT: "عمق الشرح", depth: { quick: "شرح سريع", full: "شرح كامل", deep: "شرح عميق" }, tag: "شرح مشروع",
+    lvl: "مستوى الشرح", beginner: "مبتدئ", expert: "خبير", top: "نظرة أولى",
+    mapS: "الطبقات", mapT: "طبقات المشروع", mapI: "كل جزء له حرف من حروف أبجد. اضغط على أي جزء لترى ماذا يفعل ومع من يتعامل. الحرف نفسه يتبع الجزء في كل الصفحة.",
+    castS: "الفريق", routeH: "رحلة الطلب: كل محطة حرفُ الجزء الذي يعمل في تلك الخطوة.", play: "شغّل الرحلة", pause: "إيقاف",
+    step: "الخطوة ", prev: "الخطوة السابقة", next: "الخطوة التالية", flows: "الرحلات", flowS: "خطوة بخطوة",
+    flowsT: "كيف تتحرك الطلبات داخل المشروع؟", flowsI: "اختر رحلة. كل رحلة تتبع عملًا واحدًا من بدايته إلى نهايته.",
+    relk: { "one-to-many": "واحد لكثير", "one-to-one": "واحد لواحد", "many-to-many": "كثير لكثير", "many-to-one": "كثير لواحد" }, rel: "علاقة", cols: "الأعمدة",
+    dbS: "قاعدة البيانات", dbT: "أين تُحفظ البيانات؟", dbI: "اضغط على اسم جدول لترى الجداول المرتبطة به.", rels: "العلاقات بين الجداول",
+    parts: "الأقسام", kinds: { start: "بداية", feature: "ميزة", architecture: "هيكلة", fix: "إصلاح", release: "إطلاق", docs: "توثيق" },
+    storyS: "قصة المشروع", storyT: "كيف وصل المشروع إلى شكله الحالي؟",
+    nk: { gap: "ناقص", risk: "خطر", security: "أمان", debt: "دين تقني", perf: "أداء" },
+    notesS: "ملاحظات", notesT: "ملاحظات المراجعة", notesI: "ما لاحظناه أثناء قراءة الكود: أشياء ناقصة، ومخاطر، وديون تقنية. كل ملاحظة تشير إلى ملفها.",
+    wordsS: "القاموس", wordsT: "كلمات ستراها في الكود", changeS: "أين أغيّر؟", changeT: "أين أغيّر ماذا؟", want: "أريد أن…", open: "افتح",
+    tasksS: "تمارين", tasksT: "تمارين صغيرة", tasksI: "افتح المشروع، غيّر شيئًا واحدًا، شغّله وشاهد النتيجة. يمكنك دائمًا التراجع عن التغيير.", answer: "اعرض الإجابة",
+    treeS: "الملفات", treeT: "أين تعيش الملفات؟", figsS: "أشكال", figsT: "أشكال توضيحية",
+    nextQ: "هذا شرح سريع. للشرح الكامل مع القاموس والتمارين اكتب `/explain كامل`، وللمراجعة المعمّقة `/explain عميق`.",
+    nextF: "تريد تفاصيل أكثر؟ `/explain عميق` يضيف رحلات أخرى، وما بداخل كل جزء، وملاحظات المراجعة.",
+    index: "فهرس الصفحة", contents: "المحتويات", partsIdx: "فهرس الأجزاء", brand: "شرح المشاريع بالعربية",
+    uses: "يستخدم", usedBy: "يستخدمه", works: "يتعامل مع", alone: "لا يعتمد على أجزاء أخرى.", inside: "من الداخل", line: "السطر "
+  };
+  if (EN) { document.documentElement.classList.add("ltr"); document.documentElement.lang = "en"; document.documentElement.dir = "ltr"; }
+  var ICONS = {
+    person: '<circle class="ink" cx="20" cy="13" r="7"/><path class="ink" d="M7 36 C7 26 33 26 33 36"/>',
+    screen: '<rect class="ink" x="4" y="7" width="32" height="22" rx="3"/><path class="ink" d="M14 35 H26 M20 29 V35"/>',
+    phone: '<rect class="ink" x="11" y="3" width="18" height="34" rx="4"/><path class="ink" d="M17 32 H23"/>',
+    brain: '<circle class="ink" cx="20" cy="12" r="6"/><path class="ink" d="M8 36 C8 26 32 26 32 36"/><path class="ink" d="M29 6 L35 3"/>',
+    book: '<path class="ink" d="M8 6 H28 A4 4 0 0 1 32 10 V34 H12 A4 4 0 0 1 8 30 Z"/><path class="ink" d="M14 14 H26 M14 20 H26 M14 26 H22"/>',
+    notebook: '<rect class="ink" x="8" y="5" width="24" height="30" rx="3"/><path class="ink" d="M13 5 V35 M18 13 H27 M18 19 H27"/>',
+    database: '<ellipse class="ink" cx="20" cy="9" rx="12" ry="4.5"/><path class="ink" d="M8 9 V31 C8 34 32 34 32 31 V9 M8 20 C8 23 32 23 32 20"/>',
+    server: '<rect class="ink" x="6" y="5" width="28" height="12" rx="2"/><rect class="ink" x="6" y="23" width="28" height="12" rx="2"/><path class="ink" d="M11 11 H13 M11 29 H13"/>',
+    cloud: '<path class="ink" d="M11 30 H29 A7 7 0 0 0 28 16 A9 9 0 0 0 11 18 A6 6 0 0 0 11 30 Z"/>',
+    gear: '<circle class="ink" cx="20" cy="20" r="5"/><path class="ink" d="M20 4 V9 M20 31 V36 M4 20 H9 M31 20 H36 M8.7 8.7 L12.2 12.2 M27.8 27.8 L31.3 31.3 M8.7 31.3 L12.2 27.8 M27.8 12.2 L31.3 8.7"/>',
+    key: '<circle class="ink" cx="13" cy="20" r="7"/><path class="ink" d="M20 20 H36 M31 20 V26 M27 20 V24"/>',
+    mail: '<rect class="ink" x="4" y="9" width="32" height="22" rx="3"/><path class="ink" d="M5 11 L20 22 L35 11"/>',
+    bell: '<path class="ink" d="M10 28 V18 A10 10 0 0 1 30 18 V28 L33 31 H7 Z M17 34 A3 3 0 0 0 23 34"/>',
+    shield: '<path class="ink" d="M20 4 L33 9 V19 C33 27 27 33 20 36 C13 33 7 27 7 19 V9 Z"/>',
+    ball: '<circle class="ink" cx="14" cy="14" r="9"/><path class="ink" d="M20 21 L33 34"/><circle cx="31" cy="11" r="4" fill="currentColor"/>',
+    box: '<path class="ink" d="M6 13 L20 6 L34 13 V28 L20 35 L6 28 Z M6 13 L20 20 L34 13 M20 20 V35"/>'
+  };
+  var UI = {
+    play: '<svg class="mir" viewBox="0 0 16 16" aria-hidden="true"><path d="M12 2.5 L3.5 8 L12 13.5 Z" fill="currentColor"/></svg>',
+    pause: '<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/><rect x="9.5" y="2.5" width="3" height="11" rx="1" fill="currentColor"/></svg>',
+    prev: '<svg class="mir" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3 L11 8 L6 13" class="ink" style="stroke-width:1.8"/></svg>',
+    next: '<svg class="mir" viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3 L5 8 L10 13" class="ink" style="stroke-width:1.8"/></svg>',
+    down: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2 V14 M3 9 L8 14 L13 9" class="ink" style="stroke-width:1.6"/></svg>',
+    hand: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2 V14 M3.5 9.5 L8 14 L12.5 9.5" class="ink" style="stroke-width:1.6"/></svg>'
+  };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+  /* every part gets its abjad letter, in reading order of the plate */
+  var byId = {}, layerOf = {}, KEY = {}, byName = {}, order = [];
+  D.layers.forEach(function (L, li) {
+    L.nodes.forEach(function (n) {
+      var i = order.length;
+      KEY[n.id] = i < ABJAD.length ? ABJAD[i] : ABJAD[i % ABJAD.length] + (Math.floor(i / ABJAD.length) + 1);
+      byId[n.id] = n; layerOf[n.id] = li; order.push(n.id);
+      byName[n.name] = n.id;
+    });
+  });
+  function key(id) { return '<span class="k" aria-hidden="true">' + esc(KEY[id]) + '</span>'; }
+  // Prose: `Name` of a known part becomes a lettered, clickable reference; other `code` stays code.
+  /* "5–12" or "14-30" inside Arabic would flip to "12–5"; isolate number ranges */
+  function ranges(t) { return t.replace(/\d+(?:\s*[–-]\s*\d+)+/g, function (m) { return '<bdi>' + m + '</bdi>'; }); }
+  function rich(s) {
+    return esc(s).split(/(`[^`]+`)/).map(function (part, i) { return i % 2 ? part : ranges(part); }).join("").replace(/`([^`]+)`/g, function (_, c) {
+      var raw = c.replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"');
+      var id = byName[raw];
+      return id ? '<button type="button" class="ref" data-key="' + esc(id) + '" aria-label="' + esc(raw) + '">' + key(id) + '<code>' + c + '</code></button>' : '<code>' + c + '</code>';
+    });
+  }
+  /* code names inside an Arabic phrase keep their own order: "يستدعي createLoan()" */
+  function bidi(s) { return esc(s).replace(/[A-Za-z_$@][\w.$@\/:-]*(?:\(\))?/g, function (m) { return '<bdi>' + m + '</bdi>'; }); }
+  function fileLine(s) {
+    return esc(s).replace(/[\u0600-\u06FF][\u0600-\u06FF\s]*[\u0600-\u06FF]|[\u0600-\u06FF]/g, function (m) { return '<span class="ar">' + m + '</span>'; });
+  }
+  var BASE = {};
+  order.forEach(function (id) {
+    String(byId[id].file || "").split(/[,·+\s]+/).forEach(function (part) {
+      var b = part.split("/").pop();
+      if (b && /\.[a-z]+$/i.test(b) && !BASE[b]) BASE[b] = id;
+    });
+  });
+  // A path names a part when it is that part's file, or a folder that holds the part's file.
+  function partFor(s) {
+    var hit = null, bits = String(s || "").split(/[,·+\s]+/).filter(Boolean);
+    bits.some(function (part) { var b = part.split("/").pop(); if (BASE[b]) { hit = BASE[b]; return true; } return false; });
+    if (hit) return hit;
+    bits.some(function (part) {
+      var dir = part.replace(/\/+$/, "");
+      if (dir.indexOf("/") < 0 || /\.[a-z]+$/i.test(dir)) return false;
+      return order.some(function (id) { if (String(byId[id].file || "").indexOf(dir + "/") >= 0) { hit = id; return true; } return false; });
+    });
+    return hit;
+  }
+  function lc(li) { return "var(--c" + ((li % 5) + 1) + ")"; }
+  function icon(name) { return '<svg viewBox="0 0 40 40" aria-hidden="true">' + (ICONS[name] || ICONS.box) + '</svg>'; }
+
+  var figN = 0;
+  function figs(where) {
+    return (D.figures || []).filter(function (f) { return (f.section || "end") === where; }).map(function (f) {
+      figN++;
+      var body = f.svg ? f.svg : '<img src="' + esc(f.src) + '" alt="' + esc(f.alt || f.title || "") + '" loading="lazy">';
+      return '<figure class="fig' + (f.expertOnly ? ' x' : '') + '" id="fig-' + esc(f.id) + '">' + (f.title ? '<div class="fig-t">' + esc(f.title) + '</div>' : '') +
+        '<div class="fig-frame"><div class="fig-body">' + body + '</div></div>' + (f.caption ? '<figcaption><b>' + TX.fig + figN + '</b>' + rich(f.caption) + '</figcaption>' : '') + '</figure>';
+    }).join("");
+  }
+
+  var app = document.getElementById("app");
+  if (EN) { app.setAttribute("dir", "ltr"); app.setAttribute("lang", "en"); }
+  var secs = [];   // [id, short title] for the rail
+  function section(id, short, title, intro, body) {
+    secs.push([id, short]);
+    return '<section id="' + id + '" aria-labelledby="' + id + '-h"><div class="sec-h"><h2 id="' + id + '-h">' + esc(title) + '</h2>' + (intro ? '<p>' + rich(intro) + '</p>' : '') + '</div>' + body + '</section>';
+  }
+
+  /* masthead */
+  var P = D.project;
+  var MODE = { quick: 1, full: 2, deep: 3 }[P.mode] ? P.mode : "full", DEPTH = { quick: 1, full: 2, deep: 3 }[MODE];
+  var depth = '<span class="depth" title="' + TX.depthT + '"><i class="on"></i><i' + (DEPTH > 1 ? ' class="on"' : '') + '></i><i' + (DEPTH > 2 ? ' class="on"' : '') + '></i><span>' + TX.depth[MODE] + '</span></span>';
+  var LEDE = (function (t) { var m = String(t || "").match(/^.+?[.!؟?](\s|$)/); return m ? [m[0].trim(), String(t).slice(m[0].length).trim()] : [t, ""]; })(P.oneLiner);
+  var head = '<header class="mast"><div class="mast-in gut">' +
+    '<div class="mast-top"><div class="mark"><b>/explain</b><span>' + esc(P.tag || TX.tag) + '</span>' + depth + '</div>' +
+    '<div class="lvl" role="group" aria-label="' + TX.lvl + '"><button type="button" data-lvl="beginner" aria-pressed="false">' + TX.beginner + '</button><button type="button" data-lvl="expert" aria-pressed="true">' + TX.expert + '</button></div></div>' +
+    '<h1>' + esc(P.name) + '</h1><p class="lede">' + rich(LEDE[0]) + '</p>' +
+    '<ul class="legend">' + (P.facts || []).map(function (f) { return '<li>' + rich(f) + '</li>'; }).join("") + '</ul>' +
+    (P.path ? '<div class="path x">' + esc(P.path) + '</div>' : '') + '</div></header>';
+
+  var out = [];
+  var topF = figs("top"); if (topF) out.push(section("s-top", TX.top, TX.top, "", topF));
+
+  /* cast (placed after the plate) */
+  var A = D.analogy, castSec = null;
+  if (A && A.cast && A.cast.length) {
+    var art = A.image && A.image.src ? '<figure class="cast-art"><img src="' + esc(A.image.src) + '" alt="' + esc(A.image.alt || A.title) + '" loading="lazy">' + (A.image.caption ? '<figcaption>' + rich(A.image.caption) + '</figcaption>' : '') + '</figure>' : '';
+    var cast = '<ol class="cast">' + A.cast.map(function (c) {
+      var id = c.code && byName[c.code];
+      var code = c.code ? (id ? '<button type="button" class="ref code" data-key="' + esc(id) + '">' + key(id) + '<code>' + esc(c.code) + '</code></button>' : '<code class="code">' + esc(c.code) + '</code>') : '<span></span>';
+      return '<li class="role' + (c.key ? ' key' : '') + '"' + (id ? ' data-key="' + esc(id) + '"' : '') + '><div class="ic">' + icon(c.icon) + '</div><div><h3>' + esc(c.role) + '</h3><p>' + rich(c.job) + '</p>' +
+        (c.handoff ? '<div class="hand">' + UI.hand + '<span>' + rich(c.handoff) + '</span></div>' : '') + '</div>' + code + '</li>';
+    }).join("") + '</ol>';
+    castSec = [A.title, A.intro, art + figs("analogy") + cast + (A.bigIdea ? '<p class="big-idea">' + rich(A.bigIdea) + '</p>' : '')];
+  }
+
+  /* the mechanism plate */
+  var bands = D.layers.map(function (L, li) {
+    var nodes = L.nodes.map(function (n) {
+      return '<button type="button" class="node" data-key="' + esc(n.id) + '">' + key(n.id) + '<span class="nm">' + esc(n.name) + '</span><span class="sh">' + esc(n.short) + '</span></button>';
+    }).join("");
+    return '<div class="band" style="--lc:' + lc(li) + '"><div class="band-h"><b>' + esc(L.name) + '</b>' + (L.folder ? '<span class="mono x">' + esc(L.folder) + '</span>' : '') + '</div><div class="nodes">' + nodes + '</div></div>' +
+      (li < D.layers.length - 1 && L.between ? '<div class="down">' + UI.down + '<span>' + esc(L.between) + '</span></div>' : '');
+  }).join("");
+  out.push(section("s-map", TX.mapS, TX.mapT, TX.mapI,
+    figs("layers") + '<div class="plate" id="plate"><div class="plate-in">' + bands + '</div></div><div class="keybox" id="keybox" aria-live="polite"></div>'));
+  if (castSec) out.push(section("s-cast", TX.castS, castSec[0], castSec[1], castSec[2]));
+
+  /* route: one flow, or several as tabs */
+  var FLOWS = [D.flow].concat(D.moreFlows || []), F = FLOWS[0], MANY = FLOWS.length > 1;
+  function flowHtml(F) {
+    var hasRoute = F.steps.some(function (s) { return s.at && byId[s.at]; });
+    var route = !hasRoute ? '' : '<div class="route-head"><span>' + TX.routeH + '</span><button class="btn" id="play" type="button">' + UI.play + '<span>' + TX.play + '</span></button></div>' +
+      '<div class="route-wrap"><ol class="route" id="route"><span class="fill" id="fill" aria-hidden="true"></span>' + F.steps.map(function (s, i) {
+        var k = s.at && KEY[s.at] ? KEY[s.at] : String(i + 1);
+        return '<li data-i="' + i + '"' + (s.at ? ' data-key="' + esc(s.at) + '"' : '') + '><button type="button" data-i="' + i + '" aria-label="' + TX.step + (i + 1) + ': ' + esc(s.title) + '"><span class="k" aria-hidden="true">' + esc(k) + '</span><span class="n">' + (i + 1) + '</span></button></li>';
+      }).join("") + '</ol></div>';
+    var steps = '<div class="flow"><ol class="steps" id="steps">' + F.steps.map(function (s, i) {
+      return '<li><button type="button" data-i="' + i + '"' + (s.at ? ' data-key="' + esc(s.at) + '"' : '') + '><span class="n">' + (i + 1) + '</span><span><span class="tt">' + esc(s.title) + '</span><span class="who">' + esc(s.who) + '</span></span>' + (s.at && KEY[s.at] ? key(s.at) : '<span></span>') + '</button></li>';
+    }).join("") + '</ol><div class="step-card" aria-live="polite"><div class="ctrl"><button class="btn icon" id="prev" type="button" aria-label="' + TX.prev + '">' + UI.prev + '</button><span class="count" id="count"></span><button class="btn icon primary" id="next" type="button" aria-label="' + TX.next + '">' + UI.next + '</button></div><div id="stepBody"></div></div></div>';
+    return (MANY ? '<div class="flow-h"><h3>' + esc(F.title) + '</h3>' + (F.intro ? '<p>' + rich(F.intro) + '</p>' : '') + '</div>' : '') + route + steps;
+  }
+  var tabs = MANY ? '<div class="flow-tabs" role="tablist" aria-label="' + TX.flows + '">' + FLOWS.map(function (f, i) {
+    return '<button type="button" role="tab" data-f="' + i + '" aria-selected="' + (i === 0) + '">' + esc(f.tab || f.title) + '</button>';
+  }).join("") + '</div>' : '';
+  out.push(section("s-flow", TX.flowS, MANY ? (D.flowsTitle || TX.flowsT) : F.title, MANY ? TX.flowsI : F.intro,
+    figs("flow") + tabs + '<div id="flowBody">' + flowHtml(F) + '</div>'));
+
+  /* database */
+  var DB = D.database;
+  var RELK = TX.relk;
+  if (DB && DB.tables && DB.tables.length) {
+    var tbls = DB.tables.map(function (t) {
+      var cols = t.columns && t.columns.length ? '<details class="x"><summary>' + TX.cols + ' (' + t.columns.length + ')</summary><div class="cols">' + t.columns.map(function (c) {
+        return '<span class="cn">' + esc(c.name) + '</span><span class="ct">' + esc(c.type || "") + '</span><span class="cd">' + rich(c.note || "") + '</span>';
+      }).join("") + '</div></details>' : '';
+      return '<div class="tbl" data-t="' + esc(t.name) + '"><button type="button" class="tbl-h" data-t="' + esc(t.name) + '">' + esc(t.name) + '</button><p class="what">' + rich(t.what) + '</p>' + cols + (t.file ? '<div class="file x">' + fileLine(t.file) + '</div>' : '') + '</div>';
+    }).join("");
+    var rels = (DB.relations || []).map(function (r) {
+      return '<li data-a="' + esc(r.from) + '" data-b="' + esc(r.to) + '"><span class="kind">' + esc(RELK[r.kind] || r.kind || TX.rel) + '</span><span>' + rich(r.text) + '</span><span class="pair x">' + esc(r.from) + ' → ' + esc(r.to) + '</span></li>';
+    }).join("");
+    out.push(section("s-db", TX.dbS, DB.title || TX.dbT, DB.intro || TX.dbI,
+      figs("database") + '<div class="reg" id="reg">' + tbls + '</div>' + (rels ? '<h3>' + TX.rels + '</h3><ul class="rels" id="rels">' + rels + '</ul>' : '')));
+  }
+
+  /* parts */
+  if (D.parts && D.parts.items && D.parts.items.length) {
+    out.push(section("s-parts", D.parts.title || TX.parts, D.parts.title || TX.parts, D.parts.intro, figs("parts") + '<div class="parts">' + D.parts.items.map(function (p) {
+      var pid = partFor(p.how); return '<div class="part"' + (pid ? ' data-key="' + esc(pid) + '"' : '') + '><h3>' + (pid ? key(pid) : '') + esc(p.name) + '</h3>' + (p.how ? '<div class="how x">' + fileLine(p.how) + '</div>' : '') + '<ul>' + (p.points || []).map(function (x) { return '<li>' + rich(x) + '</li>'; }).join("") + '</ul></div>';
+    }).join("") + '</div>'));
+  }
+
+  /* story */
+  var ST = D.story;
+  var KINDS = { start: [TX.kinds.start, "--c5"], feature: [TX.kinds.feature, "--c1"], architecture: [TX.kinds.architecture, "--c2"], fix: [TX.kinds.fix, "--c3"], release: [TX.kinds.release, "--c4"], docs: [TX.kinds.docs, "--c5"] };
+  if (ST && ST.events && ST.events.length) {
+    var lastPhase = null;
+    var evs = ST.events.map(function (e) {
+      var ph = e.phase && e.phase !== lastPhase ? '<li class="phase">' + esc(e.phase) + '</li>' : '';
+      if (e.phase) lastPhase = e.phase;
+      var k = KINDS[e.kind] || KINDS.feature;
+      return ph + '<li class="ev" style="--kc:var(' + k[1] + ')"><div class="meta"><span class="date">' + esc(e.date) + '</span><span class="kind">' + k[0] + '</span>' + (e.commit ? '<span class="hash x">' + esc(e.commit) + '</span>' : '') + '</div><div><h3>' + esc(e.title) + '</h3><p>' + rich(e.text) + '</p></div></li>';
+    }).join("");
+    out.push(section("s-story", TX.storyS, ST.title || TX.storyT, ST.intro, figs("story") + '<ol class="story">' + evs + '</ol>'));
+  }
+
+  /* review notes */
+  var NK = { gap: [TX.nk.gap, "--c2"], risk: [TX.nk.risk, "--c1"], security: [TX.nk.security, "--c4"], debt: [TX.nk.debt, "--c3"], perf: [TX.nk.perf, "--c5"] };
+  if (D.notes && D.notes.items && D.notes.items.length) {
+    out.push(section("s-notes", TX.notesS, D.notes.title || TX.notesT, D.notes.intro || TX.notesI,
+      '<ol class="notes">' + D.notes.items.map(function (n) {
+        var k = NK[n.kind] || NK.gap, id = partFor(n.where);
+        return '<li class="note"' + (id ? ' data-key="' + esc(id) + '"' : '') + ' style="--kc:var(' + k[1] + ')"><div class="meta">' + k[0] + '</div><div><h3>' + (id ? key(id) : '') + esc(n.title) + '</h3><p>' + rich(n.text) + '</p>' + (n.where ? '<div class="where x">' + fileLine(n.where) + '</div>' : '') + '</div></li>';
+      }).join("") + '</ol>'));
+  }
+
+  if (D.glossary && D.glossary.length) {
+    out.push(section("s-words", TX.wordsS, TX.wordsT, "", '<dl class="words">' + D.glossary.map(function (g) {
+      return '<dt>' + esc(g.term) + (g.en ? '<span class="mono">' + esc(g.en) + '</span>' : '') + '</dt><dd>' + rich(g.meaning) + '</dd>';
+    }).join("") + '</dl>'));
+  }
+  var KEYED_ROWS = (D.change || []).some(function (c) { return !!partFor(c.where); });
+  if (D.change && D.change.length) {
+    out.push(section("s-change", TX.changeS, TX.changeT, "", '<div class="table-wrap"><table><thead><tr><th scope="col">' + TX.want + '</th><th scope="col">' + TX.open + '</th></tr></thead><tbody>' +
+      D.change.map(function (c) { var id = partFor(c.where); return '<tr' + (id ? ' data-key="' + esc(id) + '"' : '') + '><td>' + rich(c.want) + '</td><td class="where"><div class="whr"><span class="p">' + fileLine(c.where) + '</span>' + (id ? key(id) : (KEYED_ROWS ? '<span class="k-slot" aria-hidden="true"></span>' : '')) + '</div></td></tr>'; }).join("") + '</tbody></table></div>'));
+  }
+  if (D.exercises && D.exercises.length) {
+    out.push(section("s-tasks", TX.tasksS, TX.tasksT, TX.tasksI, '<ol class="tasks">' +
+      D.exercises.map(function (t, i) {
+        var snip = t.before || t.after ? '<pre class="snip">' + (t.before ? '<span class="old">' + esc(t.before) + '</span>\n' : '') + (t.after ? '<span class="new">' + esc(t.after) + '</span>' : '') + '</pre>' : '';
+        return '<li class="task"><span class="num" aria-hidden="true">' + (i + 1) + '</span><div class="body"><h3>' + esc(t.title) + '</h3><p>' + rich(t.text) + '</p>' + (t.file ? '<div class="file">' + fileLine(t.file) + '</div>' : '') + snip +
+          (t.answer ? '<details class="answer"><summary>' + TX.answer + '</summary><p>' + rich(t.answer) + '</p></details>' : '') + '</div></li>';
+      }).join("") + '</ol>'));
+  }
+  if (D.tree) out.push(section("s-tree", TX.treeS, TX.treeT, "", '<pre class="tree">' + esc(D.tree) + '</pre>'));
+  var endF = figs("end"); if (endF) out.push(section("s-figs", TX.figsS, TX.figsT, "", endF));
+  var NEXT = { quick: TX.nextQ, full: TX.nextF }[MODE];
+  if (NEXT) out.push('<p class="next-depth">' + rich(NEXT) + '</p>');
+
+  var rail = '<nav class="rail" aria-label="' + TX.index + '"><div><h2>' + TX.contents + '</h2><ul class="toc">' + secs.map(function (s) { return '<li><a href="#' + s[0] + '">' + esc(s[1]) + '</a></li>'; }).join("") + '</ul></div>' +
+    '<div class="r-parts"><h2>' + TX.partsIdx + '</h2><ul class="idx">' + order.map(function (id) { return '<li><button type="button" data-key="' + esc(id) + '">' + key(id) + '<span class="nm">' + esc(byId[id].name) + '</span></button></li>'; }).join("") + '</ul></div></nav>';
+
+  app.innerHTML = head + '<div class="shell gut">' + rail + '<main class="main">' + (LEDE[1] ? '<p class="intro">' + rich(LEDE[1]) + '</p>' : '') + out.join("") + '</main></div>' +
+    '<footer class="gut"><div class="in"><span>' + rich(D.footer || "") + '</span><span><b>/explain</b> · ' + TX.brand + '</span></div></footer>';
+
+  /* ---------- letters on the drawings ---------- */
+  var SVGNS = "http://www.w3.org/2000/svg";
+  app.querySelectorAll(".fig-body svg g[data-key]").forEach(function (g) {
+    var id = g.getAttribute("data-key"), r = g.querySelector("rect");
+    if (!KEY[id] || !r) return;
+    var x = +r.getAttribute("x"), y = +r.getAttribute("y"), w = +r.getAttribute("width");
+    var mk = document.createElementNS(SVGNS, "g"); mk.setAttribute("class", "f-key");
+    var c = document.createElementNS(SVGNS, "circle"); c.setAttribute("cx", x + w - 13); c.setAttribute("cy", y + 13); c.setAttribute("r", 10);
+    var t = document.createElementNS(SVGNS, "text"); t.setAttribute("x", x + w - 13); t.setAttribute("y", y + 17.5); t.setAttribute("text-anchor", "middle"); t.textContent = KEY[id];
+    mk.appendChild(c); mk.appendChild(t); g.appendChild(mk);
+  });
+
+  /* ---------- one selection, everywhere ---------- */
+  var plate = document.getElementById("plate"), keybox = document.getElementById("keybox"), cur = null;
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function relatedOf(id) {
+    var rel = {}, links = [];
+    order.forEach(function (k) {
+      (byId[k].links || []).forEach(function (l) {
+        if (k === id && byId[l.to]) { rel[l.to] = true; links.push({ dir: TX.uses, other: l.to, verb: l.verb }); }
+        else if (l.to === id) { rel[k] = true; links.push({ dir: TX.usedBy, other: k, verb: l.verb }); }
+      });
+    });
+    return { rel: rel, links: links };
+  }
+  function select(id, opts) {
+    if (!byId[id]) return;
+    cur = id;
+    var r = relatedOf(id);
+    app.querySelectorAll("[data-key]").forEach(function (el) { el.classList.toggle("is-sel", el.dataset.key === id); });
+    app.querySelectorAll(".node").forEach(function (el) { el.classList.toggle("rel", !!r.rel[el.dataset.key]); });
+    plate.classList.add("focus");
+    var n = byId[id], L = D.layers[layerOf[id]];
+    keybox.innerHTML = '<div class="big" aria-hidden="true">' + esc(KEY[id]) + '</div>' +
+      '<div><div class="nm">' + esc(n.name) + '</div><div class="lay">' + esc(L.name) + '</div><div class="file x">' + fileLine(n.file) + '</div><p class="what">' + rich(n.what) + '</p>' +
+      (n.inside && n.inside.length ? '<div class="inside x"><div class="lh">' + TX.inside + '</div><ul>' + n.inside.map(function (m) {
+        return '<li><span class="sig"><code>' + esc(m.name) + '</code>' + (m.line ? '<span class="ln">' + TX.line + esc(m.line) + '</span>' : '') + '</span><span>' + rich(m.what) + '</span></li>';
+      }).join("") + '</ul></div>' : '') + '</div>' +
+      '<div class="links"><div class="lh">' + TX.works + '</div>' + (r.links.length ? r.links.map(function (l) {
+        return '<button type="button" data-go="' + esc(l.other) + '"><span class="dir">' + l.dir + '</span>' + key(l.other) + '<span><span class="nm2">' + esc(byId[l.other].name) + '</span> <span class="vb">' + bidi(l.verb) + '</span></span></button>';
+      }).join("") : '<span class="lh">' + TX.alone + '</span>') + '</div>';
+    keybox.querySelectorAll("[data-go]").forEach(function (b) { b.addEventListener("click", function () { select(b.dataset.go); }); });
+    store("explain-sel:" + D.project.name, id);
+    if (opts && opts.reveal) document.getElementById("s-map").scrollIntoView({ block: "start" });
+  }
+  app.addEventListener("click", function (e) {
+    var t = e.target.closest(".node, .idx button, .ref, tr[data-key], .part[data-key], .note[data-key], .fig-body [data-key]");
+    if (!t || !t.dataset.key) return;
+    var fromAway = !t.closest("#s-map") && !t.closest("tr") && !t.closest(".part") && !t.closest(".note") && !t.closest(".fig-body");
+    select(t.dataset.key, { reveal: fromAway && !t.closest(".route") });
+  });
+  var saved = load("explain-sel:" + D.project.name);
+  var keyRole = A && A.cast ? A.cast.filter(function (c) { return c.key && byName[c.code]; })[0] : null;
+  select(byId[saved] ? saved : keyRole ? byName[keyRole.code] : order[0]);
+
+  /* ---------- route and steps ---------- */
+  var ci = 0, sbtn, stops, fill, routeEl, timer = null, playBtn, flowBody = document.getElementById("flowBody");
+  function show(i) {
+    ci = (i + F.steps.length) % F.steps.length;
+    sbtn.forEach(function (b, j) { b.classList.toggle("on", j === ci); b.setAttribute("aria-current", j === ci ? "step" : "false"); });
+    var s = F.steps[ci];
+    document.getElementById("count").textContent = (ci + 1) + " / " + F.steps.length;
+    document.getElementById("stepBody").innerHTML = '<h3>' + esc(s.title) + '</h3><div class="who">' + rich(s.who) + '</div><p>' + rich(s.text) + '</p>' + (s.file ? '<div class="file x">' + fileLine(s.file) + '</div>' : '');
+    if (routeEl) {
+      stops.forEach(function (li, j) { li.classList.toggle("done", j < ci); li.classList.toggle("now", j === ci); });
+      var first = stops[0], here = stops[ci];
+      if (first && here) {
+        var a = first.offsetLeft + first.offsetWidth / 2, b = here.offsetLeft + here.offsetWidth / 2;
+        fill.style.width = Math.abs(a - b) + "px";
+        if (EN) fill.style.left = a + "px"; else fill.style.right = (routeEl.offsetWidth - a) + "px";
+      }
+    }
+  }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } if (playBtn) playBtn.innerHTML = UI.play + '<span>' + TX.play + '</span>'; }
+  function bindFlow() {
+    sbtn = flowBody.querySelectorAll("#steps button"); stops = flowBody.querySelectorAll("#route li");
+    fill = document.getElementById("fill"); routeEl = document.getElementById("route"); playBtn = document.getElementById("play");
+    if (playBtn) playBtn.addEventListener("click", function () {
+      if (timer) { stop(); return; }
+      if (ci === F.steps.length - 1) show(0);
+      playBtn.innerHTML = UI.pause + '<span>' + TX.pause + '</span>';
+      timer = setInterval(function () { if (ci >= F.steps.length - 1) { stop(); return; } show(ci + 1); }, 2400);
+    });
+    flowBody.querySelectorAll("#steps button, #route button").forEach(function (b) { b.addEventListener("click", function () { stop(); show(+b.dataset.i); }); });
+    document.getElementById("next").addEventListener("click", function () { stop(); show(ci + 1); });
+    document.getElementById("prev").addEventListener("click", function () { stop(); show(ci - 1); });
+    show(0);
+  }
+  bindFlow();
+  app.querySelectorAll(".flow-tabs button").forEach(function (t) {
+    t.addEventListener("click", function () {
+      stop(); F = FLOWS[+t.dataset.f];
+      app.querySelectorAll(".flow-tabs button").forEach(function (o) { o.setAttribute("aria-selected", String(o === t)); });
+      flowBody.innerHTML = flowHtml(F); bindFlow();
+      if (cur) flowBody.querySelectorAll("[data-key]").forEach(function (el) { el.classList.toggle("is-sel", el.dataset.key === cur); });
+    });
+  });
+  window.addEventListener("resize", function () { show(ci); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { show(ci); });
+
+  /* ---------- database ---------- */
+  var reg = document.getElementById("reg"), relsEl = document.getElementById("rels"), selT = null;
+  app.querySelectorAll(".tbl-h").forEach(function (h) {
+    h.addEventListener("click", function () {
+      var t = h.dataset.t; selT = selT === t ? null : t;
+      var rel = {}; if (selT) rel[selT] = true;
+      app.querySelectorAll("#rels li").forEach(function (li) {
+        var hit = !!selT && (li.dataset.a === selT || li.dataset.b === selT);
+        if (hit) { rel[li.dataset.a] = true; rel[li.dataset.b] = true; }
+        li.classList.toggle("hit", hit);
+      });
+      app.querySelectorAll(".tbl").forEach(function (el) { el.classList.toggle("sel", el.dataset.t === selT); el.classList.toggle("rel", !!rel[el.dataset.t] && el.dataset.t !== selT); });
+      reg.classList.toggle("focus", !!selT); if (relsEl) relsEl.classList.toggle("focus", !!selT);
+    });
+  });
+
+  /* ---------- rail: where am I ---------- */
+  var links = {}; app.querySelectorAll(".toc a").forEach(function (a) { links[a.getAttribute("href").slice(1)] = a; });
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { Object.keys(links).forEach(function (k) { links[k].classList.toggle("here", k === en.target.id); }); } });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    secs.forEach(function (s) { var el = document.getElementById(s[0]); if (el) io.observe(el); });
+  }
+
+  /* the page is drawn by script, so honour a #section link once it exists */
+  if (location.hash.length > 1) { var tgt = document.getElementById(decodeURIComponent(location.hash.slice(1))); if (tgt) requestAnimationFrame(function () { tgt.scrollIntoView({ block: "start" }); }); }
+
+  /* ---------- level ---------- */
+  function setLvl(l) {
+    document.body.classList.toggle("beginner", l === "beginner");
+    app.querySelectorAll(".lvl button").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.lvl === l)); });
+    store("explain-lvl", l);
+    show(ci);
+  }
+  app.querySelectorAll(".lvl button").forEach(function (b) { b.addEventListener("click", function () { setLvl(b.dataset.lvl); }); });
+  if (load("explain-lvl") === "beginner") setLvl("beginner");
+})();
+</script>
+
+</html>

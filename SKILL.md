@@ -1,12 +1,22 @@
 ---
 name: explain
-description: Explain any software project in full, simple Arabic as an interactive right-to-left explainer page with a real-world analogy, a clickable map of the project's layers, a step-by-step flow of one request, the screens or entry points, a glossary, a "where do I change what" table and starter exercises. Use whenever the user wants to understand, explain, document, teach or onboard someone to a codebase in Arabic, for example "اشرح لي هذا المشروع", "شرح كامل بالعربية", "كيف يعمل هذا الكود", "ارسم لي مكونات المشروع", "أريد أن أفهم مشروع استلمته", "اشرح المشروع للطلاب", or a vibe-coded project they don't understand yet, even if they don't say "skill", "diagram" or "page". Also use when they ask in English for an Arabic explanation of a repo. Three depths: quick (سريع، نظرة سريعة), full (default) and deep (عميق، مفصل، للمراجعة) with extra flows, function-level detail and review notes.
+description: Explain any software project in plain Arabic or English as an interactive explainer page (right-to-left for Arabic) with a real-world analogy, a clickable map of the project's layers, a step-by-step flow of one request, the screens or entry points, a glossary, a "where do I change what" table and starter exercises. Use whenever the user wants to understand, explain, document, teach or onboard someone to a codebase, for example "explain this project", "help me understand this repo", "how does this code work", "map out this codebase for me", "I inherited this project and don't get it", "onboard the new devs", "اشرح لي هذا المشروع", "شرح كامل بالعربية", "كيف يعمل هذا الكود", "ارسم لي مكونات المشروع", "أريد أن أفهم مشروع استلمته", or a vibe-coded project they don't understand yet, even if they don't say "skill", "diagram" or "page". Three depths: quick (سريع), full (default) and deep (عميق) with extra flows, function-level detail and review notes.
 license: MIT
 ---
 
-# شرح المشروع بالعربية (Arabic project explainer)
+# /explain · project explainer (Arabic or English)
 
-Turn a real codebase into one Arabic page that a learner can read top to bottom and a developer can use as a map. The page layout is a fixed template filled from a JSON file, so your effort goes into understanding the code and writing clear Arabic. Readers are students, junior developers, or anyone who inherited or vibe-coded a project.
+Turn a real codebase into one page, in Arabic or English, that a learner can read top to bottom and a developer can use as a map. The page layout is a fixed template filled from a JSON file, so your effort goes into understanding the code and writing clearly. Readers are students, junior developers, or anyone who inherited or vibe-coded a project.
+
+## Language
+
+Every page is in one language, set as `project.lang`: `ar` (Arabic, right to left, the default) or `en` (English, left to right). Decide it in this order:
+
+1. A language the user names: `/explain en`, `english`, `in English`, `بالإنجليزية` give `en`; `ar`, `arabic`, `عربي`, `بالعربية` give `ar`.
+2. Otherwise, the language the user writes in: «اشرح لي المشروع» is Arabic, "explain this repo" is English. A bare `/explain` takes the language of the conversation so far.
+3. With nothing to go on, Arabic.
+
+Reply to the user in the page's language. Depth words work in both languages (`سريع` or `quick`).
 
 `SKILL` below means this skill's folder (`~/.claude/skills/explain` for a personal install, `.claude/skills/explain` for a project install).
 
@@ -36,7 +46,7 @@ Depth changes how much you read and write, never the template. In `quick`, stop 
 
 ### 1. Find the project and the depth
 
-The user usually types `/explain`. Whatever follows is the input, in any order: a depth word (above), a path (`/explain ~/Projects/shop`), a part to focus on (`/explain the payment flow`), or nothing (the current project at `full`). `/explain سريع ~/Projects/shop` and `/explain deep payments` both work. A focus doesn't change the depth; it makes the main flow follow that focus. If the working directory isn't a project and no path was given, ask which project; don't guess.
+The user usually types `/explain`. Whatever follows is the input, in any order: a depth word (above), a language word, a path (`/explain ~/Projects/shop`), a part to focus on (`/explain the payment flow`), or nothing (the current project at `full`). `/explain سريع ~/Projects/shop` and `/explain deep payments` both work. A focus doesn't change the depth; it makes the main flow follow that focus. If the working directory isn't a project and no path was given, ask which project; don't guess.
 
 ### 2. Map it in one call
 
@@ -61,21 +71,28 @@ python3 -I SKILL/scripts/verify.py <data.json> <project-root>
 python3 -I SKILL/scripts/build.py <data.json> <out.html>
 ```
 
-`verify.py` checks every cited path, every exercise line number and snippet, and every story commit against the repo, and prints only problems. Fix each one with a small Edit and rerun. `build.py` checks the structure (ids, links, sections) and writes the page. Put the HTML in the scratch folder unless the user wants it in the project (for example `docs/شرح-المشروع.html`).
+`verify.py` checks every cited path, every exercise line number and snippet, and every story commit against the repo, and prints only problems. Fix each one with a small Edit and rerun. `build.py` checks the structure (ids, links, sections) and writes the page. Put the HTML in the scratch folder unless the user wants it in the project (for example `docs/شرح-المشروع.html`, or `docs/explained.html` for an English page).
 
 ### 6. Deliver
 
-If the Artifact tool is available, publish the HTML as an artifact (icon `book`) and give the link. Otherwise rebuild it with `--standalone` (a complete HTML document), open the file in the browser and give its absolute path. The page is one self-contained file. Remind the user that it shows their file names, folders and commit messages before they share it. Reply in Arabic: the depth, what the page covers, and anything you could not verify. After a `quick` or `full` page, mention in one line that a deeper one is available.
+If the Artifact tool is available, publish the HTML as an artifact (icon `book`) and give the link. Otherwise rebuild it with `--standalone` (a complete HTML document), open the file in the browser and give its absolute path. The page is one self-contained file. Remind the user that it shows their file names, folders and commit messages before they share it. Reply in the page's language: the depth, what the page covers, and anything you could not verify. After a `quick` or `full` page, mention in one line that a deeper one is available.
 
-## Writing the Arabic
+## Writing the page
 
-The page succeeds or fails on the writing. Write how a good teacher talks, not how a translated manual reads.
+The page succeeds or fails on the writing. Write how a good teacher talks, not how a manual reads. In both languages:
 
-- Clear Modern Standard Arabic, short sentences, one idea per sentence.
+- Short sentences, one idea per sentence. No padding: every sentence teaches something about this project.
+- Say what a part does in the reader's terms before naming the technology.
+- Code names, file names and packages stay exactly as in the code. Western digits (0–9) for numbers and line numbers.
+
+**English pages:** plain, direct English, "you" for the reader. "Saves the score on the phone after every point" before "uses SharedPreferences". Explain a framework term in a few words on first use instead of assuming it ("a hook, a React function that keeps state").
+
+**Arabic pages:**
+
+- Clear Modern Standard Arabic.
 - Say what a part does in the reader's terms before naming the technology: «يحفظ النتيجة في ذاكرة الهاتف بعد كل نقطة» before «يستخدم SharedPreferences».
 - Code names, file names and packages stay in English exactly as in the code. On first use of a concept give both: «المستودع (Repository)».
-- If a sentence sounds translated, rewrite it from scratch. Western digits (0–9) for numbers and line numbers.
-- No padding. Every sentence teaches something about this project.
+- If a sentence sounds translated, rewrite it from scratch.
 
 ## What to avoid
 

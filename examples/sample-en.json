@@ -1,0 +1,746 @@
+{
+  "project": {
+    "name": "How does «My Library» work?",
+    "title": "My Library, explained",
+    "tag": "Sample · fictional project",
+    "path": "~/Projects/my-library",
+    "oneLiner": "A web app for borrowing books from a neighborhood library. Readers search for a book and reserve it, get an email two days before it's due, and the librarian adds books from a private dashboard. This is a fictional sample that shows what the page looks like.",
+    "facts": [
+      "React 18 + Vite",
+      "Node.js + Express",
+      "PostgreSQL via Prisma",
+      "4 screens",
+      "a daily reminder job"
+    ],
+    "mode": "full",
+    "lang": "en"
+  },
+  "analogy": {
+    "title": "Meet the library staff",
+    "intro": "A real library has a reader, the shelves, a front desk, a librarian, a loan ledger and a postman. The app has the same jobs.",
+    "cast": [
+      {
+        "icon": "person",
+        "role": "You, the reader",
+        "job": "You search for a book and press «Reserve».",
+        "code": "",
+        "key": false,
+        "handoff": "“I'd like this book”"
+      },
+      {
+        "icon": "screen",
+        "role": "The shelves",
+        "job": "Show the books and the search results. They never reserve anything themselves; they pass your request on.",
+        "code": "BookListPage",
+        "key": false,
+        "handoff": "“A reader wants book 42”"
+      },
+      {
+        "icon": "key",
+        "role": "The front desk",
+        "job": "Checks that you're a member before letting your request through.",
+        "code": "requireReader",
+        "key": false,
+        "handoff": "“Registered reader, go ahead”"
+      },
+      {
+        "icon": "brain",
+        "role": "The librarian",
+        "job": "The only one allowed to lend books. Checks a copy is free, records the loan and sets the due date.",
+        "code": "loanService",
+        "key": true,
+        "handoff": "“Record this loan”"
+      },
+      {
+        "icon": "database",
+        "role": "The loan ledger",
+        "job": "Keeps every book, who borrowed it and when it's due back.",
+        "code": "PostgreSQL",
+        "key": false,
+        "handoff": ""
+      },
+      {
+        "icon": "mail",
+        "role": "The postman",
+        "job": "Comes by every morning and reminds anyone whose book is due soon.",
+        "code": "reminderJob",
+        "key": false,
+        "handoff": "“Reminder: return your book in two days”"
+      }
+    ],
+    "bigIdea": "Each part has one job: the screen shows, the front desk checks, the librarian decides, the ledger keeps, and the postman reminds."
+  },
+  "layers": [
+    {
+      "name": "Screens · what the reader sees",
+      "folder": "web/src/pages",
+      "between": "call the helpers",
+      "nodes": [
+        {
+          "id": "list",
+          "name": "BookListPage",
+          "short": "search and reserve",
+          "file": "web/src/pages/BookListPage.tsx",
+          "what": "Shows the books and search results, with a «Reserve» button on each one.",
+          "links": [
+            {
+              "to": "loanshook",
+              "verb": "reserves through reserve()"
+            },
+            {
+              "to": "apic",
+              "verb": "searches through searchBooks()"
+            }
+          ]
+        },
+        {
+          "id": "book",
+          "name": "BookPage",
+          "short": "one book",
+          "file": "web/src/pages/BookPage.tsx",
+          "what": "A single book: its description, how many copies are free, and a reserve button.",
+          "links": [
+            {
+              "to": "apic",
+              "verb": "loads the book"
+            }
+          ]
+        },
+        {
+          "id": "mine",
+          "name": "MyLoansPage",
+          "short": "my loans",
+          "file": "web/src/pages/MyLoansPage.tsx",
+          "what": "The books you've borrowed and when they're due, with a «Returned it» button.",
+          "links": [
+            {
+              "to": "loanshook",
+              "verb": "reads my loans"
+            }
+          ]
+        },
+        {
+          "id": "login",
+          "name": "LoginPage",
+          "short": "email sign-in",
+          "file": "web/src/pages/LoginPage.tsx",
+          "what": "The reader types an email and gets a sign-in link. There are no passwords.",
+          "links": [
+            {
+              "to": "auth",
+              "verb": "asks for a sign-in link"
+            }
+          ]
+        },
+        {
+          "id": "admin",
+          "name": "AdminPage",
+          "short": "librarian dashboard",
+          "file": "web/src/pages/AdminPage.tsx",
+          "what": "Where the librarian adds books and changes how many copies there are.",
+          "links": [
+            {
+              "to": "apic",
+              "verb": "sends new books"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Front end · state and requests",
+      "folder": "web/src/lib",
+      "between": "HTTPS requests to the server",
+      "nodes": [
+        {
+          "id": "apic",
+          "name": "api.ts",
+          "short": "every request goes through here",
+          "file": "web/src/lib/api.ts",
+          "what": "One function adds the sign-in token to each request and turns server errors into readable messages.",
+          "links": [
+            {
+              "to": "booksR",
+              "verb": "GET /books"
+            },
+            {
+              "to": "loansR",
+              "verb": "POST /loans"
+            }
+          ]
+        },
+        {
+          "id": "auth",
+          "name": "useAuth",
+          "short": "who am I?",
+          "file": "web/src/lib/useAuth.ts",
+          "what": "Keeps the sign-in token in the browser and knows whether the reader is a librarian.",
+          "links": [
+            {
+              "to": "authR",
+              "verb": "requests and verifies the link"
+            }
+          ]
+        },
+        {
+          "id": "loanshook",
+          "name": "useLoans",
+          "short": "my loans",
+          "file": "web/src/lib/useLoans.ts",
+          "what": "Loads the reader's loans and refreshes them after every reservation or return.",
+          "links": [
+            {
+              "to": "apic",
+              "verb": "uses request()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Server · routes",
+      "folder": "server/src/routes",
+      "between": "hand the request to the rules",
+      "nodes": [
+        {
+          "id": "booksR",
+          "name": "books.routes.ts",
+          "short": "search and add",
+          "file": "server/src/routes/books.routes.ts",
+          "what": "Handles search, showing a book, and adding books from the dashboard.",
+          "links": [
+            {
+              "to": "bookSvc",
+              "verb": "calls search() and add()"
+            }
+          ]
+        },
+        {
+          "id": "loansR",
+          "name": "loans.routes.ts",
+          "short": "reserve and return",
+          "file": "server/src/routes/loans.routes.ts",
+          "what": "Handles `POST /loans` and `POST /loans/:id/return` once the front desk has checked the reader.",
+          "links": [
+            {
+              "to": "guard",
+              "verb": "goes through requireReader first"
+            },
+            {
+              "to": "loanSvc",
+              "verb": "calls createLoan()"
+            }
+          ]
+        },
+        {
+          "id": "authR",
+          "name": "auth.routes.ts",
+          "short": "sign-in links",
+          "file": "server/src/routes/auth.routes.ts",
+          "what": "Emails the sign-in link, then swaps it for a sign-in token when the reader clicks it.",
+          "links": [
+            {
+              "to": "mailer",
+              "verb": "sends the link"
+            },
+            {
+              "to": "prisma",
+              "verb": "stores the short-lived token"
+            }
+          ]
+        },
+        {
+          "id": "guard",
+          "name": "requireReader",
+          "short": "the front desk",
+          "file": "server/src/middleware/requireReader.ts",
+          "what": "Reads the sign-in token from the request. Without a valid reader it answers 401.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "looks up the reader"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Rules · what's allowed",
+      "folder": "server/src/services",
+      "between": "read and write",
+      "nodes": [
+        {
+          "id": "loanSvc",
+          "name": "loanService",
+          "short": "the librarian",
+          "file": "server/src/services/loanService.ts",
+          "what": "Checks the book has a free copy, records the loan, and sets the due date 14 days out.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "writes to the loans table"
+            }
+          ]
+        },
+        {
+          "id": "bookSvc",
+          "name": "bookService",
+          "short": "the catalog",
+          "file": "server/src/services/bookService.ts",
+          "what": "Searches books and counts the free copies of each.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "reads books and loans"
+            }
+          ]
+        },
+        {
+          "id": "reminder",
+          "name": "reminderJob",
+          "short": "the postman",
+          "file": "server/src/jobs/reminders.ts",
+          "what": "Runs every morning at 8. Finds loans due in two days and sends a reminder.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "finds loans due soon"
+            },
+            {
+              "to": "mailer",
+              "verb": "sends the reminder"
+            }
+          ]
+        },
+        {
+          "id": "mailer",
+          "name": "mailer",
+          "short": "sends email",
+          "file": "server/src/lib/mailer.ts",
+          "what": "Sends sign-in and reminder emails through the email service.",
+          "links": []
+        }
+      ]
+    },
+    {
+      "name": "Data",
+      "folder": "server/prisma",
+      "between": "",
+      "nodes": [
+        {
+          "id": "prisma",
+          "name": "db.ts",
+          "short": "the database connection",
+          "file": "server/src/db.ts",
+          "what": "One Prisma client the whole server shares.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "reads and writes"
+            }
+          ]
+        },
+        {
+          "id": "db",
+          "name": "PostgreSQL",
+          "short": "books and loans",
+          "file": "server/prisma/schema.prisma",
+          "what": "Tables for books, readers, loans and sign-in tokens.",
+          "links": []
+        }
+      ]
+    },
+    {
+      "name": "Startup and helpers",
+      "folder": "server/src",
+      "nodes": [
+        {
+          "id": "server",
+          "name": "index.ts",
+          "short": "starts the server",
+          "file": "server/src/index.ts",
+          "what": "Mounts the routes, starts listening, and schedules the reminder job.",
+          "links": [
+            {
+              "to": "loansR",
+              "verb": "mounts the routes"
+            },
+            {
+              "to": "reminder",
+              "verb": "schedules the job"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "title": "What happens when you reserve a book?",
+    "intro": "Follow one press of «Reserve» until the loan is saved and the due date appears.",
+    "steps": [
+      {
+        "who": "You",
+        "title": "You press «Reserve»",
+        "text": "The screen calls `reserve()` with the book's id.",
+        "file": "web/src/pages/BookListPage.tsx · onReserve()",
+        "at": "list"
+      },
+      {
+        "who": "api.ts",
+        "title": "The request leaves for the server",
+        "text": "The sign-in token is added and `POST /loans` goes out.",
+        "file": "web/src/lib/api.ts · request()",
+        "at": "apic"
+      },
+      {
+        "who": "requireReader",
+        "title": "The front desk checks you",
+        "text": "If the token is valid, the reader is known and the request goes through.",
+        "file": "server/src/middleware/requireReader.ts",
+        "at": "guard",
+        "lit": [
+          "prisma"
+        ]
+      },
+      {
+        "who": "loanService",
+        "title": "The librarian decides",
+        "text": "Counts the copies on loan. If one is left, records the loan and sets the due date.",
+        "file": "server/src/services/loanService.ts · createLoan()",
+        "at": "loanSvc"
+      },
+      {
+        "who": "PostgreSQL",
+        "title": "Saved",
+        "text": "A new row with the due date lands in the `loans` table.",
+        "file": "server/prisma/schema.prisma · model Loan",
+        "at": "db",
+        "lit": [
+          "prisma"
+        ]
+      },
+      {
+        "who": "useLoans",
+        "title": "The screen updates",
+        "text": "Your loans are loaded again and «Reserved, return it by …» appears.",
+        "file": "web/src/lib/useLoans.ts · refresh()",
+        "at": "loanshook"
+      }
+    ]
+  },
+  "database": {
+    "tables": [
+      {
+        "name": "loans",
+        "what": "Every loan: who borrowed which book and when it's due.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "book_id",
+            "type": "int",
+            "note": "the book"
+          },
+          {
+            "name": "reader_id",
+            "type": "int",
+            "note": "the reader"
+          },
+          {
+            "name": "due_at",
+            "type": "timestamp",
+            "note": "due date"
+          },
+          {
+            "name": "returned_at",
+            "type": "timestamp?",
+            "note": "empty while the reader has the book"
+          }
+        ]
+      },
+      {
+        "name": "books",
+        "what": "Every book in the library and how many copies it has.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "title",
+            "type": "text",
+            "note": "title"
+          },
+          {
+            "name": "author",
+            "type": "text",
+            "note": "author"
+          },
+          {
+            "name": "copies",
+            "type": "int",
+            "note": "number of copies"
+          }
+        ]
+      },
+      {
+        "name": "readers",
+        "what": "Registered readers.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "email",
+            "type": "text",
+            "note": "for sign-in and reminders"
+          },
+          {
+            "name": "is_admin",
+            "type": "bool",
+            "note": "the librarian"
+          }
+        ]
+      },
+      {
+        "name": "login_tokens",
+        "what": "Short-lived sign-in tokens.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "token",
+            "type": "text",
+            "note": "the token"
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp",
+            "note": "after 15 minutes"
+          }
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "from": "loans",
+        "to": "books",
+        "kind": "many-to-one",
+        "text": "Each loan is for one book; a book is borrowed many times."
+      },
+      {
+        "from": "loans",
+        "to": "readers",
+        "kind": "many-to-one",
+        "text": "Each loan belongs to one reader."
+      },
+      {
+        "from": "login_tokens",
+        "to": "readers",
+        "kind": "many-to-one",
+        "text": "Each sign-in token belongs to one reader."
+      }
+    ]
+  },
+  "story": {
+    "events": [
+      {
+        "date": "2026-01-10",
+        "phase": "The start",
+        "kind": "start",
+        "title": "First commit",
+        "text": "A search page and a fixed list of books in a JSON file.",
+        "commit": "a1b2c3d"
+      },
+      {
+        "date": "2026-01-24",
+        "phase": "The start",
+        "kind": "feature",
+        "title": "Reservations",
+        "text": "`loanService` appears. This is where the “a free copy or no loan” rule began."
+      },
+      {
+        "date": "2026-02-02",
+        "phase": "First release",
+        "kind": "architecture",
+        "title": "Moving to PostgreSQL",
+        "text": "Prisma replaced the JSON file. That's why there's a `prisma/` folder."
+      },
+      {
+        "date": "2026-02-20",
+        "phase": "First release",
+        "kind": "feature",
+        "title": "Email sign-in",
+        "text": "Passwords were removed. That's why there's a `login_tokens` table."
+      },
+      {
+        "date": "2026-03-15",
+        "phase": "First release",
+        "kind": "release",
+        "title": "Launch at the neighborhood library",
+        "text": "The first real readers."
+      },
+      {
+        "date": "2026-04-02",
+        "phase": "After launch",
+        "kind": "feature",
+        "title": "Return reminders",
+        "text": "The daily job was added, with its own due-date math separate from `loanService`."
+      }
+    ]
+  },
+  "parts": {
+    "title": "Screens",
+    "items": [
+      {
+        "name": "Search",
+        "how": "web/src/pages/BookListPage.tsx",
+        "points": [
+          "Search by title or author",
+          "A reserve button on every card"
+        ]
+      },
+      {
+        "name": "Book details",
+        "how": "web/src/pages/BookPage.tsx",
+        "points": [
+          "Description and free copies"
+        ]
+      },
+      {
+        "name": "My loans",
+        "how": "web/src/pages/MyLoansPage.tsx",
+        "points": [
+          "Borrowed books",
+          "Due dates",
+          "A «Returned it» button"
+        ]
+      },
+      {
+        "name": "Dashboard",
+        "how": "web/src/pages/AdminPage.tsx",
+        "points": [
+          "Add a book",
+          "Change the number of copies"
+        ]
+      }
+    ]
+  },
+  "glossary": [
+    {
+      "term": "Component",
+      "en": "",
+      "meaning": "A reusable piece of the interface, like `BookCard`."
+    },
+    {
+      "term": "Hook",
+      "en": "",
+      "meaning": "A React function that keeps state or loads data, like `useLoans`."
+    },
+    {
+      "term": "Route",
+      "en": "",
+      "meaning": "An address the server answers on, like `POST /loans`."
+    },
+    {
+      "term": "Middleware",
+      "en": "",
+      "meaning": "A step every request passes through before its route, like `requireReader`."
+    },
+    {
+      "term": "Service",
+      "en": "",
+      "meaning": "Where the business rules live, like “no loan without a free copy”."
+    },
+    {
+      "term": "Schema",
+      "en": "",
+      "meaning": "The description of the tables and their columns in `schema.prisma`."
+    },
+    {
+      "term": "Transaction",
+      "en": "",
+      "meaning": "A group of writes that all succeed or all fail."
+    },
+    {
+      "term": "Cron job",
+      "en": "",
+      "meaning": "Code the server runs on its own at a set time, like the morning reminder."
+    },
+    {
+      "term": "Token",
+      "en": "",
+      "meaning": "A secret string that tells the server who you are on every request."
+    },
+    {
+      "term": "Migration",
+      "en": "",
+      "meaning": "A file that changes the database's shape one step at a time."
+    }
+  ],
+  "change": [
+    {
+      "want": "change how long a loan lasts",
+      "where": "server/src/services/loanService.ts · LOAN_DAYS"
+    },
+    {
+      "want": "change when the reminder goes out",
+      "where": "server/src/jobs/reminders.ts · dueInTwoDays()"
+    },
+    {
+      "want": "add a column to a table",
+      "where": "server/prisma/schema.prisma"
+    },
+    {
+      "want": "change an error message",
+      "where": "web/src/lib/api.ts · ERRORS"
+    },
+    {
+      "want": "change how a book card looks",
+      "where": "web/src/pages/BookListPage.tsx · BookCard"
+    },
+    {
+      "want": "change the sign-in email",
+      "where": "server/src/lib/mailer.ts · sendLink()"
+    },
+    {
+      "want": "block a reader from reserving",
+      "where": "server/src/middleware/requireReader.ts"
+    },
+    {
+      "want": "change the reminder's hour",
+      "where": "server/src/index.ts · cron.schedule()"
+    }
+  ],
+  "exercises": [
+    {
+      "title": "Change the loan length",
+      "text": "Make it 21 days instead of 14, then reserve a book and look at the new due date.",
+      "file": "server/src/services/loanService.ts · line 8",
+      "before": "const LOAN_DAYS = 14;",
+      "after": "const LOAN_DAYS = 21;",
+      "answer": ""
+    },
+    {
+      "title": "Change the «not available» message",
+      "text": "Write something kinder for the reader.",
+      "file": "web/src/lib/api.ts · line 4",
+      "before": "  NO_COPY: \"This book isn't available\",",
+      "after": "  NO_COPY: \"Every copy is out right now. Try again in a few days\",",
+      "answer": ""
+    },
+    {
+      "title": "Read and explain",
+      "text": "Why doesn't `available()` need an “available” column in the books table?",
+      "file": "server/src/services/bookService.ts · line 25",
+      "before": "",
+      "after": "return book.copies - openLoans;",
+      "answer": "Because the number of free copies is computed every time: copies minus the loans not yet returned. There's no stored number that someone could forget to update."
+    }
+  ],
+  "tree": "my-library/\n├── web/src/\n│   ├── pages/      # the four screens\n│   └── lib/        # api.ts, useAuth, useLoans\n└── server/\n    ├── prisma/     # schema.prisma and migrations\n    └── src/\n        ├── routes/     # the routes\n        ├── middleware/ # requireReader\n        ├── services/   # loanService, bookService\n        ├── jobs/       # reminders.ts\n        └── index.ts    # starts the server",
+  "figures": [
+    {
+      "id": "deployen",
+      "section": "layers",
+      "title": "Where does each part run?",
+      "caption": "The front end runs in the browser; only the server talks to the database and the email service.",
+      "alt": "The reader uses a React front end that calls an Express server over HTTPS; the server uses PostgreSQL through Prisma and sends email every morning.",
+      "svg": "deploy-en.svg"
+    }
+  ],
+  "footer": "A fictional sample that shows what an /explain page looks like."
+}
