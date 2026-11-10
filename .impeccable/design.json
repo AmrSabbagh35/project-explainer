@@ -1,0 +1,690 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-10T12:25:02.870952+00:00",
+  "title": "Design System: /explain",
+  "extensions": {
+    "colorMeta": {
+      "key": {
+        "role": "primary",
+        "displayName": "Vermilion Rubric",
+        "canonical": "#EE6A4C",
+        "tonalRamp": [
+          "#3C1A13",
+          "#6B3022",
+          "#9B4531",
+          "#CA5A41",
+          "#F18067",
+          "#F5A694",
+          "#F9CBC0",
+          "#FDEDEA"
+        ]
+      },
+      "key-light": {
+        "role": "primary",
+        "displayName": "Vermilion Rubric (paper)",
+        "canonical": "#C2391F",
+        "tonalRamp": [
+          "#300E08",
+          "#571A0E",
+          "#7E2514",
+          "#A5301A",
+          "#CB5741",
+          "#DA8879",
+          "#EABAB1",
+          "#F8E7E4"
+        ]
+      },
+      "on-key": {
+        "role": "primary",
+        "displayName": "On Vermilion",
+        "canonical": "#0B1222",
+        "tonalRamp": [
+          "#030408",
+          "#05080F",
+          "#070C16",
+          "#090F1D",
+          "#303643",
+          "#6D717A",
+          "#AAACB2",
+          "#E2E3E4"
+        ]
+      },
+      "on-key-light": {
+        "role": "primary",
+        "displayName": "On Vermilion (paper)",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#404040",
+          "#737373",
+          "#A6A6A6",
+          "#D9D9D9",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF"
+        ]
+      },
+      "gilt": {
+        "role": "secondary",
+        "displayName": "Gilt Hairline",
+        "canonical": "#C29A4F",
+        "tonalRamp": [
+          "#302614",
+          "#574524",
+          "#7E6433",
+          "#A58343",
+          "#CBA969",
+          "#DAC295",
+          "#EADCC1",
+          "#F8F3EA"
+        ]
+      },
+      "gilt-light": {
+        "role": "secondary",
+        "displayName": "Gilt Hairline (paper)",
+        "canonical": "#8E6A28",
+        "tonalRamp": [
+          "#241A0A",
+          "#403012",
+          "#5C451A",
+          "#795A22",
+          "#9F8048",
+          "#BBA67E",
+          "#D7CBB4",
+          "#F1EDE5"
+        ]
+      },
+      "gilt-soft": {
+        "role": "secondary",
+        "displayName": "Soft Gilt",
+        "canonical": "rgba(194, 154, 79, .32)"
+      },
+      "gilt-soft-light": {
+        "role": "secondary",
+        "displayName": "Soft Gilt (paper)",
+        "canonical": "rgba(142, 106, 40, .30)"
+      },
+      "mast-gilt": {
+        "role": "secondary",
+        "displayName": "Masthead Gilt",
+        "canonical": "#D2AC63",
+        "tonalRamp": [
+          "#342B19",
+          "#5E4D2D",
+          "#887040",
+          "#B29254",
+          "#D9B87A",
+          "#E4CDA1",
+          "#EFE2C8",
+          "#FAF5EC"
+        ]
+      },
+      "mast-gilt-light": {
+        "role": "secondary",
+        "displayName": "Masthead Gilt (paper)",
+        "canonical": "#E0BE7A",
+        "tonalRamp": [
+          "#38301E",
+          "#655537",
+          "#927C4F",
+          "#BEA268",
+          "#E5C88E",
+          "#ECD8AF",
+          "#F4E8D0",
+          "#FBF7EF"
+        ]
+      },
+      "lapis": {
+        "role": "tertiary",
+        "displayName": "Lapis Link",
+        "canonical": "#6F9BEA",
+        "tonalRamp": [
+          "#1C273A",
+          "#324669",
+          "#486598",
+          "#5E84C7",
+          "#85AAED",
+          "#A9C3F2",
+          "#CDDCF8",
+          "#EEF3FC"
+        ]
+      },
+      "lapis-light": {
+        "role": "tertiary",
+        "displayName": "Lapis Link (paper)",
+        "canonical": "#1E4FA8",
+        "tonalRamp": [
+          "#08142A",
+          "#0D244C",
+          "#14336D",
+          "#1A438F",
+          "#4069B5",
+          "#7895CB",
+          "#B0C1E1",
+          "#E4EAF5"
+        ]
+      },
+      "ground": {
+        "role": "neutral",
+        "displayName": "Lapis-Black Ground",
+        "canonical": "#0B1222",
+        "tonalRamp": [
+          "#030408",
+          "#05080F",
+          "#070C16",
+          "#090F1D",
+          "#303643",
+          "#6D717A",
+          "#AAACB2",
+          "#E2E3E4"
+        ]
+      },
+      "ground-light": {
+        "role": "neutral",
+        "displayName": "Cool Paper Ground",
+        "canonical": "#F3F5F9",
+        "tonalRamp": [
+          "#3D3D3E",
+          "#6D6E70",
+          "#9E9FA2",
+          "#CFD0D4",
+          "#F5F6FA",
+          "#F8F9FB",
+          "#FBFCFD",
+          "#FEFEFE"
+        ]
+      },
+      "plate": {
+        "role": "neutral",
+        "displayName": "Lapis Plate",
+        "canonical": "#13224A",
+        "tonalRamp": [
+          "#050812",
+          "#090F21",
+          "#0C1630",
+          "#101D3F",
+          "#364365",
+          "#717A92",
+          "#ACB2C0",
+          "#E3E4E9"
+        ]
+      },
+      "plate-light": {
+        "role": "neutral",
+        "displayName": "Paper Plate",
+        "canonical": "#FFFFFF",
+        "tonalRamp": [
+          "#404040",
+          "#737373",
+          "#A6A6A6",
+          "#D9D9D9",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF"
+        ]
+      },
+      "plate-2": {
+        "role": "neutral",
+        "displayName": "Plate Two",
+        "canonical": "#1A2D5C",
+        "tonalRamp": [
+          "#060B17",
+          "#0C1429",
+          "#111D3C",
+          "#16264E",
+          "#3C4C74",
+          "#76819D",
+          "#AFB6C6",
+          "#E4E6EB"
+        ]
+      },
+      "plate-2-light": {
+        "role": "neutral",
+        "displayName": "Plate Two (paper)",
+        "canonical": "#E6EDF8",
+        "tonalRamp": [
+          "#3A3B3E",
+          "#676B70",
+          "#969AA1",
+          "#C4C9D3",
+          "#EAF0F9",
+          "#F0F4FB",
+          "#F6F9FD",
+          "#FCFDFE"
+        ]
+      },
+      "mast": {
+        "role": "neutral",
+        "displayName": "Masthead Lapis",
+        "canonical": "#13224A",
+        "tonalRamp": [
+          "#050812",
+          "#090F21",
+          "#0C1630",
+          "#101D3F",
+          "#364365",
+          "#717A92",
+          "#ACB2C0",
+          "#E3E4E9"
+        ]
+      },
+      "mast-light": {
+        "role": "neutral",
+        "displayName": "Masthead Lapis (paper)",
+        "canonical": "#1E3A78",
+        "tonalRamp": [
+          "#080E1E",
+          "#0D1A36",
+          "#14264E",
+          "#1A3166",
+          "#40588C",
+          "#7889AE",
+          "#B0BAD0",
+          "#E4E7EF"
+        ]
+      },
+      "mast-ink": {
+        "role": "neutral",
+        "displayName": "Masthead Ink",
+        "canonical": "#EEF1F7",
+        "tonalRamp": [
+          "#3C3C3E",
+          "#6B6C6F",
+          "#9B9DA1",
+          "#CACDD2",
+          "#F1F3F8",
+          "#F5F7FA",
+          "#F9FAFC",
+          "#FDFDFE"
+        ]
+      },
+      "mast-ink-2": {
+        "role": "neutral",
+        "displayName": "Masthead Ink Two",
+        "canonical": "#B4C0DA",
+        "tonalRamp": [
+          "#2D3036",
+          "#515662",
+          "#757D8E",
+          "#99A3B9",
+          "#BFC9E0",
+          "#D2D9E9",
+          "#E5E9F2",
+          "#F6F7FB"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Paper Ink",
+        "canonical": "#E8ECF4",
+        "tonalRamp": [
+          "#3A3B3D",
+          "#686A6E",
+          "#97999F",
+          "#C5C9CF",
+          "#EBEFF6",
+          "#F1F4F8",
+          "#F7F8FB",
+          "#FCFDFE"
+        ]
+      },
+      "ink-light": {
+        "role": "neutral",
+        "displayName": "Lapis Ink (paper)",
+        "canonical": "#111A2C",
+        "tonalRamp": [
+          "#04060B",
+          "#080C14",
+          "#0B111D",
+          "#0E1625",
+          "#353C4C",
+          "#707680",
+          "#ACAFB5",
+          "#E2E4E6"
+        ]
+      },
+      "ink-2": {
+        "role": "neutral",
+        "displayName": "Muted Ink",
+        "canonical": "#A3AFC4",
+        "tonalRamp": [
+          "#292C31",
+          "#494F58",
+          "#6A727F",
+          "#8B95A7",
+          "#B1BBCD",
+          "#C8CFDC",
+          "#DFE3EA",
+          "#F4F5F8"
+        ]
+      },
+      "ink-2-light": {
+        "role": "neutral",
+        "displayName": "Muted Ink (paper)",
+        "canonical": "#4A576D",
+        "tonalRamp": [
+          "#12161B",
+          "#212731",
+          "#303947",
+          "#3F4A5D",
+          "#657083",
+          "#929AA7",
+          "#C0C4CC",
+          "#E9EBED"
+        ]
+      },
+      "code-bg": {
+        "role": "neutral",
+        "displayName": "Code Well",
+        "canonical": "#0E182C",
+        "tonalRamp": [
+          "#04060B",
+          "#060B14",
+          "#09101D",
+          "#0C1425",
+          "#323B4C",
+          "#6E7480",
+          "#ABAEB5",
+          "#E2E3E6"
+        ]
+      },
+      "code-bg-light": {
+        "role": "neutral",
+        "displayName": "Code Well (paper)",
+        "canonical": "#EDF1F8",
+        "tonalRamp": [
+          "#3B3C3E",
+          "#6B6C70",
+          "#9A9DA1",
+          "#C9CDD3",
+          "#F0F3F9",
+          "#F4F7FB",
+          "#F9FAFD",
+          "#FDFDFE"
+        ]
+      },
+      "c1": {
+        "role": "tertiary",
+        "displayName": "Layer Tint 1",
+        "canonical": "#6F9BEA",
+        "tonalRamp": [
+          "#1C273A",
+          "#324669",
+          "#486598",
+          "#5E84C7",
+          "#85AAED",
+          "#A9C3F2",
+          "#CDDCF8",
+          "#EEF3FC"
+        ]
+      },
+      "c2": {
+        "role": "tertiary",
+        "displayName": "Layer Tint 2",
+        "canonical": "#C29A4F",
+        "tonalRamp": [
+          "#302614",
+          "#574524",
+          "#7E6433",
+          "#A58343",
+          "#CBA969",
+          "#DAC295",
+          "#EADCC1",
+          "#F8F3EA"
+        ]
+      },
+      "c3": {
+        "role": "tertiary",
+        "displayName": "Layer Tint 3",
+        "canonical": "#A3AFC4",
+        "tonalRamp": [
+          "#292C31",
+          "#494F58",
+          "#6A727F",
+          "#8B95A7",
+          "#B1BBCD",
+          "#C8CFDC",
+          "#DFE3EA",
+          "#F4F5F8"
+        ]
+      },
+      "c4": {
+        "role": "tertiary",
+        "displayName": "Layer Tint 4",
+        "canonical": "#8FB0EE",
+        "tonalRamp": [
+          "#242C3C",
+          "#404F6B",
+          "#5D729B",
+          "#7A96CA",
+          "#A0BCF1",
+          "#BCD0F5",
+          "#D8E3F9",
+          "#F2F6FD"
+        ]
+      },
+      "c5": {
+        "role": "tertiary",
+        "displayName": "Layer Tint 5",
+        "canonical": "#9C8A62",
+        "tonalRamp": [
+          "#272218",
+          "#463E2C",
+          "#655A40",
+          "#857553",
+          "#AB9C7A",
+          "#C4B9A1",
+          "#DCD6C8",
+          "#F3F1EC"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Project title in the masthead."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles under a soft gilt rule."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Step card, phases, figure titles."
+      },
+      "lede": {
+        "displayName": "Lede",
+        "purpose": "One-line answer in the masthead."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All reading text within 68ch."
+      },
+      "subhead": {
+        "displayName": "Subhead",
+        "purpose": "Card and row headings."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Band and table headers, metadata."
+      },
+      "code": {
+        "displayName": "Code",
+        "purpose": "Identifiers, paths, hashes; LTR isolated."
+      },
+      "key-letter": {
+        "displayName": "Key Letter",
+        "purpose": "Abjad letter inside a key disc."
+      }
+    },
+    "shadows": [
+      {
+        "name": "station-halo",
+        "value": "0 0 0 6px color-mix(in srgb, var(--key) 22%, transparent)",
+        "purpose": "Current route station only."
+      }
+    ],
+    "motion": [
+      {
+        "name": "route-fill",
+        "value": "width .75s cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Vermilion progress along the route."
+      },
+      {
+        "name": "state",
+        "value": ".2s",
+        "purpose": "Key, node and row background and border changes."
+      },
+      {
+        "name": "dim",
+        "value": "opacity .25s",
+        "purpose": "Focus-mode dimming of unrelated rows."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "transition: none; scroll-behavior: auto",
+        "purpose": "All transitions off under prefers-reduced-motion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "tablet",
+        "value": "960px"
+      },
+      {
+        "name": "phone",
+        "value": "620px"
+      }
+    ],
+    "themes": {
+      "switch": "prefers-color-scheme, overridden by :root[data-theme]",
+      "default": "dark"
+    }
+  },
+  "components": [
+    {
+      "name": "Letter Key",
+      "kind": "custom",
+      "refersTo": "letter-key",
+      "description": "The abjad key for a part; vermilion rim at rest, solid vermilion when selected.",
+      "html": "<div dir=\"rtl\" style=\"display:flex;gap:10px\"><button class=\"ds-k\">أ</button><button class=\"ds-k ds-on\">ب</button><button class=\"ds-k\">ج</button></div>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-k{all:unset;cursor:pointer;display:inline-grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;font-family:var(--display);font-weight:700;font-size:15px;line-height:1;padding-top:.12em;color:var(--key);border:1px solid color-mix(in srgb,var(--key) 55%,transparent);transition:background .2s,color .2s}.ds-k:hover{border-color:var(--key)}.ds-k:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}.ds-k.ds-on{background:var(--key);color:var(--on-key);border-color:var(--key)}"
+    },
+    {
+      "name": "Pill Button",
+      "kind": "button",
+      "refersTo": "button-pill",
+      "description": "Quiet control: transparent, soft gilt rim.",
+      "html": "<button class=\"ds-btn\">الخطوة التالية</button>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-btn{font-family:var(--body);font-size:14px;font-weight:600;background:transparent;color:var(--ink);border:1px solid var(--gilt-soft);border-radius:999px;padding:6px 14px;cursor:pointer}.ds-btn:hover{border-color:var(--gilt)}.ds-btn:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}"
+    },
+    {
+      "name": "Primary Pill Button",
+      "kind": "button",
+      "refersTo": "button-pill-primary",
+      "description": "Vermilion play control for the route; the only filled button.",
+      "html": "<button class=\"ds-btn-p\">تشغيل</button>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-btn-p{font-family:var(--body);font-size:14px;font-weight:600;background:var(--key);color:var(--on-key);border:1px solid var(--key);border-radius:999px;padding:6px 14px;cursor:pointer}.ds-btn-p:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}"
+    },
+    {
+      "name": "Level Switch",
+      "kind": "chip",
+      "refersTo": "level-switch-on",
+      "description": "Beginner / expert switch on the masthead band.",
+      "html": "<div class=\"ds-mast\" dir=\"rtl\"><div class=\"ds-lvl\"><button aria-pressed=\"false\">مبتدئ</button><button aria-pressed=\"true\">خبير</button></div></div>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-mast{background:var(--mast);padding:16px}.ds-lvl{display:inline-flex;border:1px solid color-mix(in srgb,var(--mast-gilt) 45%,transparent);border-radius:999px;padding:3px;gap:2px}.ds-lvl button{all:unset;cursor:pointer;padding:3px 14px;border-radius:999px;font-family:var(--body);font-size:14px;font-weight:600;color:var(--mast-ink-2)}.ds-lvl button[aria-pressed=\"true\"]{background:var(--mast-ink);color:var(--mast)}.ds-lvl button:focus-visible{outline:2px solid var(--mast-gilt);outline-offset:2px}"
+    },
+    {
+      "name": "Index Rail",
+      "kind": "nav",
+      "refersTo": "",
+      "description": "Right-hand section index with gilt naskh heading and vermilion current marker.",
+      "html": "<nav class=\"ds-rail\" dir=\"rtl\"><h2>الفهرس</h2><a href=\"#\">الفكرة</a><a href=\"#\" class=\"ds-here\">الخريطة</a><a href=\"#\">الرحلة</a></nav>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-rail{background:var(--ground);padding:12px;display:flex;flex-direction:column;font-family:var(--body);font-size:14.5px;width:236px}.ds-rail h2{font-family:var(--display);font-size:17px;font-weight:700;margin:0 0 6px;color:var(--gilt)}.ds-rail a{display:block;padding:4px 12px 4px 0;color:var(--ink-2);text-decoration:none;border-right:1px solid var(--gilt-soft)}.ds-rail a:hover{color:var(--ink)}.ds-rail a:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}.ds-rail a.ds-here{color:var(--ink);border-right-color:var(--key);font-weight:600}"
+    },
+    {
+      "name": "Part Node",
+      "kind": "card",
+      "refersTo": "part-node",
+      "description": "A lettered part on the mechanism plate, tinted by its layer.",
+      "html": "<div class=\"ds-plate\" dir=\"rtl\"><div class=\"ds-in\"><button class=\"ds-node\"><span class=\"ds-k\">أ</span><span class=\"ds-nm\">AuthController</span><span class=\"ds-sh\">يستقبل طلب الدخول</span></button><button class=\"ds-node ds-sel\"><span class=\"ds-k\">ب</span><span class=\"ds-nm\">UserRepository</span><span class=\"ds-sh\">يقرأ المستخدم من القاعدة</span></button></div></div>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-plate{background:var(--plate);border:1px solid var(--gilt);border-radius:4px;padding:6px}.ds-in{border:1px solid var(--gilt-soft);border-radius:2px;padding:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}.ds-node{--lc:var(--c1);all:unset;box-sizing:border-box;cursor:pointer;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 10px;align-items:center;padding:9px 10px;border-radius:6px;border:1px solid color-mix(in srgb,var(--lc) 34%,transparent);background:color-mix(in srgb,var(--lc) 6%,transparent);transition:border-color .2s,background .2s;font-family:var(--body);color:var(--ink)}.ds-node:hover{border-color:var(--lc)}.ds-node:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}.ds-node.ds-sel{border-color:var(--key);background:color-mix(in srgb,var(--key) 10%,transparent)}.ds-k{grid-row:span 2;display:inline-grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;font-family:var(--display);font-weight:700;font-size:15px;line-height:1;padding-top:.12em;color:var(--key);border:1px solid color-mix(in srgb,var(--key) 55%,transparent)}.ds-sel .ds-k{background:var(--key);color:var(--on-key)}.ds-nm{font-family:var(--mono);font-size:12.5px;font-weight:600;direction:ltr;text-align:right}.ds-sh{font-size:13px;color:var(--ink-2);line-height:1.5}"
+    },
+    {
+      "name": "Figure Frame with f- classes",
+      "kind": "custom",
+      "refersTo": "plate-frame",
+      "description": "Double-ruled figure frame; SVG coloured only by f- classes.",
+      "html": "<figure class=\"ds-fig\" dir=\"rtl\"><div class=\"ds-ft\">مسار النشر</div><div class=\"ds-frame\"><div class=\"ds-body\"><svg viewBox=\"0 0 560 120\" xmlns=\"http://www.w3.org/2000/svg\"><defs><marker id=\"ds-ah\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto-start-reverse\"><path d=\"M0,0 L10,5 L0,10 z\" class=\"f-head\"/></marker></defs><rect class=\"f-band\" x=\"10\" y=\"10\" width=\"540\" height=\"100\" rx=\"6\"/><rect class=\"f-c1\" x=\"390\" y=\"35\" width=\"140\" height=\"50\" rx=\"6\"/><text class=\"f-t\" x=\"460\" y=\"65\" text-anchor=\"middle\">المستخدم</text><rect class=\"f-acc\" x=\"210\" y=\"35\" width=\"140\" height=\"50\" rx=\"6\"/><text class=\"f-t\" x=\"280\" y=\"65\" text-anchor=\"middle\">الخادم</text><rect class=\"f-box\" x=\"30\" y=\"35\" width=\"140\" height=\"50\" rx=\"6\"/><text class=\"f-code\" x=\"100\" y=\"65\" text-anchor=\"middle\">db.sqlite</text><line class=\"f-line\" x1=\"390\" y1=\"60\" x2=\"352\" y2=\"60\" marker-end=\"url(#ds-ah)\"/><line class=\"f-dash\" x1=\"210\" y1=\"60\" x2=\"172\" y2=\"60\" marker-end=\"url(#ds-ah)\"/></svg></div></div><figcaption><b>شكل ١</b>من الطلب إلى القاعدة.</figcaption></figure>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-fig{margin:0;display:flex;flex-direction:column;gap:10px;font-family:var(--body);color:var(--ink)}.ds-ft{font-family:var(--display);font-weight:700;font-size:20px}.ds-frame{background:var(--plate);border:1px solid var(--gilt);border-radius:4px;padding:6px}.ds-body{border:1px solid var(--gilt-soft);border-radius:2px;padding:14px}.ds-body svg{display:block;width:100%;height:auto}.ds-body svg text{font-family:var(--body);fill:var(--ink);font-size:14px;direction:rtl}.ds-fig figcaption{font-size:14.5px;color:var(--ink-2)}.ds-fig figcaption b{color:var(--gilt);margin-left:6px}.f-t{fill:var(--ink);font-weight:700}.f-m{fill:var(--ink-2);font-size:12px}.f-code{font-family:var(--mono);fill:var(--ink-2);font-size:11px;direction:ltr}.f-box{fill:var(--plate-2);stroke:var(--gilt-soft);stroke-width:1.2}.f-band{fill:var(--ground);stroke:var(--gilt-soft);stroke-dasharray:4 4}.f-line{stroke:var(--ink-2);stroke-width:1.6;fill:none}.f-dash{stroke:var(--ink-2);stroke-width:1.6;fill:none;stroke-dasharray:5 4}.f-head{fill:var(--ink-2)}.f-acc{fill:color-mix(in srgb,var(--gilt) 16%,var(--plate));stroke:var(--gilt);stroke-width:1.6}.f-c1{fill:color-mix(in srgb,var(--c1) 14%,var(--plate));stroke:var(--c1);stroke-width:1.4}.f-c2{fill:color-mix(in srgb,var(--c2) 14%,var(--plate));stroke:var(--c2);stroke-width:1.4}.f-c3{fill:color-mix(in srgb,var(--c3) 14%,var(--plate));stroke:var(--c3);stroke-width:1.4}.f-c4{fill:color-mix(in srgb,var(--c4) 14%,var(--plate));stroke:var(--c4);stroke-width:1.4}.f-c5{fill:color-mix(in srgb,var(--c5) 14%,var(--plate));stroke:var(--c5);stroke-width:1.4}"
+    },
+    {
+      "name": "Code Block",
+      "kind": "custom",
+      "refersTo": "code-block",
+      "description": "LTR mono snippet in the code well; diffs strike in vermilion, add in c2.",
+      "html": "<pre class=\"ds-snip\"><span class=\"ds-old\">const limit = 10;</span>\n<span class=\"ds-new\">const limit = 25;</span></pre>",
+      "css": ":host{--ground:#0B1222;--plate:#13224A;--plate-2:#1A2D5C;--mast:#13224A;--mast-ink:#EEF1F7;--mast-ink-2:#B4C0DA;--mast-gilt:#D2AC63;--ink:#E8ECF4;--ink-2:#A3AFC4;--gilt:#C29A4F;--gilt-soft:rgba(194,154,79,.32);--key:#EE6A4C;--on-key:#0B1222;--lapis:#6F9BEA;--code-bg:#0E182C;--c1:#6F9BEA;--c2:#C29A4F;--c3:#A3AFC4;--c4:#8FB0EE;--c5:#9C8A62;--display:\"Amiri\",\"Noto Naskh Arabic\",serif;--body:\"Noto Sans Arabic\",\"Segoe UI\",Tahoma,sans-serif;--mono:\"JetBrains Mono\",ui-monospace,Menlo,monospace;} .ds-snip{margin:0;direction:ltr;text-align:left;font-family:var(--mono);font-size:13px;line-height:1.75;background:var(--code-bg);border:1px solid var(--gilt-soft);border-radius:6px;padding:12px 14px;overflow-x:auto;white-space:pre;color:var(--ink)}.ds-old{color:var(--ink-2);text-decoration:line-through;text-decoration-color:var(--key)}.ds-new{color:var(--c2);font-weight:600}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Lettered Plate",
+    "overview": "Every codebase is drawn as one of Al-Jazari's mechanical plates. Each part receives an abjad letter (أ ب ج د…) in vermilion, and that letter follows the part through the whole page: the mechanism map, the route of one request, the database register, the change table, the figures and the inline prose. The reader moves letter, then part, then file, the way one reads a lettered plate. Choosing a letter anywhere lights the same part everywhere.\n\nThe page is dark-first: a lapis-black ground, lapis plate fields, gilt hairlines for every frame and rule, paper-white ink. The light theme is cool paper with lapis ink, the same vermilion deepened, and darkened gilt. Classical naskh carries titles and keys, a calm Arabic sans carries reading, mono appears only for code. Density is moderate: one fixed reading measure, generous section spacing, and structure drawn by hairlines rather than boxed cards.\n\nThe layout is fixed across projects; only the data changes. A lapis masthead band opens the page, a sticky index rail sits at the right (RTL start) edge, and one main column runs beside it.",
+    "keyCharacteristics": [
+      "Abjad letter keys in vermilion, the single signature device, shared by every section.",
+      "Gilt hairlines (1px) as the only framing and dividing material.",
+      "A double-ruled plate frame (gilt outer, soft gilt inner) around the mechanism and figures.",
+      "Naskh display for titles, keys and numerals; Arabic sans for reading; LTR mono for every identifier.",
+      "Flat, tonal depth; no drop shadows.",
+      "Two themes from one token set, switched by `prefers-color-scheme` or `data-theme`."
+    ],
+    "rules": [
+      {
+        "name": "The Rubric Rule",
+        "body": "Vermilion belongs to letter keys and the selected part only. Never fill a box, a heading, a decoration or a figure shape with it; highlights that are not selection use gilt (`f-acc`).",
+        "section": "colors"
+      },
+      {
+        "name": "The Hairline Rule",
+        "body": "Structure is drawn with 1px gilt lines, soft gilt for dividers and full gilt for frames. Do not introduce grey borders or filled card backgrounds to separate content.",
+        "section": "colors"
+      },
+      {
+        "name": "The Twin Token Rule",
+        "body": "Colour only through the tokens. Every surface, including Claude-drawn figures, must render correctly in both themes without a single hex value.",
+        "section": "colors"
+      },
+      {
+        "name": "The Three Voices Rule",
+        "body": "Naskh for titles, keys and numerals; sans for reading; mono for identifiers only. Never set Arabic prose in mono or code in naskh.",
+        "section": "typography"
+      },
+      {
+        "name": "The Isolated Code Rule",
+        "body": "Every identifier, path and snippet is `direction: ltr` with bidi isolation, aligned to the right edge of its column so paths line up in strict tabular columns.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tonal Depth Rule",
+        "body": "Lift a surface by moving it from ground to plate, never by shadow.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** give every part its abjad letter and show that same letter wherever the part appears.",
+      "**Do** draw structure with 1px gilt hairlines: soft gilt for dividers, full gilt for frames and the masthead rule.",
+      "**Do** set titles, letters and numerals in Amiri 700, reading text in Noto Sans Arabic at 16.5px / 1.85 within 68ch, and identifiers in JetBrains Mono, LTR and isolated.",
+      "**Do** colour figures only with the `f-` classes, start them on the right, and wrap part boxes in `data-key` groups with a 26px clear top-right corner.",
+      "**Do** keep wide content scrolling inside its own container so the page never scrolls sideways.",
+      "**Do** use a 2px lapis focus ring (masthead gilt inside the band) on every interactive element."
+    ],
+    "donts": [
+      "**Don't** use vermilion for anything except letter keys and the selected part; use `f-acc` gilt for emphasis in figures.",
+      "**Don't** use hex values or inline colours in figures or data; both themes must work from the tokens.",
+      "**Don't** add drop shadows; depth is tonal, and the route halo is the only ring.",
+      "**Don't** fall back to a docs-site arrangement of a left sidebar tree and white cards; the rail sits at the right and content is ruled, not boxed.",
+      "**Don't** set Arabic prose in mono or code in the naskh face."
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+<svg viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="How /explain works: scan.py maps the repo, Claude reads the key files, writes data.json, verify.py checks every fact, build.py writes one Arabic page">
+  <style>
+    .t{font:600 17px "Noto Sans Arabic","Segoe UI",system-ui,sans-serif;fill:#E8ECF4}
+    .a{font:15px "Noto Sans Arabic","Segoe UI",system-ui,sans-serif;fill:#E8ECF4;direction:rtl}
+    .e{font:13px system-ui,"Segoe UI",sans-serif;fill:#A3AFC4}
+    .c{font:600 14px "SF Mono",Menlo,Consolas,monospace;fill:#C29A4F}
+    .n{font:700 15px system-ui,sans-serif;fill:#0B1222}
+  </style>
+  <defs><marker id="hw-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#C29A4F"/></marker></defs>
+  <rect width="1000" height="300" rx="14" fill="#0B1222"/>
+  <text x="488" y="44" text-anchor="end" class="t">How /explain works</text>
+  <text x="500" y="44" text-anchor="middle" class="t">·</text>
+  <text x="512" y="44" text-anchor="start" class="t">كيف تعمل المهارة</text>
+  <g>
+    <rect x="24" y="80" width="168" height="170" rx="10" fill="#13224A" stroke="#C29A4F" stroke-opacity=".45"/>
+    <circle cx="50" cy="106" r="13" fill="#EE6A4C"/><text x="50" y="111" text-anchor="middle" class="n">1</text>
+    <text x="108" y="150" text-anchor="middle" class="c">scan.py</text>
+    <text x="108" y="184" text-anchor="middle" class="a">خريطة المشروع</text>
+    <text x="108" y="210" text-anchor="middle" class="e">maps the repo</text>
+    <text x="108" y="228" text-anchor="middle" class="e">in one call</text>
+  </g>
+  <g>
+    <rect x="220" y="80" width="168" height="170" rx="10" fill="#13224A" stroke="#C29A4F" stroke-opacity=".45"/>
+    <circle cx="246" cy="106" r="13" fill="#EE6A4C"/><text x="246" y="111" text-anchor="middle" class="n">2</text>
+    <text x="304" y="150" text-anchor="middle" class="c">Claude</text>
+    <text x="304" y="184" text-anchor="middle" class="a">يقرأ الملفات المهمة</text>
+    <text x="304" y="210" text-anchor="middle" class="e">reads only the</text>
+    <text x="304" y="228" text-anchor="middle" class="e">files it will cite</text>
+  </g>
+  <g>
+    <rect x="416" y="80" width="168" height="170" rx="10" fill="#13224A" stroke="#C29A4F" stroke-opacity=".45"/>
+    <circle cx="442" cy="106" r="13" fill="#EE6A4C"/><text x="442" y="111" text-anchor="middle" class="n">3</text>
+    <text x="500" y="150" text-anchor="middle" class="c">data.json</text>
+    <text x="500" y="184" text-anchor="middle" class="a">يكتب الشرح بالعربية</text>
+    <text x="500" y="210" text-anchor="middle" class="e">writes the content,</text>
+    <text x="500" y="228" text-anchor="middle" class="e">not the layout</text>
+  </g>
+  <g>
+    <rect x="612" y="80" width="168" height="170" rx="10" fill="#13224A" stroke="#C29A4F" stroke-opacity=".45"/>
+    <circle cx="638" cy="106" r="13" fill="#EE6A4C"/><text x="638" y="111" text-anchor="middle" class="n">4</text>
+    <text x="696" y="150" text-anchor="middle" class="c">verify.py</text>
+    <text x="696" y="184" text-anchor="middle" class="a">يتحقق من كل مسار وسطر</text>
+    <text x="696" y="210" text-anchor="middle" class="e">checks every path,</text>
+    <text x="696" y="228" text-anchor="middle" class="e">line and commit</text>
+  </g>
+  <g>
+    <rect x="808" y="80" width="168" height="170" rx="10" fill="#1A2D5C" stroke="#C29A4F"/>
+    <circle cx="834" cy="106" r="13" fill="#EE6A4C"/><text x="834" y="111" text-anchor="middle" class="n">5</text>
+    <text x="892" y="150" text-anchor="middle" class="c">build.py</text>
+    <text x="892" y="184" text-anchor="middle" class="a">صفحة عربية واحدة</text>
+    <text x="892" y="210" text-anchor="middle" class="e">one self-contained</text>
+    <text x="892" y="228" text-anchor="middle" class="e">HTML page</text>
+  </g>
+  <path d="M194,165 L216,165" stroke="#C29A4F" stroke-width="2" marker-end="url(#hw-ah)"/>
+  <path d="M390,165 L412,165" stroke="#C29A4F" stroke-width="2" marker-end="url(#hw-ah)"/>
+  <path d="M586,165 L608,165" stroke="#C29A4F" stroke-width="2" marker-end="url(#hw-ah)"/>
+  <path d="M782,165 L804,165" stroke="#C29A4F" stroke-width="2" marker-end="url(#hw-ah)"/>
+  <text x="500" y="280" text-anchor="middle" class="e">Steps 1, 4 and 5 are Python scripts with no dependencies, so Claude's tokens go to understanding the code.</text>
+</svg>

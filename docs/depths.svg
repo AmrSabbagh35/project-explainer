@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1000 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Three depths: quick, full and deep, and what each page contains">
+  <style>
+    .h{font:700 24px "Noto Sans Arabic","Segoe UI",system-ui,sans-serif;fill:#E8ECF4}
+    .c{font:600 14px "SF Mono",Menlo,Consolas,monospace;fill:#C29A4F}
+    .a{font:15px "Noto Sans Arabic","Segoe UI",system-ui,sans-serif;fill:#E8ECF4;direction:rtl}
+    .e{font:13px system-ui,"Segoe UI",sans-serif;fill:#A3AFC4}
+    .k{font:600 13px system-ui,sans-serif;fill:#EE6A4C}
+  </style>
+  <rect width="1000" height="400" rx="14" fill="#0B1222"/>
+  <!-- quick -->
+  <rect x="24" y="24" width="304" height="352" rx="10" fill="#13224A" stroke="#C29A4F" stroke-opacity=".45"/>
+  <rect x="48" y="52" width="7" height="20" rx="2" fill="#C29A4F"/><rect x="59" y="52" width="7" height="20" rx="2" fill="#C29A4F" fill-opacity=".25"/><rect x="70" y="52" width="7" height="20" rx="2" fill="#C29A4F" fill-opacity=".25"/>
+  <text x="304" y="72" text-anchor="end" class="h">سريع</text>
+  <text x="48" y="104" class="c">/explain سريع · quick</text>
+  <text x="304" y="148" text-anchor="start" class="a">فكرة المشروع</text>
+  <text x="304" y="176" text-anchor="start" class="a">5-12 جزءًا في طبقاتها</text>
+  <text x="304" y="204" text-anchor="start" class="a">رحلة واحدة قصيرة</text>
+  <text x="304" y="232" text-anchor="start" class="a">أين أغيّر ماذا؟</text>
+  <text x="48" y="300" class="e">A 5-minute overview:</text>
+  <text x="48" y="318" class="e">"what is this project?"</text>
+  <text x="48" y="352" class="k">≈ 25k tokens</text>
+  <!-- full -->
+  <rect x="348" y="24" width="304" height="352" rx="10" fill="#13224A" stroke="#C29A4F" stroke-opacity=".45"/>
+  <rect x="372" y="52" width="7" height="20" rx="2" fill="#C29A4F"/><rect x="383" y="52" width="7" height="20" rx="2" fill="#C29A4F"/><rect x="394" y="52" width="7" height="20" rx="2" fill="#C29A4F" fill-opacity=".25"/>
+  <text x="628" y="72" text-anchor="end" class="h">كامل</text>
+  <text x="372" y="104" class="c">/explain · full (default)</text>
+  <text x="628" y="148" text-anchor="start" class="a">كل ما في «سريع»، مع:</text>
+  <text x="628" y="176" text-anchor="start" class="a">التشبيه وفريقه · 12-22 جزءًا</text>
+  <text x="628" y="204" text-anchor="start" class="a">قاعدة البيانات وقصة المشروع</text>
+  <text x="628" y="232" text-anchor="start" class="a">القاموس · 3 تمارين · الملفات</text>
+  <text x="372" y="300" class="e">Learning or onboarding:</text>
+  <text x="372" y="318" class="e">the whole project, in order</text>
+  <text x="372" y="352" class="k">≈ 40–50k tokens</text>
+  <!-- deep -->
+  <rect x="672" y="24" width="304" height="352" rx="10" fill="#1A2D5C" stroke="#C29A4F"/>
+  <rect x="696" y="52" width="7" height="20" rx="2" fill="#C29A4F"/><rect x="707" y="52" width="7" height="20" rx="2" fill="#C29A4F"/><rect x="718" y="52" width="7" height="20" rx="2" fill="#C29A4F"/>
+  <text x="952" y="72" text-anchor="end" class="h">عميق</text>
+  <text x="696" y="104" class="c">/explain عميق · deep</text>
+  <text x="952" y="148" text-anchor="start" class="a">كل ما في «كامل»، مع:</text>
+  <text x="952" y="176" text-anchor="start" class="a">2-3 رحلات في تبويبات</text>
+  <text x="952" y="204" text-anchor="start" class="a">ما بداخل كل جزء: الدوال وأسطرها</text>
+  <text x="952" y="232" text-anchor="start" class="a">ملاحظات المراجعة: نواقص ومخاطر</text>
+  <text x="952" y="260" text-anchor="start" class="a">4-5 تمارين وأشكال توضيحية</text>
+  <text x="696" y="300" class="e">Before you change or review</text>
+  <text x="696" y="318" class="e">the code: functions, risks, gaps</text>
+  <text x="696" y="352" class="k">≈ 90–100k tokens</text>
+</svg>

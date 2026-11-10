@@ -1,0 +1,33 @@
+<svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg">
+  <defs><marker id="deploy-ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="f-head"/></marker></defs>
+  <rect x="770" y="115" width="115" height="70" rx="8" class="f-box"/>
+  <text x="827" y="145" text-anchor="middle" class="f-t">القارئ</text>
+  <text x="827" y="168" text-anchor="middle" class="f-m">في المتصفح</text>
+  <g data-key="apic">
+    <rect x="565" y="105" width="165" height="90" rx="8" class="f-c1"/>
+    <text x="647" y="140" text-anchor="middle" class="f-t">واجهة React</text>
+    <text x="647" y="165" text-anchor="middle" class="f-code">web/src/lib/api.ts</text>
+  </g>
+  <g data-key="server">
+    <rect x="335" y="105" width="185" height="90" rx="8" class="f-c2"/>
+    <text x="427" y="140" text-anchor="middle" class="f-t">خادم Express</text>
+    <text x="427" y="165" text-anchor="middle" class="f-code">server/src/index.ts</text>
+  </g>
+  <g data-key="db">
+    <rect x="70" y="30" width="200" height="80" rx="8" class="f-c3"/>
+    <text x="170" y="64" text-anchor="middle" class="f-t">PostgreSQL</text>
+    <text x="170" y="88" text-anchor="middle" class="f-m">الكتب والاستعارات</text>
+  </g>
+  <g data-key="mailer">
+    <rect x="70" y="190" width="200" height="80" rx="8" class="f-c4"/>
+    <text x="170" y="224" text-anchor="middle" class="f-t">خدمة البريد</text>
+    <text x="170" y="248" text-anchor="middle" class="f-m">تنبيهات الإرجاع</text>
+  </g>
+  <path d="M770,150 L735,150" class="f-line" marker-end="url(#deploy-ah)"/>
+  <path d="M565,150 L525,150" class="f-line" marker-end="url(#deploy-ah)"/>
+  <text x="545" y="138" text-anchor="middle" class="f-m">HTTPS</text>
+  <path d="M335,130 C300,130 300,70 275,70" class="f-line" marker-end="url(#deploy-ah)"/>
+  <text x="318" y="92" text-anchor="middle" class="f-m">Prisma</text>
+  <path d="M335,170 C300,170 300,230 275,230" class="f-dash" marker-end="url(#deploy-ah)"/>
+  <text x="318" y="215" text-anchor="middle" class="f-m">كل صباح</text>
+</svg>

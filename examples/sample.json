@@ -1,0 +1,745 @@
+{
+  "project": {
+    "name": "كيف يعمل تطبيق «مكتبتي»؟",
+    "title": "شرح تطبيق مكتبتي",
+    "tag": "مثال · مشروع خيالي",
+    "path": "~/Projects/my-library",
+    "oneLiner": "تطبيق ويب لاستعارة الكتب من مكتبة الحي. يبحث القارئ عن كتاب ويحجزه، ويصله بريد قبل موعد الإرجاع بيومين، ويضيف أمين المكتبة الكتب من لوحة خاصة. هذا مثال خيالي يوضح شكل الصفحة.",
+    "facts": [
+      "React 18 + Vite",
+      "Node.js + Express",
+      "PostgreSQL عبر Prisma",
+      "4 شاشات",
+      "مهمة يومية للتنبيهات"
+    ],
+    "mode": "full"
+  },
+  "analogy": {
+    "title": "تعرّف على فريق المكتبة",
+    "intro": "في أي مكتبة حقيقية يوجد قارئ، ورفوف معروضة، وموظف استقبال، وأمين مكتبة، وسجل الاستعارة، وساعي بريد. التطبيق فيه نفس الوظائف.",
+    "cast": [
+      {
+        "icon": "person",
+        "role": "أنت، القارئ",
+        "job": "تبحث عن كتاب وتضغط «احجز».",
+        "code": "",
+        "key": false,
+        "handoff": "«أريد هذا الكتاب»"
+      },
+      {
+        "icon": "screen",
+        "role": "الرفوف المعروضة",
+        "job": "تعرض الكتب ونتيجة البحث. لا تحجز شيئًا بنفسها، بل ترسل طلبك.",
+        "code": "BookListPage",
+        "key": false,
+        "handoff": "«القارئ يطلب الكتاب رقم 42»"
+      },
+      {
+        "icon": "key",
+        "role": "موظف الاستقبال",
+        "job": "يتأكد أنك مشترك قبل أن يمرر طلبك إلى الداخل.",
+        "code": "requireReader",
+        "key": false,
+        "handoff": "«هذا قارئ مسجّل، تفضّل»"
+      },
+      {
+        "icon": "brain",
+        "role": "أمين المكتبة",
+        "job": "الوحيد المسموح له بحجز الكتب. يتأكد أن الكتاب متاح، ويسجّل الحجز، ويحدد موعد الإرجاع.",
+        "code": "loanService",
+        "key": true,
+        "handoff": "«سجّل هذا الحجز»"
+      },
+      {
+        "icon": "database",
+        "role": "سجل الاستعارة",
+        "job": "يحفظ كل كتاب ومن استعاره ومتى يجب إرجاعه.",
+        "code": "PostgreSQL",
+        "key": false,
+        "handoff": ""
+      },
+      {
+        "icon": "mail",
+        "role": "ساعي البريد",
+        "job": "يمر كل صباح ويذكّر من اقترب موعد إرجاعه.",
+        "code": "reminderJob",
+        "key": false,
+        "handoff": "«تذكير: أرجِع الكتاب بعد يومين»"
+      }
+    ],
+    "bigIdea": "لكل جزء مهمة واحدة: الشاشة تعرض، والاستقبال يتحقق، وأمين المكتبة يقرر، والسجل يحفظ، والبريد يذكّر."
+  },
+  "layers": [
+    {
+      "name": "الشاشات · ما يراه القارئ",
+      "folder": "web/src/pages",
+      "between": "تستدعي الدوال المساعدة",
+      "nodes": [
+        {
+          "id": "list",
+          "name": "BookListPage",
+          "short": "البحث والحجز",
+          "file": "web/src/pages/BookListPage.tsx",
+          "what": "تعرض الكتب ونتيجة البحث، وفيها زر «احجز» لكل كتاب.",
+          "links": [
+            {
+              "to": "loanshook",
+              "verb": "تحجز عبر reserve()"
+            },
+            {
+              "to": "apic",
+              "verb": "تبحث عبر searchBooks()"
+            }
+          ]
+        },
+        {
+          "id": "book",
+          "name": "BookPage",
+          "short": "تفاصيل كتاب",
+          "file": "web/src/pages/BookPage.tsx",
+          "what": "صفحة الكتاب الواحد: الوصف، وعدد النسخ المتاحة، وزر الحجز.",
+          "links": [
+            {
+              "to": "apic",
+              "verb": "تجلب الكتاب"
+            }
+          ]
+        },
+        {
+          "id": "mine",
+          "name": "MyLoansPage",
+          "short": "كتبي المستعارة",
+          "file": "web/src/pages/MyLoansPage.tsx",
+          "what": "قائمة الكتب التي استعرتها ومواعيد إرجاعها، مع زر «أرجعته».",
+          "links": [
+            {
+              "to": "loanshook",
+              "verb": "تقرأ استعاراتي"
+            }
+          ]
+        },
+        {
+          "id": "login",
+          "name": "LoginPage",
+          "short": "الدخول بالبريد",
+          "file": "web/src/pages/LoginPage.tsx",
+          "what": "يكتب القارئ بريده فيصله رابط دخول. لا توجد كلمة مرور.",
+          "links": [
+            {
+              "to": "auth",
+              "verb": "تطلب رابط الدخول"
+            }
+          ]
+        },
+        {
+          "id": "admin",
+          "name": "AdminPage",
+          "short": "لوحة أمين المكتبة",
+          "file": "web/src/pages/AdminPage.tsx",
+          "what": "يضيف منها أمين المكتبة الكتب ويعدّل عدد النسخ.",
+          "links": [
+            {
+              "to": "apic",
+              "verb": "ترسل الكتب الجديدة"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "الواجهة · الحالة والاتصال",
+      "folder": "web/src/lib",
+      "between": "طلبات HTTPS إلى الخادم",
+      "nodes": [
+        {
+          "id": "apic",
+          "name": "api.ts",
+          "short": "كل الطلبات من هنا",
+          "file": "web/src/lib/api.ts",
+          "what": "دالة واحدة تضيف رمز الدخول لكل طلب وتحوّل أخطاء الخادم إلى رسائل عربية.",
+          "links": [
+            {
+              "to": "booksR",
+              "verb": "GET /books"
+            },
+            {
+              "to": "loansR",
+              "verb": "POST /loans"
+            }
+          ]
+        },
+        {
+          "id": "auth",
+          "name": "useAuth",
+          "short": "من أنا؟",
+          "file": "web/src/lib/useAuth.ts",
+          "what": "يحفظ رمز الدخول في المتصفح ويعرف إن كان القارئ أمين مكتبة.",
+          "links": [
+            {
+              "to": "authR",
+              "verb": "يطلب الرابط ويتحقق منه"
+            }
+          ]
+        },
+        {
+          "id": "loanshook",
+          "name": "useLoans",
+          "short": "استعاراتي",
+          "file": "web/src/lib/useLoans.ts",
+          "what": "يجلب استعارات القارئ ويحدّثها بعد كل حجز أو إرجاع.",
+          "links": [
+            {
+              "to": "apic",
+              "verb": "يستخدم request()"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "الخادم · المسارات",
+      "folder": "server/src/routes",
+      "between": "تمرر الطلب إلى القواعد",
+      "nodes": [
+        {
+          "id": "booksR",
+          "name": "books.routes.ts",
+          "short": "البحث والإضافة",
+          "file": "server/src/routes/books.routes.ts",
+          "what": "يستقبل البحث وعرض الكتاب، وإضافة الكتب من لوحة الإدارة.",
+          "links": [
+            {
+              "to": "bookSvc",
+              "verb": "يستدعي search() و add()"
+            }
+          ]
+        },
+        {
+          "id": "loansR",
+          "name": "loans.routes.ts",
+          "short": "الحجز والإرجاع",
+          "file": "server/src/routes/loans.routes.ts",
+          "what": "يستقبل `POST /loans` و `POST /loans/:id/return` بعد أن يتحقق الاستقبال من القارئ.",
+          "links": [
+            {
+              "to": "guard",
+              "verb": "يمر أولًا عبر requireReader"
+            },
+            {
+              "to": "loanSvc",
+              "verb": "يستدعي createLoan()"
+            }
+          ]
+        },
+        {
+          "id": "authR",
+          "name": "auth.routes.ts",
+          "short": "روابط الدخول",
+          "file": "server/src/routes/auth.routes.ts",
+          "what": "يرسل رابط الدخول بالبريد، ثم يبدّله برمز دخول عندما يضغطه القارئ.",
+          "links": [
+            {
+              "to": "mailer",
+              "verb": "يرسل الرابط"
+            },
+            {
+              "to": "prisma",
+              "verb": "يحفظ الرمز المؤقت"
+            }
+          ]
+        },
+        {
+          "id": "guard",
+          "name": "requireReader",
+          "short": "موظف الاستقبال",
+          "file": "server/src/middleware/requireReader.ts",
+          "what": "يقرأ رمز الدخول من الطلب. إن لم يجد قارئًا صالحًا يرد بخطأ 401.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "يبحث عن القارئ"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "القواعد · ماذا يُسمح وماذا يُمنع",
+      "folder": "server/src/services",
+      "between": "يقرأ ويكتب",
+      "nodes": [
+        {
+          "id": "loanSvc",
+          "name": "loanService",
+          "short": "أمين المكتبة",
+          "file": "server/src/services/loanService.ts",
+          "what": "يتأكد أن للكتاب نسخة متاحة، ويسجّل الاستعارة، ويحدد موعد الإرجاع بعد 14 يومًا.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "يكتب في جدول loans"
+            }
+          ]
+        },
+        {
+          "id": "bookSvc",
+          "name": "bookService",
+          "short": "فهرس الكتب",
+          "file": "server/src/services/bookService.ts",
+          "what": "يبحث في الكتب ويحسب النسخ المتاحة لكل كتاب.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "يقرأ books و loans"
+            }
+          ]
+        },
+        {
+          "id": "reminder",
+          "name": "reminderJob",
+          "short": "ساعي البريد",
+          "file": "server/src/jobs/reminders.ts",
+          "what": "يعمل كل صباح الساعة 8. يبحث عن الاستعارات التي ينتهي موعدها بعد يومين ويرسل تذكيرًا.",
+          "links": [
+            {
+              "to": "prisma",
+              "verb": "يبحث عن المواعيد القريبة"
+            },
+            {
+              "to": "mailer",
+              "verb": "يرسل التذكير"
+            }
+          ]
+        },
+        {
+          "id": "mailer",
+          "name": "mailer",
+          "short": "إرسال البريد",
+          "file": "server/src/lib/mailer.ts",
+          "what": "يرسل رسائل الدخول والتذكير عبر خدمة البريد.",
+          "links": []
+        }
+      ]
+    },
+    {
+      "name": "البيانات",
+      "folder": "server/prisma",
+      "between": "",
+      "nodes": [
+        {
+          "id": "prisma",
+          "name": "db.ts",
+          "short": "الاتصال بقاعدة البيانات",
+          "file": "server/src/db.ts",
+          "what": "نسخة واحدة من Prisma يستخدمها كل الخادم.",
+          "links": [
+            {
+              "to": "db",
+              "verb": "يقرأ ويكتب"
+            }
+          ]
+        },
+        {
+          "id": "db",
+          "name": "PostgreSQL",
+          "short": "سجل الكتب والاستعارات",
+          "file": "server/prisma/schema.prisma",
+          "what": "جداول الكتب والقرّاء والاستعارات ورموز الدخول.",
+          "links": []
+        }
+      ]
+    },
+    {
+      "name": "البدء والأدوات المساعدة",
+      "folder": "server/src",
+      "nodes": [
+        {
+          "id": "server",
+          "name": "index.ts",
+          "short": "تشغيل الخادم",
+          "file": "server/src/index.ts",
+          "what": "يركّب المسارات، ويبدأ الاستماع، ويجدول مهمة التنبيهات.",
+          "links": [
+            {
+              "to": "loansR",
+              "verb": "يركّب المسارات"
+            },
+            {
+              "to": "reminder",
+              "verb": "يجدول المهمة"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "flow": {
+    "title": "ماذا يحدث عندما تحجز كتابًا؟",
+    "intro": "اتبع ضغطة «احجز» حتى يُسجَّل الحجز ويظهر موعد الإرجاع.",
+    "steps": [
+      {
+        "who": "أنت",
+        "title": "تضغط «احجز»",
+        "text": "الشاشة تستدعي `reserve()` ومعها رقم الكتاب.",
+        "file": "web/src/pages/BookListPage.tsx · onReserve()",
+        "at": "list"
+      },
+      {
+        "who": "api.ts",
+        "title": "الطلب يخرج إلى الخادم",
+        "text": "يضاف رمز الدخول، ويُرسل `POST /loans`.",
+        "file": "web/src/lib/api.ts · request()",
+        "at": "apic"
+      },
+      {
+        "who": "requireReader",
+        "title": "الاستقبال يتحقق منك",
+        "text": "إن كان الرمز صالحًا يُعرف القارئ ويمر الطلب.",
+        "file": "server/src/middleware/requireReader.ts",
+        "at": "guard",
+        "lit": [
+          "prisma"
+        ]
+      },
+      {
+        "who": "loanService",
+        "title": "أمين المكتبة يقرر",
+        "text": "يعدّ النسخ المستعارة. إن بقيت نسخة يسجّل الحجز ويحدد موعد الإرجاع.",
+        "file": "server/src/services/loanService.ts · createLoan()",
+        "at": "loanSvc"
+      },
+      {
+        "who": "PostgreSQL",
+        "title": "الحفظ",
+        "text": "يُضاف سطر جديد إلى جدول `loans` فيه موعد الإرجاع.",
+        "file": "server/prisma/schema.prisma · model Loan",
+        "at": "db",
+        "lit": [
+          "prisma"
+        ]
+      },
+      {
+        "who": "useLoans",
+        "title": "الشاشة تتحدث",
+        "text": "تُجلب قائمة استعاراتك من جديد، ويظهر «تم الحجز، أرجِعه قبل …».",
+        "file": "web/src/lib/useLoans.ts · refresh()",
+        "at": "loanshook"
+      }
+    ]
+  },
+  "database": {
+    "tables": [
+      {
+        "name": "loans",
+        "what": "كل استعارة: من استعار أي كتاب ومتى يرجعه.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "book_id",
+            "type": "int",
+            "note": "الكتاب"
+          },
+          {
+            "name": "reader_id",
+            "type": "int",
+            "note": "القارئ"
+          },
+          {
+            "name": "due_at",
+            "type": "timestamp",
+            "note": "موعد الإرجاع"
+          },
+          {
+            "name": "returned_at",
+            "type": "timestamp?",
+            "note": "فارغ ما دام الكتاب عند القارئ"
+          }
+        ]
+      },
+      {
+        "name": "books",
+        "what": "كل كتاب في المكتبة وعدد نسخه.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "title",
+            "type": "text",
+            "note": "العنوان"
+          },
+          {
+            "name": "author",
+            "type": "text",
+            "note": "المؤلف"
+          },
+          {
+            "name": "copies",
+            "type": "int",
+            "note": "عدد النسخ"
+          }
+        ]
+      },
+      {
+        "name": "readers",
+        "what": "القرّاء المسجّلون.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "email",
+            "type": "text",
+            "note": "للدخول والتنبيهات"
+          },
+          {
+            "name": "is_admin",
+            "type": "bool",
+            "note": "أمين المكتبة"
+          }
+        ]
+      },
+      {
+        "name": "login_tokens",
+        "what": "رموز الدخول المؤقتة.",
+        "file": "server/prisma/schema.prisma",
+        "columns": [
+          {
+            "name": "token",
+            "type": "text",
+            "note": "الرمز"
+          },
+          {
+            "name": "expires_at",
+            "type": "timestamp",
+            "note": "بعد 15 دقيقة"
+          }
+        ]
+      }
+    ],
+    "relations": [
+      {
+        "from": "loans",
+        "to": "books",
+        "kind": "many-to-one",
+        "text": "كل استعارة لكتاب واحد، والكتاب يُستعار مرات كثيرة."
+      },
+      {
+        "from": "loans",
+        "to": "readers",
+        "kind": "many-to-one",
+        "text": "كل استعارة تخص قارئًا واحدًا."
+      },
+      {
+        "from": "login_tokens",
+        "to": "readers",
+        "kind": "many-to-one",
+        "text": "كل رمز دخول يخص قارئًا واحدًا."
+      }
+    ]
+  },
+  "story": {
+    "events": [
+      {
+        "date": "2026-01-10",
+        "phase": "البداية",
+        "kind": "start",
+        "title": "أول commit",
+        "text": "صفحة بحث وقائمة كتب ثابتة في ملف JSON.",
+        "commit": "a1b2c3d"
+      },
+      {
+        "date": "2026-01-24",
+        "phase": "البداية",
+        "kind": "feature",
+        "title": "الحجز",
+        "text": "ظهر `loanService`. من هنا بدأت قاعدة «نسخة متاحة أو لا حجز»."
+      },
+      {
+        "date": "2026-02-02",
+        "phase": "الإصدار الأول",
+        "kind": "architecture",
+        "title": "الانتقال إلى PostgreSQL",
+        "text": "حلّت Prisma محل ملف JSON. لهذا يوجد مجلد `prisma/`."
+      },
+      {
+        "date": "2026-02-20",
+        "phase": "الإصدار الأول",
+        "kind": "feature",
+        "title": "الدخول بالبريد",
+        "text": "أزيلت كلمات المرور. لهذا يوجد جدول `login_tokens`."
+      },
+      {
+        "date": "2026-03-15",
+        "phase": "الإصدار الأول",
+        "kind": "release",
+        "title": "الإطلاق لمكتبة الحي",
+        "text": "أول قرّاء حقيقيين."
+      },
+      {
+        "date": "2026-04-02",
+        "phase": "بعد الإطلاق",
+        "kind": "feature",
+        "title": "تذكير الإرجاع",
+        "text": "أضيفت المهمة اليومية، بحساب مواعيد منفصل عن `loanService`."
+      }
+    ]
+  },
+  "parts": {
+    "title": "الشاشات",
+    "items": [
+      {
+        "name": "البحث",
+        "how": "web/src/pages/BookListPage.tsx",
+        "points": [
+          "بحث بالعنوان أو المؤلف",
+          "زر الحجز على كل بطاقة"
+        ]
+      },
+      {
+        "name": "تفاصيل الكتاب",
+        "how": "web/src/pages/BookPage.tsx",
+        "points": [
+          "الوصف وعدد النسخ المتاحة"
+        ]
+      },
+      {
+        "name": "كتبي",
+        "how": "web/src/pages/MyLoansPage.tsx",
+        "points": [
+          "الكتب المستعارة",
+          "مواعيد الإرجاع",
+          "زر «أرجعته»"
+        ]
+      },
+      {
+        "name": "لوحة الإدارة",
+        "how": "web/src/pages/AdminPage.tsx",
+        "points": [
+          "إضافة كتاب",
+          "تعديل عدد النسخ"
+        ]
+      }
+    ]
+  },
+  "glossary": [
+    {
+      "term": "مكوّن",
+      "en": "Component",
+      "meaning": "قطعة من الواجهة تُعاد استخدامها، مثل `BookCard`."
+    },
+    {
+      "term": "خطّاف",
+      "en": "Hook",
+      "meaning": "دالة React تحفظ حالة أو تجلب بيانات، مثل `useLoans`."
+    },
+    {
+      "term": "مسار",
+      "en": "Route",
+      "meaning": "عنوان يستقبل عليه الخادم الطلبات، مثل `POST /loans`."
+    },
+    {
+      "term": "وسيط",
+      "en": "Middleware",
+      "meaning": "خطوة تمر بها الطلبات قبل المسار، مثل `requireReader`."
+    },
+    {
+      "term": "خدمة",
+      "en": "Service",
+      "meaning": "المكان الذي توجد فيه قواعد العمل، مثل «لا حجز بلا نسخة متاحة»."
+    },
+    {
+      "term": "مخطط",
+      "en": "Schema",
+      "meaning": "وصف الجداول وأعمدتها في `schema.prisma`."
+    },
+    {
+      "term": "معاملة",
+      "en": "Transaction",
+      "meaning": "مجموعة كتابات تنجح كلها أو تفشل كلها."
+    },
+    {
+      "term": "مهمة مجدولة",
+      "en": "Cron job",
+      "meaning": "كود يشغّله الخادم وحده في وقت محدد، مثل التذكير الصباحي."
+    },
+    {
+      "term": "رمز الدخول",
+      "en": "Token",
+      "meaning": "نص سري يثبت للخادم من أنت في كل طلب."
+    },
+    {
+      "term": "ترحيل",
+      "en": "Migration",
+      "meaning": "ملف يغيّر شكل قاعدة البيانات خطوة بخطوة."
+    }
+  ],
+  "change": [
+    {
+      "want": "تغيير مدة الاستعارة",
+      "where": "server/src/services/loanService.ts · LOAN_DAYS"
+    },
+    {
+      "want": "تغيير موعد التذكير",
+      "where": "server/src/jobs/reminders.ts · dueInTwoDays()"
+    },
+    {
+      "want": "إضافة عمود لجدول",
+      "where": "server/prisma/schema.prisma"
+    },
+    {
+      "want": "تغيير نص رسالة خطأ",
+      "where": "web/src/lib/api.ts · ERRORS"
+    },
+    {
+      "want": "تغيير شكل بطاقة الكتاب",
+      "where": "web/src/pages/BookListPage.tsx · BookCard"
+    },
+    {
+      "want": "تغيير نص بريد الدخول",
+      "where": "server/src/lib/mailer.ts · sendLink()"
+    },
+    {
+      "want": "منع قارئ من الحجز",
+      "where": "server/src/middleware/requireReader.ts"
+    },
+    {
+      "want": "تغيير ساعة التذكير",
+      "where": "server/src/index.ts · cron.schedule()"
+    }
+  ],
+  "exercises": [
+    {
+      "title": "غيّر مدة الاستعارة",
+      "text": "اجعلها 21 يومًا بدل 14، ثم احجز كتابًا وشاهد الموعد الجديد.",
+      "file": "server/src/services/loanService.ts · السطر 8",
+      "before": "const LOAN_DAYS = 14;",
+      "after": "const LOAN_DAYS = 21;",
+      "answer": ""
+    },
+    {
+      "title": "غيّر رسالة «غير متاح»",
+      "text": "اكتب رسالة ألطف للقارئ.",
+      "file": "web/src/lib/api.ts · السطر 4",
+      "before": "  NO_COPY: \"الكتاب غير متاح\",",
+      "after": "  NO_COPY: \"كل النسخ مستعارة الآن، جرّب بعد أيام\",",
+      "answer": ""
+    },
+    {
+      "title": "اقرأ واشرح",
+      "text": "لماذا لا يحتاج `available()` إلى عمود «متاح» في جدول الكتب؟",
+      "file": "server/src/services/bookService.ts · السطر 25",
+      "before": "",
+      "after": "return book.copies - openLoans;",
+      "answer": "لأن عدد النسخ المتاحة يُحسب كل مرة: عدد النسخ ناقص الاستعارات التي لم تُرجع بعد. لا يوجد رقم مخزّن قد ينسى أحد تحديثه."
+    }
+  ],
+  "tree": "my-library/\n├── web/src/\n│   ├── pages/      # الشاشات الأربع\n│   └── lib/        # api.ts و useAuth و useLoans\n└── server/\n    ├── prisma/     # schema.prisma والترحيلات\n    └── src/\n        ├── routes/     # المسارات\n        ├── middleware/ # requireReader\n        ├── services/   # loanService و bookService\n        ├── jobs/       # reminders.ts\n        └── index.ts    # تشغيل الخادم",
+  "figures": [
+    {
+      "id": "deploy",
+      "section": "layers",
+      "title": "أين يعمل كل جزء؟",
+      "caption": "الواجهة في المتصفح، والخادم وحده يتكلم مع قاعدة البيانات وخدمة البريد.",
+      "alt": "القارئ يستخدم واجهة React التي تتصل بخادم Express عبر HTTPS، والخادم يتصل بقاعدة PostgreSQL عبر Prisma ويرسل البريد كل صباح.",
+      "svg": "deploy.svg"
+    }
+  ],
+  "footer": "مثال خيالي يوضح شكل صفحة /explain."
+}

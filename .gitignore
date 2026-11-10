@@ -1,0 +1,12 @@
+.DS_Store
+__pycache__/
+*.pyc
+# generated pages
+*.out.html
+/tmp/
+# Impeccable working files: review captures and builds of private projects stay local
+.impeccable/review/
+.impeccable/sample-build.html
+.impeccable/questions/
+.impeccable/brief-body.md
+.impeccable/direction-payload.json
