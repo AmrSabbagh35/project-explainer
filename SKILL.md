@@ -65,7 +65,7 @@ python3 -I SKILL/scripts/build.py <data.json> <out.html>
 
 ### 6. Deliver
 
-If the Artifact tool is available, publish the HTML as an artifact (icon `book`) and give the link; otherwise open the file in the browser and give its absolute path. The page is one self-contained file. Remind the user that it shows their file names, folders and commit messages before they share it. Reply in Arabic: the depth, what the page covers, and anything you could not verify. After a `quick` or `full` page, mention in one line that a deeper one is available.
+If the Artifact tool is available, publish the HTML as an artifact (icon `book`) and give the link. Otherwise rebuild it with `--standalone` (a complete HTML document), open the file in the browser and give its absolute path. The page is one self-contained file. Remind the user that it shows their file names, folders and commit messages before they share it. Reply in Arabic: the depth, what the page covers, and anything you could not verify. After a `quick` or `full` page, mention in one line that a deeper one is available.
 
 ## Writing the Arabic
 

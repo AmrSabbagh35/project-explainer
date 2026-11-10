@@ -2,7 +2,11 @@
 """Build an Arabic project explainer page from a DATA JSON file.
 
 Usage:
-    python3 -I build.py <data.json> <out.html>
+    python3 -I build.py <data.json> <out.html> [--standalone]
+
+--standalone writes a complete HTML document (doctype and <html>), for a page
+opened from disk or hosted on its own. Leave it off for an Artifact, which
+wraps the page itself.
 
 Reads the template next to this script (../assets/template.html), swaps the
 sample DATA block for the JSON you wrote, sets the <title>, and checks the
@@ -232,9 +236,11 @@ def prepare_figures(d, base, warnings):
 
 
 def main():
-    if len(sys.argv) != 3:
-        fail("usage: build.py <data.json> <out.html>")
-    data_path, out_path = map(pathlib.Path, sys.argv[1:])
+    args = [a for a in sys.argv[1:] if a != "--standalone"]
+    standalone = len(args) != len(sys.argv) - 1
+    if len(args) != 2:
+        fail("usage: build.py <data.json> <out.html> [--standalone]")
+    data_path, out_path = map(pathlib.Path, args)
     try:
         data = json.loads(data_path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:
@@ -249,6 +255,9 @@ def main():
         fail("template DATA markers not found")
     title = data["project"].get("title") or ("شرح " + data["project"]["name"])
     out = out.replace("__TITLE__", title.replace("<", "").replace(">", ""), 1)
+    if standalone:
+        # a page opened as a file or hosted on its own needs a full document; artifacts add this themselves
+        out = '<!doctype html>\n<html lang="ar" dir="rtl">\n' + out + '\n</html>\n'
     out_path.write_text(out, encoding="utf-8")
     for w in warnings:
         print("WARNING: " + w)

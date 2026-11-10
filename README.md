@@ -2,7 +2,7 @@
 
 # /explain · شرح المشاريع بالعربية
 
-**[English below ↓](#english)**
+**[جرّب العرض التجريبي](https://amrsabbagh35.github.io/project-explainer-ar/)** · **[English below ↓](#english)**
 
 مهارة (Skill) لـ Claude تشرح أي مشروع برمجي شرحًا كاملًا بالعربية، في صفحة تفاعلية واحدة من اليمين إلى اليسار. المطور المبتدئ يفهم منها المشروع، والمطور الخبير يستخدمها خريطةً بجانب الكود.
 
@@ -20,6 +20,7 @@
 - [ثلاثة أعماق للشرح](#ثلاثة-أعماق-للشرح)
 - [ماذا تجد في الصفحة](#ماذا-تجد-في-الصفحة)
 - [أمثلة على الطلبات](#أمثلة-على-الطلبات)
+- [العرض التجريبي](#العرض-التجريبي)
 - [جرّبها بدون مشروع](#جرّبها-بدون-مشروع)
 - [كيف تعمل](#كيف-تعمل)
 - [التكلفة](#التكلفة)
@@ -117,6 +118,10 @@ git clone https://github.com/AmrSabbagh35/project-explainer-ar.git .claude/skill
 | «أريد شرحًا مختصرًا للمشروع للطلاب الجدد» | شرح سريع. |
 | «Explain this repo in Arabic for my team» | شرح كامل بالعربية. |
 
+## العرض التجريبي
+
+افتح صفحات المشروع الخيالي مباشرة في المتصفح، بدون تثبيت شيء: [صفحة سريعة](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html)، و[صفحة كاملة](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html)، و[صفحة عميقة](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). جرّب الضغط على الأجزاء، وتشغيل الرحلة، ومفتاح مبتدئ / خبير.
+
 ## جرّبها بدون مشروع
 
 في مجلد `examples/` ثلاثة ملفات بيانات لنفس المشروع الخيالي، واحد لكل عمق. ابنِ أي منها وافتحه:
@@ -125,9 +130,9 @@ git clone https://github.com/AmrSabbagh35/project-explainer-ar.git .claude/skill
 
 ```bash
 cd ~/.claude/skills/explain
-python3 -I scripts/build.py examples/sample-quick.json /tmp/explain-quick.html
-python3 -I scripts/build.py examples/sample.json /tmp/explain-full.html
-python3 -I scripts/build.py examples/sample-deep.json /tmp/explain-deep.html
+python3 -I scripts/build.py examples/sample-quick.json /tmp/explain-quick.html --standalone
+python3 -I scripts/build.py examples/sample.json /tmp/explain-full.html --standalone
+python3 -I scripts/build.py examples/sample-deep.json /tmp/explain-deep.html --standalone
 open /tmp/explain-deep.html   # على Linux: xdg-open
 ```
 
@@ -182,6 +187,8 @@ MIT
 
 # /explain · Explain any codebase in Arabic
 
+**[Open the live demo](https://amrsabbagh35.github.io/project-explainer-ar/)**
+
 **/explain** is a Claude skill that explains any software project in full, plain Arabic, as one interactive right-to-left HTML page. Beginners use it to understand a project they inherited or vibe-coded; experienced developers keep it open beside the code as a map.
 
 Open a project in Claude Code and type:
@@ -198,6 +205,7 @@ Claude reads the real code, then writes a page that says what the project is, wh
 - [Three depths](#three-depths)
 - [What's on the page](#whats-on-the-page)
 - [Example requests](#example-requests)
+- [Live demo](#live-demo)
 - [Try it without a project](#try-it-without-a-project)
 - [How it works](#how-it-works)
 - [Cost](#cost)
@@ -285,15 +293,19 @@ What Claude noticed while reading: gaps, risks, security issues, tech debt and s
 | `/explain the payment flow` | A full page whose flow follows payments. |
 | "Explain this repo in Arabic for my team" | The skill triggers on its own, no `/explain` needed. |
 
+## Live demo
+
+Open the fictional project's pages in your browser, nothing to install: [quick](https://amrsabbagh35.github.io/project-explainer-ar/demo/quick.html), [full](https://amrsabbagh35.github.io/project-explainer-ar/demo/full.html) and [deep](https://amrsabbagh35.github.io/project-explainer-ar/demo/deep.html). Click the parts, play the flow, and flip the beginner / expert switch.
+
 ## Try it without a project
 
 `examples/` holds the same fictional project at all three depths. Build one and open it:
 
 ```bash
 cd ~/.claude/skills/explain
-python3 -I scripts/build.py examples/sample-quick.json /tmp/explain-quick.html
-python3 -I scripts/build.py examples/sample.json /tmp/explain-full.html
-python3 -I scripts/build.py examples/sample-deep.json /tmp/explain-deep.html
+python3 -I scripts/build.py examples/sample-quick.json /tmp/explain-quick.html --standalone
+python3 -I scripts/build.py examples/sample.json /tmp/explain-full.html --standalone
+python3 -I scripts/build.py examples/sample-deep.json /tmp/explain-deep.html --standalone
 open /tmp/explain-deep.html   # on Linux: xdg-open
 ```
 
